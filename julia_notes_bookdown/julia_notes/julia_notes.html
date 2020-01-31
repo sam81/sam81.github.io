@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Julia Notes</title>
+  <meta name="description" content="A test" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Julia Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A test" />
+  <meta name="github-repo" content="sam81/julia-notes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Julia Notes" />
+  
+  <meta name="twitter:description" content="A test" />
+  
+
+<meta name="author" content="Samuele Carcagno" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#a-simple-introduction-to-julia"><i class="fa fa-check"></i><b>1</b> A simple introduction to Julia</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#getting-help"><i class="fa fa-check"></i><b>1.1</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#data-types"><i class="fa fa-check"></i><b>2</b> Data Types</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#a-quick-overview-of-the-most-common-data-types"><i class="fa fa-check"></i><b>2.1</b> A quick overview of the most common data types</a><ul>
+<li class="chapter" data-level="2.1.1" data-path=""><a href="#arrays"><i class="fa fa-check"></i><b>2.1.1</b> Arrays</a></li>
+<li class="chapter" data-level="2.1.2" data-path=""><a href="#dictionaries"><i class="fa fa-check"></i><b>2.1.2</b> Dictionaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#mutable-and-immutable-objects"><i class="fa fa-check"></i><b>3</b> Mutable and immutable objects</a></li>
+<li class="chapter" data-level="4" data-path=""><a href="#packageManagement"><i class="fa fa-check"></i><b>4</b> Installing and managing packages</a></li>
+<li class="chapter" data-level="5" data-path=""><a href="#dataframes"><i class="fa fa-check"></i><b>5</b> DataFrames</a><ul>
+<li class="chapter" data-level="5.0.1" data-path=""><a href="#displaying-data-on-screen"><i class="fa fa-check"></i><b>5.0.1</b> Displaying data on screen</a></li>
+<li class="chapter" data-level="5.1" data-path=""><a href="#selecting-rows"><i class="fa fa-check"></i><b>5.1</b> Selecting rows</a><ul>
+<li class="chapter" data-level="5.1.1" data-path=""><a href="#summarizing-data"><i class="fa fa-check"></i><b>5.1.1</b> Summarizing data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path=""><a href="#random-numbers-and-sampling"><i class="fa fa-check"></i><b>6</b> Random Numbers and Sampling</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#setting-the-random-seed"><i class="fa fa-check"></i><b>6.1</b> Setting the random seed</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#working-with-distributions"><i class="fa fa-check"></i><b>6.2</b> Working with distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#workflow"><i class="fa fa-check"></i><b>7</b> Workflow</a><ul>
+<li class="chapter" data-level="7.1" data-path=""><a href="#environment-customization"><i class="fa fa-check"></i><b>7.1</b> Environment customization</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path=""><a href="#plotlyJS"><i class="fa fa-check"></i><b>8</b> PlotlyJS</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#gadfly"><i class="fa fa-check"></i><b>9</b> Gadfly</a></li>
+<li class="chapter" data-level="10" data-path=""><a href="#ggplot2"><i class="fa fa-check"></i><b>10</b> ggplot2 via RCall</a></li>
+<li class="chapter" data-level="11" data-path=""><a href="#vegalite"><i class="fa fa-check"></i><b>11</b> Vegalite</a><ul>
+<li class="chapter" data-level="11.1" data-path=""><a href="#faceting"><i class="fa fa-check"></i><b>11.1</b> Faceting</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path=""><a href="#pyplot"><i class="fa fa-check"></i><b>12</b> PyPlot (matplotlib)</a><ul>
+<li class="chapter" data-level="12.0.1" data-path=""><a href="#saving-multiple-plots-in-one-pdf-with-pyplot"><i class="fa fa-check"></i><b>12.0.1</b> Saving multiple plots in one pdf with PyPlot</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path=""><a href="#parallel-processing"><i class="fa fa-check"></i><b>13</b> Parallel Processing</a></li>
+<li class="chapter" data-level="14" data-path=""><a href="#generating-packages"><i class="fa fa-check"></i><b>14</b> Generating packages</a></li>
+<li class="chapter" data-level="15" data-path=""><a href="#working-with-sound"><i class="fa fa-check"></i><b>15</b> Working with sound</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#references"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Julia Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Julia Notes</h1>
+<p class="author"><em>Samuele Carcagno</em></p>
+<p class="date"><em>31/01/2020</em></p>
+</div>
+
+
+<p>Samuele Carcagno: <a href="mailto:sam.carcagno@gmail.com">sam.carcagno@gmail.com</a></p>
+<p>This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <a href="http://creativecommons.org/licenses/by/4.0/" class="uri">http://creativecommons.org/licenses/by/4.0/</a>.</p>
+
+<p>This document contains some notes on the Julia programming language <span class="citation">(Bezanson et al. <a href="#ref-BezansonEtAl2017">2017</a>)</span>. The notes are sketchy and are written mainly for myself, but they may be useful to someone learning the language.</p>
+
+
+<div id="a-simple-introduction-to-julia" class="section level1">
+<h1><span class="header-section-number">1</span> A simple introduction to Julia</h1>
+<p>It is customary to start a tutorial on a programming language by printing the phrase “Hello world!”. We can do that from a julia terminal (also known as REPL, which stands for read–eval–print loop) using the <code>println</code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb1-1" title="1">println(<span class="st">&quot;Hello world!&quot;</span>)</a></code></pre></div>
+<pre><code>## Hello world!</code></pre>
+<p>but tipically we want to save our programs in a script for later execution. So suppose we have saved our <code>println(&quot;Hello world!&quot;)</code> command in a file called <code>test_julia.jl</code>. How do we execute the program? We can use the <code>include</code> function for this purpose:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb3-1" title="1">include(<span class="st">&quot;test_julia.jl&quot;</span>)</a></code></pre></div>
+<p>If you’re new to programming, it may be helpful to think of julia as a fancy calculator initially, and using it as such to familiarize yourself with it. For example you can perform simple arithmetic operations from the REPL:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb4-1" title="1"><span class="fl">5</span>+<span class="fl">7</span></a></code></pre></div>
+<pre><code>## 12</code></pre>
+<p>you can also assign the results of operations to variables, for example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb6-1" title="1">x = <span class="fl">5</span>+<span class="fl">7</span></a></code></pre></div>
+<pre><code>## 12</code></pre>
+<p>and use these variables for further operations, such as:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb8-1" title="1">x/<span class="fl">3</span></a></code></pre></div>
+<pre><code>## 4.0</code></pre>
+<p>Of course julia is much more than just a fancy calculator, and hopefully this tutorial (which is very much of a work in progress, and therefore very patchy) will give and idea of what you can do with julia and how.</p>
+<p>If you’re new to julia you should be aware that the basic installation only provides a limited set of core functions. Additional functionality is provided by addon packages which need to be installed and initialized in order to be used. More detailed info on installing and managing packages is available in Section <a href="#packageManagement">4</a>. For a quickstart, suppose that you want to compute the mean of a set of numbers. To do this you need to install the <code>StatsBase</code> package first, which provides statistical functions. You can do this with the following command:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb10-1" title="1">Pkg.install(<span class="st">&quot;StatsBase&quot;</span>)</a></code></pre></div>
+<p>to use the functions in the package you need to load it into your workspace with the <code>using</code> command:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb11-1" title="1">using StatsBase</a></code></pre></div>
+<p>now you can use the <code>mean</code> function, for example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb12-1" title="1">mean([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>])</a></code></pre></div>
+<pre><code>## 2.0</code></pre>
+<p>Julia has taken a very modular approach splitting the core language functions from domain specific functions which are provided by add on packages. For example a base installation of julia does not have built in plotting functionality. For this you need to install one of the plotting packages. An overview of some of these packages is provided in other sections of this document: <a href="#gadfly">Gadfly</a>, <a href="#pyplot">PyPlot</a>, <a href="#vegalite">VegaLite</a>. You can also call R from julia, and so you can indirectly use <code>ggoplot2</code> from julia. This is illustrated in the <a href="#ggplot2">ggplot2</a> section.</p>
+<div id="getting-help" class="section level2">
+<h2><span class="header-section-number">1.1</span> Getting help</h2>
+<p>To get help on a function you can type the question mark (<code>?</code>) at the REPL, followed by the name of the function for which you seek help, for example to get help on the <code>println</code> function you can type:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb14-1" title="1">?println</a></code></pre></div>
+
+</div>
+</div>
+<div id="data-types" class="section level1">
+<h1><span class="header-section-number">2</span> Data Types</h1>
+<div id="a-quick-overview-of-the-most-common-data-types" class="section level2">
+<h2><span class="header-section-number">2.1</span> A quick overview of the most common data types</h2>
+<p>Julia has a sophisticated type system, and a variety of built-in data types and structures. If you’re totally new to programming you may want to learn the basics of how numbers are represented in computers (e.g. learn the difference between integers and floating point numbers) because a basic knowledge of these topics will be very useful, if not essential, when working with Julia.</p>
+<p>You can check the type of an object with the <code>typeof</code> function. For example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb15-1" title="1">typeof(<span class="fl">3</span>) <span class="co">## this is an integer</span></a></code></pre></div>
+<pre><code>## Int64</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb17-1" title="1">typeof(<span class="fl">3.0</span>) <span class="co">## this is a floating point number</span></a></code></pre></div>
+<pre><code>## Float64</code></pre>
+<p>You can convert easily between the two:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb19-1" title="1">x = <span class="fl">3</span></a></code></pre></div>
+<pre><code>## 3</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb21-1" title="1">x = float(x) <span class="co">##convert to floating point number</span></a></code></pre></div>
+<pre><code>## 3.0</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb23-1" title="1">x = <span class="fl">3.0</span></a></code></pre></div>
+<pre><code>## 3.0</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb25-1" title="1">x = round(<span class="dt">Int</span>, x) <span class="co">#convert to an integer</span></a></code></pre></div>
+<pre><code>## 3</code></pre>
+<p>Now that we’ve seen some numbers let’s move on to strings:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb27-1" title="1">s = <span class="st">&quot;Hello&quot;</span> <span class="co">#this is a string</span></a></code></pre></div>
+<pre><code>## &quot;Hello&quot;</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb29-1" title="1">z = <span class="st">&quot;3&quot;</span> <span class="co">#and this is also a string</span></a></code></pre></div>
+<pre><code>## &quot;3&quot;</code></pre>
+<p>we can convert <code>z</code> above to an integer or a floating point number with the <code>parse</code> function:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb31-1" title="1">parse(<span class="dt">Int</span>, z) <span class="co">#convert into an integer</span></a></code></pre></div>
+<pre><code>## 3</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb33-1" title="1">parse(<span class="dt">Float64</span>, z) <span class="co">#convert to a floating point number</span></a></code></pre></div>
+<pre><code>## 3.0</code></pre>
+<p>One of the most useful data structures are arrays. Arrays are containers that can contain objects of different types. We can initialize arrays of numbers with the <code>zeros</code> function:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb35-1" title="1">x = zeros(<span class="fl">5</span>)</a></code></pre></div>
+<pre><code>## 5-element Array{Float64,1}:
+##  0.0
+##  0.0
+##  0.0
+##  0.0
+##  0.0</code></pre>
+<p>by default this initializes an array of 64-bit floating point numbers, but we can specify a different type if we want to:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb37-1" title="1">x = zeros(<span class="dt">Int</span>, <span class="fl">5</span>) <span class="co">#array of integers</span></a></code></pre></div>
+<pre><code>## 5-element Array{Int64,1}:
+##  0
+##  0
+##  0
+##  0
+##  0</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb39-1" title="1">x = zeros(<span class="dt">Float32</span>, <span class="fl">5</span>) <span class="co">#array of 32-bit floats</span></a></code></pre></div>
+<pre><code>## 5-element Array{Float32,1}:
+##  0.0
+##  0.0
+##  0.0
+##  0.0
+##  0.0</code></pre>
+<p>we can also intialize arrays with more than one dimension:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb41-1" title="1">x = zeros(<span class="fl">3</span>,<span class="fl">3</span>) <span class="co">#3x3 matrix</span></a></code></pre></div>
+<pre><code>## 3×3 Array{Float64,2}:
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb43-1" title="1">x = zeros(<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">3</span>) <span class="co">#3x3x3 array</span></a></code></pre></div>
+<pre><code>## 3×3×3 Array{Float64,3}:
+## [:, :, 1] =
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+## 
+## [:, :, 2] =
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+## 
+## [:, :, 3] =
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0
+##  0.0  0.0  0.0</code></pre>
+<p>Arrays can also contain strings:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb45-1" title="1">x = [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{String,1}:
+##  &quot;a&quot;
+##  &quot;b&quot;
+##  &quot;c&quot;</code></pre>
+<p>or be miscellaneous collections of objects of <code>Any</code> type (similar to Python lists):</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb47-1" title="1">x = [<span class="fl">1</span>, <span class="st">&quot;a&quot;</span>, <span class="fl">3.0</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Any,1}:
+##  1   
+##   &quot;a&quot;
+##  3.0</code></pre>
+<p>including other arrays:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb49-1" title="1">x = [<span class="fl">1</span>, <span class="st">&quot;a&quot;</span>, <span class="fl">3.0</span>, [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]]</a></code></pre></div>
+<pre><code>## 4-element Array{Any,1}:
+##  1         
+##   &quot;a&quot;      
+##  3.0       
+##   [1, 2, 3]</code></pre>
+<p>Dictionaries, consisting of key-value pairs, constitute anothe very useful object. The key and the values can be of different types. For example:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb51-1" title="1">myDict = <span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">Any</span>}()</a></code></pre></div>
+<p>will initialize a dictionary with a string key, and a value that can be of any type:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb52-1" title="1">myDict[<span class="st">&quot;a&quot;</span>] = <span class="fl">3</span></a>
+<a class="sourceLine" id="cb52-2" title="2">myDict[<span class="st">&quot;b&quot;</span>] = <span class="st">&quot;hello&quot;</span></a></code></pre></div>
+<div id="arrays" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Arrays</h3>
+<p>Initializing vectors of a given type:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb53-1" title="1">x = (<span class="dt">Int</span>)[] <span class="co">#integer</span></a></code></pre></div>
+<pre><code>## 0-element Array{Int64,1}</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb55-1" title="1">y = (<span class="dt">Real</span>)[] <span class="co">#floating point</span></a></code></pre></div>
+<pre><code>## 0-element Array{Real,1}</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb57-1" title="1">z = (<span class="dt">String</span>)[] <span class="co"># string</span></a></code></pre></div>
+<pre><code>## 0-element Array{String,1}</code></pre>
+<p>you can then <code>push!</code> elements inside the vectors</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb59-1" title="1">push!(x, <span class="fl">3</span>)</a></code></pre></div>
+<pre><code>## 1-element Array{Int64,1}:
+##  3</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb61-1" title="1">push!(y, <span class="fl">3.2</span>)</a></code></pre></div>
+<pre><code>## 1-element Array{Real,1}:
+##  3.2</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb63-1" title="1">push!(z, <span class="st">&quot;abc&quot;</span>)</a></code></pre></div>
+<pre><code>## 1-element Array{String,1}:
+##  &quot;abc&quot;</code></pre>
+</div>
+<div id="dictionaries" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Dictionaries</h3>
+<p>Nested dictionaries:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb65-1" title="1">mydict = <span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">Any</span>}()</a></code></pre></div>
+<pre><code>## Dict{String,Any} with 0 entries</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb67-1" title="1">mydict[<span class="st">&quot;nest1&quot;</span>] = <span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">Any</span>}()</a></code></pre></div>
+<pre><code>## Dict{String,Any} with 0 entries</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb69-1" title="1">mydict[<span class="st">&quot;nest1&quot;</span>][<span class="st">&quot;nest2&quot;</span>] = [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+
+</div>
+</div>
+</div>
+<div id="mutable-and-immutable-objects" class="section level1">
+<h1><span class="header-section-number">3</span> Mutable and immutable objects</h1>
+
+<div class="rmdwarning">
+This topic can be somewhat mind-boggling! While I strive to write correct definitions and explanations, remember that these are simply my notes on using Julia, and I’m not an expert! So take my words and explanations with a grain of salt, and drop me an e-mail or fork these notes on github to fix them if you find errors.
+</div>
+
+<p>Objects in Julia can either be mutable or immutable, you can check whether
+an object is immutable with the <code>isimmutable</code> function, for example, integers and
+floating point numbers are immutable:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb71-1" title="1">isimmutable(<span class="fl">1</span>)</a></code></pre></div>
+<pre><code>## true</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb73-1" title="1">isimmutable(<span class="fl">1.1</span>)</a></code></pre></div>
+<pre><code>## true</code></pre>
+<p>while arrays and dictionaries are mutable:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb75-1" title="1">isimmutable([<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>])</a></code></pre></div>
+<pre><code>## false</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb77-1" title="1">isimmutable(<span class="dt">Dict</span>(<span class="st">&quot;a&quot;</span> =&gt; <span class="fl">1</span>, <span class="st">&quot;b&quot;</span> =&gt; <span class="fl">2</span>, <span class="st">&quot;c&quot;</span> =&gt; <span class="fl">3</span>))</a></code></pre></div>
+<pre><code>## false</code></pre>
+<p>Immutable objects cannot be changed, while mutable objects can. Why is this important? Because they behave very differently. For example, suppose that you bind variable <code>a</code> to an immutable object:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb79-1" title="1">a = <span class="fl">1</span></a></code></pre></div>
+<pre><code>## 1</code></pre>
+<p>then you bind another variable, <code>b</code>, to <code>a</code>:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb81-1" title="1">b = a</a></code></pre></div>
+<pre><code>## 1</code></pre>
+<p>you can check that <code>a</code> and <code>b</code> are bound to the same object:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb83-1" title="1">println(objectid(a))</a></code></pre></div>
+<pre><code>## 11967854120867199718</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb85-1" title="1">println(objectid(b))</a></code></pre></div>
+<pre><code>## 11967854120867199718</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb87-1" title="1">objectid(a) == objectid(b)</a></code></pre></div>
+<pre><code>## true</code></pre>
+<p>now if you change the value of <code>a</code>, you’re binding it to a new object, while <code>b</code> is still bound to the previous one:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb89-1" title="1">a = <span class="fl">2</span></a></code></pre></div>
+<pre><code>## 2</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb91-1" title="1">println(objectid(a))</a></code></pre></div>
+<pre><code>## 5352850025288631388</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb93-1" title="1">println(b)</a></code></pre></div>
+<pre><code>## 1</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb95-1" title="1">println(objectid(b))</a></code></pre></div>
+<pre><code>## 11967854120867199718</code></pre>
+<p>so, <code>a</code> and <code>b</code> now have different values. So far so good, but what happens with variables bound to mutable objects? Let’s try to bind <code>x</code> to an array, which is mutable, and then bind <code>y</code> to <code>x</code>:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb97-1" title="1">x = [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb99-1" title="1">y = x</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb101-1" title="1">println(objectid(x))</a></code></pre></div>
+<pre><code>## 15596065500155535289</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb103-1" title="1">println(objectid(y))</a></code></pre></div>
+<pre><code>## 15596065500155535289</code></pre>
+<p>now we change the value of the first element of <code>x</code>:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb105-1" title="1">x[<span class="fl">1</span>] = <span class="fl">999</span></a></code></pre></div>
+<pre><code>## 999</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb107-1" title="1">println(y)</a></code></pre></div>
+<pre><code>## [999, 2, 3]</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb109-1" title="1">println(objectid(x))</a></code></pre></div>
+<pre><code>## 15596065500155535289</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb111-1" title="1">println(objectid(y))</a></code></pre></div>
+<pre><code>## 15596065500155535289</code></pre>
+<p>we can see that the first element of <code>y</code> has changed as well, and <code>x</code> and <code>y</code> are still bound to the same object. When we modify the value of the first element of <code>x</code> we’re not binding <code>x</code> to a new object, we’re modifying the old one, so <code>x</code> and <code>y</code> are still bound to the same object, and changing the value of the first element of <code>x</code> also changes the value of the first element of <code>y</code>. But watch out! If you do:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb113-1" title="1">x = [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb115-1" title="1">y = x</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb117-1" title="1">println(objectid(x))</a></code></pre></div>
+<pre><code>## 7365922990070846502</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb119-1" title="1">println(objectid(y))</a></code></pre></div>
+<pre><code>## 7365922990070846502</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb121-1" title="1">x = [<span class="fl">999</span>, <span class="fl">2</span>, <span class="fl">3</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  999
+##    2
+##    3</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb123-1" title="1">println(y)</a></code></pre></div>
+<pre><code>## [1, 2, 3]</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb125-1" title="1">println(objectid(x))</a></code></pre></div>
+<pre><code>## 12877331896388202487</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb127-1" title="1">println(objectid(y))</a></code></pre></div>
+<pre><code>## 7365922990070846502</code></pre>
+<p>you’re not modifying the mutable object to which <code>x</code> was bound, you’re binding <code>x</code> to a totally new object! So <code>x</code> and <code>y</code> will be bound to different objects.</p>
+
+<div class="rmdtip">
+It may help to think of a mutable object as a container of items.
+</div>
+
+<p>When you change an item in the container the binding of a variable to the container doesn’t change, but if you change the container… the binding will change. Here’s anothe example in which we change the container:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb129-1" title="1">x = [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb131-1" title="1">y = x</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb133-1" title="1">x = [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>] <span class="co">#it looks the same but we&#39;re changing the container!</span></a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  1
+##  2
+##  3</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb135-1" title="1">objectid(y) == objectid(x) <span class="co">#not the same object</span></a></code></pre></div>
+<pre><code>## false</code></pre>
+<p>despite the fact that they have the same value:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb137-1" title="1">x==y</a></code></pre></div>
+<pre><code>## true</code></pre>
+<p>All this may seem abstract and, and may seem to be touching edge cases, but it has important consequences. One of these is that if you pass a mutable object to a function as an argument, and you modify that object inside the function, the object will be modified even though you may not explicitly return it. For example, suppose that we write a function to sum two arrays, and in case the first array is longer than the second one we remove elements from it until their length matches:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb139-1" title="1"><span class="kw">function</span> foo(x,y)</a>
+<a class="sourceLine" id="cb139-2" title="2">    <span class="kw">while</span> length(x) &gt; length(y)</a>
+<a class="sourceLine" id="cb139-3" title="3">        pop!(x)</a>
+<a class="sourceLine" id="cb139-4" title="4">    <span class="kw">end</span></a>
+<a class="sourceLine" id="cb139-5" title="5">    z = x+y</a>
+<a class="sourceLine" id="cb139-6" title="6">    <span class="kw">return</span> z</a>
+<a class="sourceLine" id="cb139-7" title="7"><span class="kw">end</span>    </a></code></pre></div>
+<p>note that the function does not explicitly return <code>x</code>, but will nontheless modify it. Now let’s call the function with the following arguments:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb140-1" title="1">x = [<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>];</a>
+<a class="sourceLine" id="cb140-2" title="2">y = [<span class="fl">2</span>,<span class="fl">2</span>];</a>
+<a class="sourceLine" id="cb140-3" title="3">z = foo(x, y)</a></code></pre></div>
+<pre><code>## 2-element Array{Int64,1}:
+##  3
+##  3</code></pre>
+<p>we get the value of <code>z</code> which we explicitly returned, but if we check what value now <code>x</code> has:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb142-1" title="1">x</a></code></pre></div>
+<pre><code>## 2-element Array{Int64,1}:
+##  1
+##  1</code></pre>
+<p>we can see that it has been modified as well. This doesn’t happen with immutable objects. Let’s check it with another very contrived example:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">function</span> foo(x,y)</a>
+<a class="sourceLine" id="cb144-2" title="2">    <span class="kw">while</span> x &gt; y</a>
+<a class="sourceLine" id="cb144-3" title="3">        x = x-<span class="fl">1</span></a>
+<a class="sourceLine" id="cb144-4" title="4">    <span class="kw">end</span></a>
+<a class="sourceLine" id="cb144-5" title="5">    z = x+y</a>
+<a class="sourceLine" id="cb144-6" title="6">    <span class="kw">return</span> z</a>
+<a class="sourceLine" id="cb144-7" title="7"><span class="kw">end</span>    </a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb145-1" title="1">x = <span class="fl">8</span>; y=<span class="fl">3</span>;</a>
+<a class="sourceLine" id="cb145-2" title="2">foo(x, y)</a></code></pre></div>
+<pre><code>## 6</code></pre>
+<p>the function returns the expected value, and if we check what’s the value of <code>x</code>:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb147-1" title="1">x</a></code></pre></div>
+<pre><code>## 8</code></pre>
+<p>we can see that it has not changed. That’s because <code>x</code> is bound to an immutable object in this case, and the variable <code>x</code> inside the function is in a different scope from the variable <code>x</code> outside the function.</p>
+
+<div class="rmdimportant">
+The moral of the story above is: Watch out when you pass mutable objects as function arguments!
+</div>
+
+<p>Another important side effect of the difference between mutable and immutable objects involves the local scope introduced by certain code blocks, such as <code>for</code> loops. Variables from the global scope are available for reading in the local scope, but not for writing. So for example the <code>x</code> in the <code>for</code> loop below will be bound to a new object in the local scope of the loop:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb149-1" title="1">x = <span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb149-2" title="2"><span class="kw">for</span> i=<span class="fl">1</span>:<span class="fl">3</span></a>
+<a class="sourceLine" id="cb149-3" title="3">    x = i</a>
+<a class="sourceLine" id="cb149-4" title="4">    println(x)</a>
+<a class="sourceLine" id="cb149-5" title="5"><span class="kw">end</span></a></code></pre></div>
+<pre><code>## 1
+## 2
+## 3</code></pre>
+<p>we can check that the <code>x</code> in the global scope has not been modified:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb151-1" title="1">x</a></code></pre></div>
+<pre><code>## 0</code></pre>
+<p>But if <code>x</code> is a mutable object, and we modify one of its elements inside the loop:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb153-1" title="1">x = [<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>];</a>
+<a class="sourceLine" id="cb153-2" title="2"><span class="kw">for</span> i=<span class="fl">1</span>:<span class="fl">3</span></a>
+<a class="sourceLine" id="cb153-3" title="3">    x[<span class="fl">2</span>] = i</a>
+<a class="sourceLine" id="cb153-4" title="4">    println(x)</a>
+<a class="sourceLine" id="cb153-5" title="5"><span class="kw">end</span></a></code></pre></div>
+<pre><code>## [0, 1, 0]
+## [0, 2, 0]
+## [0, 3, 0]</code></pre>
+<p>this will be reflected in the global scope:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb155-1" title="1">x</a></code></pre></div>
+<pre><code>## 3-element Array{Int64,1}:
+##  0
+##  3
+##  0</code></pre>
+
+</div>
+<div id="packageManagement" class="section level1">
+<h1><span class="header-section-number">4</span> Installing and managing packages</h1>
+<p>There are two ways of installing and managing packages in Julia. One is through functions at the Julia REPL, the other is through the <em>package manager REPL</em>. For example, to install the <code>Gadfly</code> package from the Julia REPL you can use the <code>Pkg.add</code> function:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb157-1" title="1">Pkg.add(<span class="st">&quot;Gadfly&quot;</span>)</a></code></pre></div>
+<p>to do the same from the package manager REPL you need to first access the package manager REPL by typing <code>]</code> in the Julia REPL. Once you’ve entered the package manager REPL, which should show <code>pkg&gt;</code> in the prompt, you can install a package using the <code>add</code> command:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb158-1" title="1">add Gadfly</a></code></pre></div>
+<p>Passing the name of the package to install, as shown in the examples above works for packages registered in the Julia package database. If you want to install unregistered packages that are available on GitHub or other git repositories you need to pass the git URL of the package that you want to install. For example, you can install the <a href="https://github.com/sam81/SndLib.jl">SndLib.jl</a> package from the Julia REPL as follows:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb159-1" title="1">Pkg.add(<span class="st">&quot;git@github.com:sam81/SndLib.jl.git&quot;</span>)</a></code></pre></div>
+<p>To update your packages to their latest version you can use the <code>Pkg.update()</code> command from the julia REPL, or the <code>up</code> command from the package manager REPL.</p>
+<p>To remove a package you can use the <code>Pkg.rm(&quot;packageName&quot;)</code> command from the Julia REPL, or the <code>rm packageName</code> command from the package manager REPL.</p>
+
+</div>
+<div id="dataframes" class="section level1">
+<h1><span class="header-section-number">5</span> DataFrames</h1>
+<p>In Julia dataframes are handled by an addon package. It can be installed with:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb160-1" title="1">Pkg.add(<span class="st">&quot;DataFrames&quot;</span>)</a></code></pre></div>
+<p>it’s very likely that you will want to read and write dataframes as CSV files at some stage. This functionality is provided by the <code>CSV.jl</code> package, so you should install it as well:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb161-1" title="1">Pkg.add(<span class="st">&quot;CSV&quot;</span>)</a></code></pre></div>
+<p>to use the <code>DataFrames</code> and <code>CSV</code> packages you need to load them:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb162-1" title="1">using CSV</a>
+<a class="sourceLine" id="cb162-2" title="2">using DataFrames</a></code></pre></div>
+<p>For the examples we’ll use the <code>iris</code> dataset from the <code>RDatasets</code> package, so
+we’ll need to install it first if it’s not already installed:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb163-1" title="1">Pkg.add(<span class="st">&quot;RDatasets&quot;</span>)</a></code></pre></div>
+<p>we can now load it and load the <code>iris</code> dataset:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb164-1" title="1">using RDatasets</a>
+<a class="sourceLine" id="cb164-2" title="2">iris = dataset(<span class="st">&quot;datasets&quot;</span>, <span class="st">&quot;iris&quot;</span>)</a></code></pre></div>
+<pre><code>## 150×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 5.1         │ 3.5        │ 1.4         │ 0.2        │ setosa       │
+## │ 2   │ 4.9         │ 3.0        │ 1.4         │ 0.2        │ setosa       │
+## │ 3   │ 4.7         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+## │ 4   │ 4.6         │ 3.1        │ 1.5         │ 0.2        │ setosa       │
+## │ 5   │ 5.0         │ 3.6        │ 1.4         │ 0.2        │ setosa       │
+## │ 6   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa       │
+## │ 7   │ 4.6         │ 3.4        │ 1.4         │ 0.3        │ setosa       │
+## ⋮
+## │ 143 │ 5.8         │ 2.7        │ 5.1         │ 1.9        │ virginica    │
+## │ 144 │ 6.8         │ 3.2        │ 5.9         │ 2.3        │ virginica    │
+## │ 145 │ 6.7         │ 3.3        │ 5.7         │ 2.5        │ virginica    │
+## │ 146 │ 6.7         │ 3.0        │ 5.2         │ 2.3        │ virginica    │
+## │ 147 │ 6.3         │ 2.5        │ 5.0         │ 1.9        │ virginica    │
+## │ 148 │ 6.5         │ 3.0        │ 5.2         │ 2.0        │ virginica    │
+## │ 149 │ 6.2         │ 3.4        │ 5.4         │ 2.3        │ virginica    │
+## │ 150 │ 5.9         │ 3.0        │ 5.1         │ 1.8        │ virginica    │</code></pre>
+<p>let’s create a numeric vector and a string vector of the same length, and then put them in a dataframe:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb166-1" title="1">y = rand(<span class="fl">10</span>)</a></code></pre></div>
+<pre><code>## 10-element Array{Float64,1}:
+##  0.35980655374348225
+##  0.30914613783299005
+##  0.7305710415910236 
+##  0.28772472645844993
+##  0.7304237025238804 
+##  0.8263018940027678 
+##  0.3042506763452575 
+##  0.7658358345495233 
+##  0.4057944014256023 
+##  0.8265083273898153</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb168-1" title="1">cnd = [[<span class="st">&quot;a&quot;</span> <span class="kw">for</span> i=<span class="fl">1</span>:<span class="fl">5</span>]; [<span class="st">&quot;b&quot;</span> <span class="kw">for</span> i=<span class="fl">1</span>:<span class="fl">5</span>]]</a></code></pre></div>
+<pre><code>## 10-element Array{String,1}:
+##  &quot;a&quot;
+##  &quot;a&quot;
+##  &quot;a&quot;
+##  &quot;a&quot;
+##  &quot;a&quot;
+##  &quot;b&quot;
+##  &quot;b&quot;
+##  &quot;b&quot;
+##  &quot;b&quot;
+##  &quot;b&quot;</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb170-1" title="1">resFrame =  DataFrame(y=y, cnd=cnd)</a></code></pre></div>
+<pre><code>## 10×2 DataFrame
+## │ Row │ y        │ cnd    │
+## │     │ Float64  │ String │
+## ├─────┼──────────┼────────┤
+## │ 1   │ 0.359807 │ a      │
+## │ 2   │ 0.309146 │ a      │
+## │ 3   │ 0.730571 │ a      │
+## │ 4   │ 0.287725 │ a      │
+## │ 5   │ 0.730424 │ a      │
+## │ 6   │ 0.826302 │ b      │
+## │ 7   │ 0.304251 │ b      │
+## │ 8   │ 0.765836 │ b      │
+## │ 9   │ 0.405794 │ b      │
+## │ 10  │ 0.826508 │ b      │</code></pre>
+<p>to access the columns of a dataframe use the following syntax:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb172-1" title="1">resFrame[!,:y] <span class="co">#retrieves the column named `y`</span></a>
+<a class="sourceLine" id="cb172-2" title="2">resFrame[!,:cnd] <span class="co">#retrieves the column named `cnd`</span></a></code></pre></div>
+<p>note that <code>:y</code> or <code>:cnd</code> are <em>Symbols</em>:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb173-1" title="1">typeof(:y)</a></code></pre></div>
+<pre><code>## Symbol</code></pre>
+<p>sometimes it is necessary to access the column of a dataframe using a string. You can do so by converting a string to a symbol:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb175-1" title="1">resFrame[!,<span class="dt">Symbol</span>(<span class="st">&quot;y&quot;</span>)]</a></code></pre></div>
+<p>you can also retrieve a column by its column number</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb176-1" title="1">resFrame[!,<span class="fl">1</span>]</a></code></pre></div>
+<p>to write a dataframe to a text of CSV file, use:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb177-1" title="1">CSV.write(<span class="st">&quot;dataframe.csv&quot;</span>, resFrame)</a></code></pre></div>
+<p>it is also possible to specify a separator, note that the separator character must be enclosed by
+single ticks <code>''</code>:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb178-1" title="1">CSV.write(<span class="st">&quot;dataframe.csv&quot;</span>, resFrame, delim=<span class="ch">&#39;;&#39;</span>)</a></code></pre></div>
+<p>To read a dataframe from a text file, use:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb179-1" title="1">dat = CSV.read(<span class="st">&quot;dataframe.csv&quot;</span>, delim=<span class="ch">&#39;;&#39;</span>)</a></code></pre></div>
+<div id="displaying-data-on-screen" class="section level3">
+<h3><span class="header-section-number">5.0.1</span> Displaying data on screen</h3>
+<p>To show the first few rows of a dataframe on screen you can use the <code>first</code>
+function, which takes as arguments the name of the dataframe and the number of
+rows that you want to show:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb180-1" title="1">first(iris, <span class="fl">4</span>)</a></code></pre></div>
+<pre><code>## 4×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 5.1         │ 3.5        │ 1.4         │ 0.2        │ setosa       │
+## │ 2   │ 4.9         │ 3.0        │ 1.4         │ 0.2        │ setosa       │
+## │ 3   │ 4.7         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+## │ 4   │ 4.6         │ 3.1        │ 1.5         │ 0.2        │ setosa       │</code></pre>
+<p>similarly to show the last few columns you can use the <code>last</code> command:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb182-1" title="1">last(iris, <span class="fl">4</span>)</a></code></pre></div>
+<pre><code>## 4×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 6.3         │ 2.5        │ 5.0         │ 1.9        │ virginica    │
+## │ 2   │ 6.5         │ 3.0        │ 5.2         │ 2.0        │ virginica    │
+## │ 3   │ 6.2         │ 3.4        │ 5.4         │ 2.3        │ virginica    │
+## │ 4   │ 5.9         │ 3.0        │ 5.1         │ 1.8        │ virginica    │</code></pre>
+<p>If you have a dataframe with too many columns to fit the screen some will be truncated. To get around this you can use:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb184-1" title="1"><span class="co">##create dataframe with lost of columns</span></a>
+<a class="sourceLine" id="cb184-2" title="2">df = DataFrame((<span class="dt">Symbol</span>(<span class="ch">&#39;a&#39;</span> + i) =&gt; rand(<span class="fl">10</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="fl">0</span>:<span class="fl">100</span>)...)</a>
+<a class="sourceLine" id="cb184-3" title="3">show(df, allcols=true)</a></code></pre></div>
+</div>
+<div id="selecting-rows" class="section level2">
+<h2><span class="header-section-number">5.1</span> Selecting rows</h2>
+<p>We’ve already seen how we can select a given column of a dataframe. Selecting
+rows of a dataframe on the basis of one or more conditions is another fundamental
+operation. The following command returns a boolean vector indicating whether
+each element in the <code>Species</code> column of the iris datasets is “setosa” or not:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb185-1" title="1">idx = iris[!,:Species] .== <span class="st">&quot;setosa&quot;</span></a></code></pre></div>
+<pre><code>## 150-element BitArray{1}:
+##  1
+##  1
+##  1
+##  1
+##  1
+##  1
+##  1
+##  1
+##  1
+##  1
+##  ⋮
+##  0
+##  0
+##  0
+##  0
+##  0
+##  0
+##  0
+##  0
+##  0</code></pre>
+<p>we can use this vector to select the corresponding rows of the dataframe:</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb187-1" title="1">iris[idx, :];</a></code></pre></div>
+<p>or more succintly we could achieve the same result with a single command:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb188-1" title="1">iris[(iris[!,:Species] .== <span class="st">&quot;setosa&quot;</span>), :];</a></code></pre></div>
+<p>we can also setect rows on the basis of multiple conditions, for example
+only the ones for the setosa specimens with a petal length greater than 1.5:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb189-1" title="1">iris[(iris[!,:Species] .== <span class="st">&quot;setosa&quot;</span>) .&amp; (iris[!,:PetalLength] .&gt; <span class="fl">1.5</span>), :]       </a></code></pre></div>
+<pre><code>## 13×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa       │
+## │ 2   │ 4.8         │ 3.4        │ 1.6         │ 0.2        │ setosa       │
+## │ 3   │ 5.7         │ 3.8        │ 1.7         │ 0.3        │ setosa       │
+## │ 4   │ 5.4         │ 3.4        │ 1.7         │ 0.2        │ setosa       │
+## │ 5   │ 5.1         │ 3.3        │ 1.7         │ 0.5        │ setosa       │
+## │ 6   │ 4.8         │ 3.4        │ 1.9         │ 0.2        │ setosa       │
+## │ 7   │ 5.0         │ 3.0        │ 1.6         │ 0.2        │ setosa       │
+## │ 8   │ 5.0         │ 3.4        │ 1.6         │ 0.4        │ setosa       │
+## │ 9   │ 4.7         │ 3.2        │ 1.6         │ 0.2        │ setosa       │
+## │ 10  │ 4.8         │ 3.1        │ 1.6         │ 0.2        │ setosa       │
+## │ 11  │ 5.0         │ 3.5        │ 1.6         │ 0.6        │ setosa       │
+## │ 12  │ 5.1         │ 3.8        │ 1.9         │ 0.4        │ setosa       │
+## │ 13  │ 5.1         │ 3.8        │ 1.6         │ 0.2        │ setosa       │</code></pre>
+<p>The <code>DataFramesMeta</code> package also provides convenient functions for selecting rows
+of a dataframes on the basis of one or more conditions.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb191-1" title="1">using DataFramesMeta</a>
+<a class="sourceLine" id="cb191-2" title="2">@where(iris, :Species .== <span class="st">&quot;setosa&quot;</span>)</a></code></pre></div>
+<pre><code>## 50×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 5.1         │ 3.5        │ 1.4         │ 0.2        │ setosa       │
+## │ 2   │ 4.9         │ 3.0        │ 1.4         │ 0.2        │ setosa       │
+## │ 3   │ 4.7         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+## │ 4   │ 4.6         │ 3.1        │ 1.5         │ 0.2        │ setosa       │
+## │ 5   │ 5.0         │ 3.6        │ 1.4         │ 0.2        │ setosa       │
+## │ 6   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa       │
+## │ 7   │ 4.6         │ 3.4        │ 1.4         │ 0.3        │ setosa       │
+## ⋮
+## │ 43  │ 4.4         │ 3.2        │ 1.3         │ 0.2        │ setosa       │
+## │ 44  │ 5.0         │ 3.5        │ 1.6         │ 0.6        │ setosa       │
+## │ 45  │ 5.1         │ 3.8        │ 1.9         │ 0.4        │ setosa       │
+## │ 46  │ 4.8         │ 3.0        │ 1.4         │ 0.3        │ setosa       │
+## │ 47  │ 5.1         │ 3.8        │ 1.6         │ 0.2        │ setosa       │
+## │ 48  │ 4.6         │ 3.2        │ 1.4         │ 0.2        │ setosa       │
+## │ 49  │ 5.3         │ 3.7        │ 1.5         │ 0.2        │ setosa       │
+## │ 50  │ 5.0         │ 3.3        │ 1.4         │ 0.2        │ setosa       │</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb193-1" title="1">@where(iris, :Species .== <span class="st">&quot;setosa&quot;</span>, :PetalLength .&gt; <span class="fl">1.5</span>)</a></code></pre></div>
+<pre><code>## 13×5 DataFrame
+## │ Row │ SepalLength │ SepalWidth │ PetalLength │ PetalWidth │ Species      │
+## │     │ Float64     │ Float64    │ Float64     │ Float64    │ Categorical… │
+## ├─────┼─────────────┼────────────┼─────────────┼────────────┼──────────────┤
+## │ 1   │ 5.4         │ 3.9        │ 1.7         │ 0.4        │ setosa       │
+## │ 2   │ 4.8         │ 3.4        │ 1.6         │ 0.2        │ setosa       │
+## │ 3   │ 5.7         │ 3.8        │ 1.7         │ 0.3        │ setosa       │
+## │ 4   │ 5.4         │ 3.4        │ 1.7         │ 0.2        │ setosa       │
+## │ 5   │ 5.1         │ 3.3        │ 1.7         │ 0.5        │ setosa       │
+## │ 6   │ 4.8         │ 3.4        │ 1.9         │ 0.2        │ setosa       │
+## │ 7   │ 5.0         │ 3.0        │ 1.6         │ 0.2        │ setosa       │
+## │ 8   │ 5.0         │ 3.4        │ 1.6         │ 0.4        │ setosa       │
+## │ 9   │ 4.7         │ 3.2        │ 1.6         │ 0.2        │ setosa       │
+## │ 10  │ 4.8         │ 3.1        │ 1.6         │ 0.2        │ setosa       │
+## │ 11  │ 5.0         │ 3.5        │ 1.6         │ 0.6        │ setosa       │
+## │ 12  │ 5.1         │ 3.8        │ 1.9         │ 0.4        │ setosa       │
+## │ 13  │ 5.1         │ 3.8        │ 1.6         │ 0.2        │ setosa       │</code></pre>
+<div id="summarizing-data" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Summarizing data</h3>
+<p>Summarizing data with the functions providing in the <code>DataFrames</code> package is
+somwhat verbose:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb195-1" title="1">using Statistics    </a>
+<a class="sourceLine" id="cb195-2" title="2">summIris = by(iris, [:Species], df -&gt; DataFrame(meanPetalWidth=mean(df[!,:PetalWidth])))</a></code></pre></div>
+<pre><code>## 3×2 DataFrame
+## │ Row │ Species      │ meanPetalWidth │
+## │     │ Categorical… │ Float64        │
+## ├─────┼──────────────┼────────────────┤
+## │ 1   │ setosa       │ 0.246          │
+## │ 2   │ versicolor   │ 1.326          │
+## │ 3   │ virginica    │ 2.026          │</code></pre>
+<p>using the macros in <code>DataFramesMeta</code> is much better</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb197-1" title="1">summIris = @linq iris |&gt; groupby(:Species) |&gt; based_on(x = mean(:PetalWidth))</a></code></pre></div>
+<pre><code>## 3×2 DataFrame
+## │ Row │ Species      │ x       │
+## │     │ Categorical… │ Float64 │
+## ├─────┼──────────────┼─────────┤
+## │ 1   │ setosa       │ 0.246   │
+## │ 2   │ versicolor   │ 1.326   │
+## │ 3   │ virginica    │ 2.026   │</code></pre>
+<p>there are slightly different ways of achieving the same result:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb199-1" title="1">@linq iris |&gt; by(:Species, x=mean(:SepalWidth))</a></code></pre></div>
+<pre><code>## 3×2 DataFrame
+## │ Row │ Species      │ x       │
+## │     │ Categorical… │ Float64 │
+## ├─────┼──────────────┼─────────┤
+## │ 1   │ setosa       │ 3.428   │
+## │ 2   │ versicolor   │ 2.77    │
+## │ 3   │ virginica    │ 2.974   │</code></pre>
+<p>or:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb201-1" title="1">@based_on(groupby(iris, :Species), x=mean(:PetalWidth))         </a></code></pre></div>
+<pre><code>## 3×2 DataFrame
+## │ Row │ Species      │ x       │
+## │     │ Categorical… │ Float64 │
+## ├─────┼──────────────┼─────────┤
+## │ 1   │ setosa       │ 0.246   │
+## │ 2   │ versicolor   │ 1.326   │
+## │ 3   │ virginica    │ 2.026   │</code></pre>
+
+</div>
+</div>
+</div>
+<div id="random-numbers-and-sampling" class="section level1">
+<h1><span class="header-section-number">6</span> Random Numbers and Sampling</h1>
+<p>One of the fundamental functions to generate random number and random sampling in Julia is <code>rand</code>. This function picks random elements from a collection of items. If the function is called without arguments it will generate a random 64-bit floating point number between 0 and 1 because that is the default collection:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb203-1" title="1">rand()</a></code></pre></div>
+<pre><code>## 0.4023878488048531</code></pre>
+<p>to generate a random integer between say 1 and 100 we need to pass that collection as an argument:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb205-1" title="1">rand(<span class="fl">1</span>:<span class="fl">100</span>)</a></code></pre></div>
+<pre><code>## 85</code></pre>
+<p>the collection to sample from could be something different than numbers. For example we can generate a sequence of letters and sample from it:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb207-1" title="1">lettersSeq = [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>];</a>
+<a class="sourceLine" id="cb207-2" title="2">rand(lettersSeq)</a></code></pre></div>
+<pre><code>## &quot;a&quot;</code></pre>
+<p>to generate more than one element we need to specify the dimensions of the vector or matrix of elements that we want to generate:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb209-1" title="1"><span class="co">#generate a 10-elements vector of</span></a>
+<a class="sourceLine" id="cb209-2" title="2"><span class="co">#random integers between 1 and 100</span></a>
+<a class="sourceLine" id="cb209-3" title="3">rand(<span class="fl">1</span>:<span class="fl">100</span>, <span class="fl">10</span>)</a></code></pre></div>
+<pre><code>## 10-element Array{Int64,1}:
+##  84
+##  58
+##  89
+##  82
+##  32
+##  14
+##  85
+##  26
+##  72
+##  61</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb211-1" title="1"><span class="co">#generate a 2x5 matrix of</span></a>
+<a class="sourceLine" id="cb211-2" title="2"><span class="co">#random integers between 1 and 100</span></a>
+<a class="sourceLine" id="cb211-3" title="3">rand(<span class="fl">1</span>:<span class="fl">100</span>, <span class="fl">2</span>, <span class="fl">5</span>) </a></code></pre></div>
+<pre><code>## 2×5 Array{Int64,2}:
+##  95  13   6  83  57
+##  93  79  80  76  81</code></pre>
+<p>note that sampling is done with replacement:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb213-1" title="1">rand([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>], <span class="fl">4</span>)</a></code></pre></div>
+<pre><code>## 4-element Array{String,1}:
+##  &quot;d&quot;
+##  &quot;b&quot;
+##  &quot;c&quot;
+##  &quot;b&quot;</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb215-1" title="1">rand([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>], <span class="fl">10</span>)</a></code></pre></div>
+<pre><code>## 10-element Array{String,1}:
+##  &quot;a&quot;
+##  &quot;d&quot;
+##  &quot;b&quot;
+##  &quot;a&quot;
+##  &quot;c&quot;
+##  &quot;b&quot;
+##  &quot;c&quot;
+##  &quot;d&quot;
+##  &quot;c&quot;
+##  &quot;d&quot;</code></pre>
+<p>the <a href="https://github.com/JuliaStats/StatsBase.jl">StatsBase.jl</a> package provides convenient functions to sample with or without replacement. For example, to sample without replacement:</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb217-1" title="1">using StatsBase</a>
+<a class="sourceLine" id="cb217-2" title="2">sample([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>], <span class="fl">4</span>, replace=false)</a></code></pre></div>
+<pre><code>## 4-element Array{String,1}:
+##  &quot;b&quot;
+##  &quot;d&quot;
+##  &quot;c&quot;
+##  &quot;a&quot;</code></pre>
+<div id="setting-the-random-seed" class="section level2">
+<h2><span class="header-section-number">6.1</span> Setting the random seed</h2>
+<p>It is sometimes desirable that a call to a random number generator actually generates the same “random” sequence each time it is called at a specific point in a script (e.g. to make an example reproducible). To achieve this it is necessary to explicitly initialize the random number generator with a <a href="https://en.wikipedia.org/wiki/Random_seed">“seed”</a>. In julia this can be done with the <code>Random.seed!</code> function in the standard library package <code>Random</code>:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">import</span> Random</a>
+<a class="sourceLine" id="cb219-2" title="2">Random.seed!(<span class="fl">375</span>)</a></code></pre></div>
+</div>
+<div id="working-with-distributions" class="section level2">
+<h2><span class="header-section-number">6.2</span> Working with distributions</h2>
+<p>The <code>Distributions.jl</code> package provides functions to sample from various distributions. For example, to sample from a normal distribution with mean=10, and sd=2, we first instantiate it:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb220-1" title="1">using Distributions</a>
+<a class="sourceLine" id="cb220-2" title="2">d = Normal(<span class="fl">10</span>, <span class="fl">2</span>)</a></code></pre></div>
+<pre><code>## Normal{Float64}(μ=10.0, σ=2.0)</code></pre>
+<p>then we sample from it with <code>rand</code>:</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb222-1" title="1">rand(d, <span class="fl">10</span>)</a></code></pre></div>
+<pre><code>## 10-element Array{Float64,1}:
+##  13.097676249974274
+##  11.757335823480798
+##  12.237501126505748
+##  13.168175635876224
+##  11.14411361628477 
+##  10.67240877975671 
+##  10.150159377468727
+##   5.931032863139524
+##  11.139710601976821
+##  11.021572604999648</code></pre>
+<p>we would do the same more succintly with:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb224-1" title="1">rand(Normal(<span class="fl">10</span>,<span class="fl">2</span>), <span class="fl">10</span>)</a></code></pre></div>
+<p>To sample from a uniform distribution:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb225-1" title="1">rand(Uniform(<span class="fl">20</span>, <span class="fl">30</span>), <span class="fl">5</span>)</a></code></pre></div>
+<pre><code>## 5-element Array{Float64,1}:
+##  24.767443081616506
+##  26.203224039053918
+##  23.73620344244641 
+##  29.20225681258401 
+##  21.679924712717167</code></pre>
+
+</div>
+</div>
+<div id="workflow" class="section level1">
+<h1><span class="header-section-number">7</span> Workflow</h1>
+<div id="environment-customization" class="section level2">
+<h2><span class="header-section-number">7.1</span> Environment customization</h2>
+<p>You can customize your Julia environment by inserting code in the <code>startup.jl</code> file located in <code>~.julia/config/</code> (create both the directory tree and the file if they don’t yet exist in your system), which is run each time Julia starts up. You could use this to load packages that you use frequently, define functions or set variables that you use often in your interactive sessions. Below is an example of a <code>startup.jl</code> file:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb227-1" title="1">push!(LOAD_PATH, <span class="st">&quot;/path/to/my/modules/&quot;</span>)</a>
+<a class="sourceLine" id="cb227-2" title="2">using Pkg</a></code></pre></div>
+<p>the first line appends the directory path to local modules to the <code>LOAD_PATH</code> environment variable, so that they can be loaded if needed. The second line loads the <code>Pkg</code> module, something that may be useful if you frequently install/update packages on your system and find it annoying to load the module manually each time.</p>
+
+</div>
+</div>
+<div id="plotlyJS" class="section level1">
+<h1><span class="header-section-number">8</span> PlotlyJS</h1>
+<p><a href="https://github.com/sglyon/PlotlyJS.jl">PlotlyJS.jl</a> is a Julia package generate interactive html figures. The figures can be saved to disk either as html pages, or in a variety of formats (pdf, png, etc…) through the <a href="https://github.com/sglyon/ORCA.jl">ORCA.jl</a> package.</p>
+
+<div class="rmdnote">
+The figures shown in the html version of this document will not have interactive features because they’ve been saved as png files.
+</div>
+
+<p>PlotlyJS can display plots in a window either through <a href="https://github.com/queryverse/ElectronDisplay.jl">ElectronDisplay.jl</a>, or through <a href="https://github.com/JunoLab/Blink.jl">Blink.jl</a>. In sum, for a full setup you may want to install the following three packages:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb228-1" title="1">Pkg.add([<span class="st">&quot;PlotlyJS&quot;</span>, <span class="st">&quot;ElectronDisplay&quot;</span>, <span class="st">&quot;ORCA&quot;</span>])</a></code></pre></div>
+<p>and then load them with:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb229-1" title="1">using PlotlyJS</a>
+<a class="sourceLine" id="cb229-2" title="2">using ORCA</a>
+<a class="sourceLine" id="cb229-3" title="3"><span class="co">#using ElectronDisplay</span></a></code></pre></div>
+<p>there are some convenience methods that allow you to quickly plot a line plot or a scatter plot. For example:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb230-1" title="1">x = collect(<span class="fl">0</span>:<span class="fl">0.1</span>:<span class="fl">2</span>*pi);</a>
+<a class="sourceLine" id="cb230-2" title="2">p = plot(x, sin.(x)); <span class="co">#line plot from two arrays</span></a></code></pre></div>
+<p><img src="../Figures/plotly_line_plot.png" width="480" /></p>
+<p>for a scatterplot:</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb231-1" title="1">x = rand(<span class="fl">10</span>); y=rand(<span class="fl">10</span>);</a>
+<a class="sourceLine" id="cb231-2" title="2">p = plot(x, y, mode=<span class="st">&quot;markers&quot;</span>, marker_color=<span class="st">&quot;black&quot;</span>); <span class="co">#line plot from two arrays</span></a></code></pre></div>
+<p><img src="../Figures/plotly_scatter_plot.png" width="480" /></p>
+<p>however, generally you will have to use a slightly more verbose syntax to fully leverage the features of plotlyJS. In particular, you need to pass two arguments to the <code>plot</code> command. The first consists of one or more <em>traces</em>, and the second one of a <em>layout</em> specification. With this syntax you can generate a line plot as follows:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb232-1" title="1">x = collect(<span class="fl">0</span>:<span class="fl">0.1</span>:<span class="fl">2</span>*pi);</a>
+<a class="sourceLine" id="cb232-2" title="2">s1 = scatter(;x=x, y=cos.(x));</a>
+<a class="sourceLine" id="cb232-3" title="3">ly = Layout(;title=<span class="st">&quot;cosine&quot;</span>, xaxis_title=<span class="st">&quot;x axis&quot;</span>, yaxis_title=<span class="st">&quot;y axis&quot;</span>);</a>
+<a class="sourceLine" id="cb232-4" title="4">p = plot([s1], ly);</a></code></pre></div>
+<p><img src="../Figures/plotly_line_plot2.png" width="480" /></p>
+<p>you can add more than one trace to a plot:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb233-1" title="1">s2 = scatter(;x=x, y=sin.(x));</a>
+<a class="sourceLine" id="cb233-2" title="2">ly = Layout(;title=<span class="st">&quot;sine &amp; cosine&quot;</span>, xaxis_title=<span class="st">&quot;x axis&quot;</span>, yaxis_title=<span class="st">&quot;y axis&quot;</span>);</a>
+<a class="sourceLine" id="cb233-3" title="3">p = plot([s1,s2], ly);</a></code></pre></div>
+<p><img src="../Figures/plotly_line_plot_2_traces.png" width="480" /></p>
+<p>you can tweak several aspects of the plots. We’ll start with changing some of the default options that I don’t really like. For example, the default option when hovering with the mouse on the plot is set to <code>compare</code>, which may be useful to compare two traces, but I find generally less useful than the other option, which is to show the values of the closest data point. You can change this by passing an option in the layout:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb234-1" title="1">ly = Layout(;title=<span class="st">&quot;sine &amp; cosine&quot;</span>, xaxis_title=<span class="st">&quot;x axis&quot;</span>,</a>
+<a class="sourceLine" id="cb234-2" title="2">            yaxis_title=<span class="st">&quot;y axis&quot;</span>,</a>
+<a class="sourceLine" id="cb234-3" title="3">            hovermode=<span class="st">&quot;closest&quot;</span>);</a></code></pre></div>
+<p>another default that I tipically change is removing the line intercepting the y axis at zero, again you can do that from the call to <code>Layout</code>:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb235-1" title="1">ly = Layout(;title=<span class="st">&quot;sine &amp; cosine&quot;</span>, xaxis_title=<span class="st">&quot;x axis&quot;</span>,</a>
+<a class="sourceLine" id="cb235-2" title="2">            yaxis_title=<span class="st">&quot;y axis&quot;</span>,</a>
+<a class="sourceLine" id="cb235-3" title="3">            hovermode=<span class="st">&quot;closest&quot;</span>,</a>
+<a class="sourceLine" id="cb235-4" title="4">            yaxis_zeroline=false);</a></code></pre></div>
+<p>I also find it useful to have a line at the edge of both the x, and y axes, you can set this with <code>xaxis_showline</code> and <code>yaxis_showline</code>:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb236-1" title="1">ly = Layout(;title=<span class="st">&quot;sine &amp; cosine&quot;</span>, xaxis_title=<span class="st">&quot;x axis&quot;</span>,</a>
+<a class="sourceLine" id="cb236-2" title="2">            yaxis_title=<span class="st">&quot;y axis&quot;</span>,</a>
+<a class="sourceLine" id="cb236-3" title="3">            hovermode=<span class="st">&quot;closest&quot;</span>,</a>
+<a class="sourceLine" id="cb236-4" title="4">            yaxis_zeroline=false,</a>
+<a class="sourceLine" id="cb236-5" title="5">            xaxis_showline=true,</a>
+<a class="sourceLine" id="cb236-6" title="6">            yaxis_showline=true);</a></code></pre></div>
+
+</div>
+<div id="gadfly" class="section level1">
+<h1><span class="header-section-number">9</span> Gadfly</h1>
+<div class="sourceCode" id="cb237"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb237-1" title="1">using Gadfly</a>
+<a class="sourceLine" id="cb237-2" title="2"></a>
+<a class="sourceLine" id="cb237-3" title="3">x = collect(<span class="fl">0</span>:<span class="fl">0.1</span>:<span class="fl">2</span>*pi)</a>
+<a class="sourceLine" id="cb237-4" title="4">plot(x=x, y=sin.(x), Geom.line,</a>
+<a class="sourceLine" id="cb237-5" title="5">     Guide.xlabel(<span class="st">&quot;Angle (radians)&quot;</span>), Guide.ylabel(<span class="st">&quot;Amplitude&quot;</span>));</a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb238-1" title="1">using RDatasets</a>
+<a class="sourceLine" id="cb238-2" title="2">iris = dataset(<span class="st">&quot;datasets&quot;</span>, <span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb238-3" title="3">plot(iris, x=<span class="st">&quot;SepalLength&quot;</span>, y=<span class="st">&quot;SepalWidth&quot;</span>, color=<span class="st">&quot;Species&quot;</span>, Geom.point);</a></code></pre></div>
+<p>Facets:</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb239-1" title="1">plot(iris, xgroup=<span class="st">&quot;Species&quot;</span>, x=<span class="st">&quot;SepalLength&quot;</span>, y=<span class="st">&quot;SepalWidth&quot;</span>, Geom.subplot_grid(Geom.point));</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb240-1" title="1">oats = dataset(<span class="st">&quot;MASS&quot;</span>, <span class="st">&quot;oats&quot;</span>)</a>
+<a class="sourceLine" id="cb240-2" title="2">oats[:Nitro] = [parse(<span class="dt">Float64</span>, split(oats[:N][i], <span class="st">&quot;c&quot;</span>)[<span class="fl">1</span>]) <span class="kw">for</span> i=<span class="fl">1</span>:length(oats[:N])]</a>
+<a class="sourceLine" id="cb240-3" title="3">set_default_plot_size(<span class="fl">16</span>cm, <span class="fl">16</span>cm)</a>
+<a class="sourceLine" id="cb240-4" title="4">plot(oats, xgroup=<span class="st">&quot;V&quot;</span>, ygroup=<span class="st">&quot;B&quot;</span>, x=<span class="st">&quot;Nitro&quot;</span>, y=<span class="st">&quot;Y&quot;</span>, Geom.subplot_grid(Geom.point, Geom.line), Guide.xlabel(<span class="st">&quot;Nitro by Variety&quot;</span>), Guide.ylabel(<span class="st">&quot;Yeld By Block&quot;</span>));</a></code></pre></div>
+
+</div>
+<div id="ggplot2" class="section level1">
+<h1><span class="header-section-number">10</span> ggplot2 via RCall</h1>
+<p>It’s possible to use <code>ggplot2</code> via the functionality provided by the <code>RCall</code> package in Julia:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb241-1" title="1">using RCall</a>
+<a class="sourceLine" id="cb241-2" title="2">using RDatasets</a>
+<a class="sourceLine" id="cb241-3" title="3">oats = dataset(<span class="st">&quot;MASS&quot;</span>, <span class="st">&quot;oats&quot;</span>)</a>
+<a class="sourceLine" id="cb241-4" title="4">oats[:Nitro] = [parse(<span class="dt">Float64</span>, split(oats[:N][i], <span class="st">&quot;c&quot;</span>)[<span class="fl">1</span>]) <span class="kw">for</span> i=<span class="fl">1</span>:length(oats[:N])]</a>
+<a class="sourceLine" id="cb241-5" title="5">R<span class="st">&quot;&quot;&quot;library(ggplot2)&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb241-6" title="6">R<span class="st">&quot;&quot;&quot;p=ggplot($oats, aes(Nitro, Y))+facet_grid(B~V)+geom_point()&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb241-7" title="7">R<span class="st">&quot;&quot;&quot;ggsave(&quot;</span>../Figures/ggplot_oats.png<span class="st">&quot;, p)&quot;&quot;&quot;</span></a></code></pre></div>
+<p><img src="../Figures/ggplot_oats.png" /></p>
+
+</div>
+<div id="vegalite" class="section level1">
+<h1><span class="header-section-number">11</span> Vegalite</h1>
+<p><a href="https://github.com/fredo-dedup/VegaLite.jl">VegaLite.jl</a> is a plotting package for Julia based on <a href="https://vega.github.io/vega-lite/">Vega-Lite</a>. Its two most notable features are that 1) it is based on a grammar of graphics, like the <code>ggplot2</code> R package; 2) it produces interactive html graphics (but they can also be saved on disk in other static formats such as pdf or png).</p>
+<p>Using Vegalite.jl feels a lot like using <code>ggplot2</code>, so users of <code>ggplot2</code> in R will feel right at home.</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb242-1" title="1">using VegaLite</a>
+<a class="sourceLine" id="cb242-2" title="2">using RDatasets</a>
+<a class="sourceLine" id="cb242-3" title="3">iris = dataset(<span class="st">&quot;datasets&quot;</span>, <span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb242-4" title="4"></a>
+<a class="sourceLine" id="cb242-5" title="5">p = iris |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb242-6" title="6">                    x=:SepalLength,</a>
+<a class="sourceLine" id="cb242-7" title="7">                    y=:SepalWidth,</a>
+<a class="sourceLine" id="cb242-8" title="8">                    color=:Species,</a>
+<a class="sourceLine" id="cb242-9" title="9">                    width=<span class="fl">250</span>,</a>
+<a class="sourceLine" id="cb242-10" title="10">                    height=<span class="fl">250</span></a>
+<a class="sourceLine" id="cb242-11" title="11">                    )</a></code></pre></div>
+<p>Note that you may need to either call <code>p</code> or <code>p |&gt; display</code> to show the plot. Depending on whether you’re using the terminal or a IDE the plot may open up in a browser window. The <a href="https://github.com/queryverse/ElectronDisplay.jl">ElectronDisplay.jl</a> package provides a convenient plotting window that can show VegaLite plots.</p>
+<p><img src="../Figures/iris_sep_wd_by_len.png" width="190" /></p>
+<p>Now that we have this first plot, let’s make a few tweaks it to improve its appearance. Currently by the default when you hover with the mouse on the points nothing happens, but you can enable tooltips as follows:</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb243-1" title="1">p = iris |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb243-2" title="2">                    x=:SepalLength,</a>
+<a class="sourceLine" id="cb243-3" title="3">                    y=:SepalWidth,</a>
+<a class="sourceLine" id="cb243-4" title="4">                    color=:Species,</a>
+<a class="sourceLine" id="cb243-5" title="5">                    width=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb243-6" title="6">                    height=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb243-7" title="7">                    tooltip=[{field=<span class="st">&quot;SepalLength&quot;</span>}, {field=<span class="st">&quot;SepalWidth&quot;</span>}]</a>
+<a class="sourceLine" id="cb243-8" title="8">                    )</a></code></pre></div>
+<p>By default, the axes start from zero. If you do not want the axes to start from zero you need to specify this as follows:</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb244-1" title="1">p = iris |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb244-2" title="2">                           x={:SepalLength, scale={zero=false}},</a>
+<a class="sourceLine" id="cb244-3" title="3">                           y={:SepalWidth, scale={zero=false}},</a>
+<a class="sourceLine" id="cb244-4" title="4">                           color=:Species,</a>
+<a class="sourceLine" id="cb244-5" title="5">                           width=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb244-6" title="6">                           height=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb244-7" title="7">                           tooltip=[{field=<span class="st">&quot;SepalLength&quot;</span>}, {field=<span class="st">&quot;SepalWidth&quot;</span>}]</a>
+<a class="sourceLine" id="cb244-8" title="8">                           )</a></code></pre></div>
+<p>We can add prettier labels to the x and y axis as follows:</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb245-1" title="1">p = iris |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb245-2" title="2">                           x={:SepalLength, </a>
+<a class="sourceLine" id="cb245-3" title="3">                              scale={zero=false},</a>
+<a class="sourceLine" id="cb245-4" title="4">                              axis={title=<span class="st">&quot;Sepal Length (cm)&quot;</span>}},</a>
+<a class="sourceLine" id="cb245-5" title="5">                           y={:SepalWidth, </a>
+<a class="sourceLine" id="cb245-6" title="6">                              scale={zero=false},</a>
+<a class="sourceLine" id="cb245-7" title="7">                              axis={title=<span class="st">&quot;Sepal Width (cm)&quot;</span>}},</a>
+<a class="sourceLine" id="cb245-8" title="8">                           color=:Species,</a>
+<a class="sourceLine" id="cb245-9" title="9">                           width=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb245-10" title="10">                           height=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb245-11" title="11">                           tooltip=[{field=<span class="st">&quot;SepalLength&quot;</span>}, {field=<span class="st">&quot;SepalWidth&quot;</span>}]</a>
+<a class="sourceLine" id="cb245-12" title="12">                           )</a></code></pre></div>
+<p>We can remove the grid as well:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb246-1" title="1">p = iris |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb246-2" title="2">                           x={:SepalLength, </a>
+<a class="sourceLine" id="cb246-3" title="3">                              scale={zero=false},</a>
+<a class="sourceLine" id="cb246-4" title="4">                              axis={title=<span class="st">&quot;Sepal Length (cm)&quot;</span>,</a>
+<a class="sourceLine" id="cb246-5" title="5">                                    grid=false}</a>
+<a class="sourceLine" id="cb246-6" title="6">                             },</a>
+<a class="sourceLine" id="cb246-7" title="7">                           y={:SepalWidth, </a>
+<a class="sourceLine" id="cb246-8" title="8">                              scale={zero=false},</a>
+<a class="sourceLine" id="cb246-9" title="9">                              axis={title=<span class="st">&quot;Sepal Width (cm)&quot;</span>,</a>
+<a class="sourceLine" id="cb246-10" title="10">                              grid=false}</a>
+<a class="sourceLine" id="cb246-11" title="11">                             },</a>
+<a class="sourceLine" id="cb246-12" title="12">                           color=:Species,</a>
+<a class="sourceLine" id="cb246-13" title="13">                           width=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb246-14" title="14">                           height=<span class="fl">400</span>,</a>
+<a class="sourceLine" id="cb246-15" title="15">                           tooltip=[{field=<span class="st">&quot;SepalLength&quot;</span>}, {field=<span class="st">&quot;SepalWidth&quot;</span>}]</a>
+<a class="sourceLine" id="cb246-16" title="16">                           )</a></code></pre></div>
+<div id="faceting" class="section level2">
+<h2><span class="header-section-number">11.1</span> Faceting</h2>
+<div class="sourceCode" id="cb247"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb247-1" title="1">oats = dataset(<span class="st">&quot;MASS&quot;</span>, <span class="st">&quot;oats&quot;</span>)</a>
+<a class="sourceLine" id="cb247-2" title="2">oats[:Nitro] = [parse(<span class="dt">Float64</span>, split(oats[:N][i], <span class="st">&quot;c&quot;</span>)[<span class="fl">1</span>]) <span class="kw">for</span> i=<span class="fl">1</span>:length(oats[:N])]</a>
+<a class="sourceLine" id="cb247-3" title="3"></a>
+<a class="sourceLine" id="cb247-4" title="4">p = oats |&gt; @vlplot(:point,</a>
+<a class="sourceLine" id="cb247-5" title="5">                    x=:Nitro,</a>
+<a class="sourceLine" id="cb247-6" title="6">                    y=:Y,</a>
+<a class="sourceLine" id="cb247-7" title="7">                    row=:B,</a>
+<a class="sourceLine" id="cb247-8" title="8">                    column=:V)</a></code></pre></div>
+<p><img src="../Figures/vegalite_oats.png" width="388" /></p>
+
+</div>
+</div>
+<div id="pyplot" class="section level1">
+<h1><span class="header-section-number">12</span> PyPlot (matplotlib)</h1>
+<div class="sourceCode" id="cb248"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb248-1" title="1">using PyCall</a>
+<a class="sourceLine" id="cb248-2" title="2">using PyPlot</a>
+<a class="sourceLine" id="cb248-3" title="3">x = collect(<span class="fl">0</span>:<span class="fl">0.1</span>:<span class="fl">2</span>*pi)</a>
+<a class="sourceLine" id="cb248-4" title="4">plot(x, sin.(x))</a></code></pre></div>
+<p><img src="../Figures/pyplot_sine.png" width="165" /></p>
+<div id="saving-multiple-plots-in-one-pdf-with-pyplot" class="section level3">
+<h3><span class="header-section-number">12.0.1</span> Saving multiple plots in one pdf with PyPlot</h3>
+<div class="sourceCode" id="cb249"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb249-1" title="1">backend_pdf = pyimport(<span class="st">&quot;matplotlib.backends.backend_pdf&quot;</span>)</a>
+<a class="sourceLine" id="cb249-2" title="2"></a>
+<a class="sourceLine" id="cb249-3" title="3">pdf_pages = backend_pdf.PdfPages(<span class="st">&quot;multipage_pdf.pdf&quot;</span>)</a>
+<a class="sourceLine" id="cb249-4" title="4">x = collect(<span class="fl">0</span>:<span class="fl">0.1</span>:<span class="fl">2</span>*pi)</a>
+<a class="sourceLine" id="cb249-5" title="5">plot(x, sin.(x))</a>
+<a class="sourceLine" id="cb249-6" title="6">savefig(pdf_pages, format=<span class="st">&quot;pdf&quot;</span>)</a>
+<a class="sourceLine" id="cb249-7" title="7">close()</a>
+<a class="sourceLine" id="cb249-8" title="8">plot(x, cos.(x))</a>
+<a class="sourceLine" id="cb249-9" title="9">savefig(pdf_pages, format=<span class="st">&quot;pdf&quot;</span>)</a>
+<a class="sourceLine" id="cb249-10" title="10">close()</a>
+<a class="sourceLine" id="cb249-11" title="11">pdf_pages.close()</a></code></pre></div>
+
+</div>
+</div>
+<div id="parallel-processing" class="section level1">
+<h1><span class="header-section-number">13</span> Parallel Processing</h1>
+<p>The BLAS library automatically makes use of multiple cores in your machine. You can tell it how many threads to use with the <code>BLAS.set_num_threads</code> function in <code>LinearAlgebra</code>:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb250-1" title="1">using LinearAlgebra</a>
+<a class="sourceLine" id="cb250-2" title="2">BLAS.set_num_threads(<span class="fl">8</span>)</a></code></pre></div>
+
+</div>
+<div id="generating-packages" class="section level1">
+<h1><span class="header-section-number">14</span> Generating packages</h1>
+<p>To generate an empty package skeleton use:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb251-1" title="1">Pkg.generate(<span class="st">&quot;packageName&quot;</span>)</a></code></pre></div>
+<p>or <code>generate packageName</code> from the package manager shell.</p>
+
+</div>
+<div id="working-with-sound" class="section level1">
+<h1><span class="header-section-number">15</span> Working with sound</h1>
+<p>Julia has fairly good support for working with sound. The <a href="https://github.com/dancasimiro/WAV.jl">WAV.jl</a> package can be used to read and write WAV files. The <a href="https://github.com/JuliaDSP/DSP.jl">DSP.jl</a> package provides functions for digital signal processing. My <a href="https://github.com/sam81/SndLib.jl">SndLib.jl</a> package provides functions to synthesize and process various sounds commonly used in psychoacoustic experiments.</p>
+
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+
+<div id="refs" class="references">
+<div id="ref-BezansonEtAl2017">
+<p>Bezanson, J., A. Edelman, S. Karpinski, and V. Shah. 2017. “Julia: A Fresh Approach to Numerical Computing.” <em>SIAM Review</em> 59 (1): 65–98. <a href="https://doi.org/10.1137/141000671" class="uri">https://doi.org/10.1137/141000671</a>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["julia_notes.pdf", "julia_notes.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
