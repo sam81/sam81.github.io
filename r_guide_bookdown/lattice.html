@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 Lattice Graphics | A R Guide</title>
+  <meta name="description" content="A guide for the R programming language." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 Lattice Graphics | A R Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A guide for the R programming language." />
+  <meta name="github-repo" content="sam81/rguide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 Lattice Graphics | A R Guide" />
+  
+  <meta name="twitter:description" content="A guide for the R programming language." />
+  
+
+<meta name="author" content="Samuele Carcagno" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="plotly.html"/>
+<link rel="next" href="graphics-labels-and-text.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./preface.html">A R Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Installing R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#installing-the-base-program"><i class="fa fa-check"></i><b>1.1</b> Installing the Base Program</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices"><i class="fa fa-check"></i><b>1.1.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#windows"><i class="fa fa-check"></i><b>1.1.2</b> Windows</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#mac-os-x"><i class="fa fa-check"></i><b>1.1.3</b> Mac Os X</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#installing-add-on-packages"><i class="fa fa-check"></i><b>1.2</b> Installing Add-On Packages</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices-1"><i class="fa fa-check"></i><b>1.2.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#windows-1"><i class="fa fa-check"></i><b>1.2.2</b> Windows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> A Simple Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#datasets"><i class="fa fa-check"></i><b>2.1</b> Datasets</a></li>
+<li class="chapter" data-level="2.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#firing-up-and-quitting-r"><i class="fa fa-check"></i><b>2.2</b> Firing up and Quitting R</a></li>
+<li class="chapter" data-level="2.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#starting-to-work-with-r"><i class="fa fa-check"></i><b>2.3</b> Starting to Work with R</a></li>
+<li class="chapter" data-level="2.4" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gettinghelp"><i class="fa fa-check"></i><b>2.4</b> Getting Help</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-online-help-system"><i class="fa fa-check"></i><b>2.4.1</b> The Online Help System</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gui"><i class="fa fa-check"></i><b>2.5</b> Working with a Graphical User Interface</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#r-studio"><i class="fa fa-check"></i><b>2.5.1</b> R Studio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-r-commander"><i class="fa fa-check"></i><b>2.5.2</b> The R Commander</a></li>
+<li class="chapter" data-level="2.5.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#jgr"><i class="fa fa-check"></i><b>2.5.3</b> JGR</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html"><i class="fa fa-check"></i><b>3</b> Organising a Working Session</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#setting-and-changing-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting and Changing the Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#objects"><i class="fa fa-check"></i><b>3.2</b> Objects</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#saving-and-using-the-workspace-image"><i class="fa fa-check"></i><b>3.3</b> Saving and Using the “Workspace Image”</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#working-in-batch-mode"><i class="fa fa-check"></i><b>3.4</b> Working in Batch Mode</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-an-r-session"><i class="fa fa-check"></i><b>3.4.1</b> Executing commands written in a file from an R session</a></li>
+<li class="chapter" data-level="3.4.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-a-shell"><i class="fa fa-check"></i><b>3.4.2</b> Executing commands written in a file from a shell</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-manip.html"><a href="data-manip.html"><i class="fa fa-check"></i><b>4</b> Data Types and Data Manipulation</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-manip.html"><a href="data-manip.html#vectors"><i class="fa fa-check"></i><b>4.1</b> Vectors</a></li>
+<li class="chapter" data-level="4.2" data-path="data-manip.html"><a href="data-manip.html#indexing-vectors"><i class="fa fa-check"></i><b>4.2</b> Indexing Vectors</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-manip.html"><a href="data-manip.html#the-seq-function"><i class="fa fa-check"></i><b>4.2.1</b> The <code>seq</code> Function</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-manip.html"><a href="data-manip.html#the-rep-function"><i class="fa fa-check"></i><b>4.2.2</b> The <code>rep</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-manip.html"><a href="data-manip.html#matrix-facilities"><i class="fa fa-check"></i><b>4.3</b> Matrix Facilities</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-manip.html"><a href="data-manip.html#matrix-operations"><i class="fa fa-check"></i><b>4.3.1</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-manip.html"><a href="data-manip.html#Lists"><i class="fa fa-check"></i><b>4.4</b> Lists</a></li>
+<li class="chapter" data-level="4.5" data-path="data-manip.html"><a href="data-manip.html#dataframes"><i class="fa fa-check"></i><b>4.5</b> Dataframes</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-manip.html"><a href="data-manip.html#accessing-parts-of-a-dataframe"><i class="fa fa-check"></i><b>4.5.1</b> Accessing Parts of a Dataframe</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-manip.html"><a href="data-manip.html#change-the-names-of-variables-in-a-dataframe"><i class="fa fa-check"></i><b>4.5.2</b> Change the Names of Variables in a Dataframe</a></li>
+<li class="chapter" data-level="4.5.3" data-path="data-manip.html"><a href="data-manip.html#other-ways-to-subset-a-dataframe"><i class="fa fa-check"></i><b>4.5.3</b> Other Ways to Subset a Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-manip.html"><a href="data-manip.html#factors"><i class="fa fa-check"></i><b>4.6</b> Factors</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-manip.html"><a href="data-manip.html#renaming-the-levels-of-a-factor"><i class="fa fa-check"></i><b>4.6.1</b> Renaming the levels of a factor</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-manip.html"><a href="data-manip.html#gl"><i class="fa fa-check"></i><b>4.6.2</b> Creating Factors with <code>gl</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-manip.html"><a href="data-manip.html#natural-sort-order-for-character-and-factor-vectors"><i class="fa fa-check"></i><b>4.6.3</b> Natural sort order for character and factor vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-manip.html"><a href="data-manip.html#getting-info-on-r-objects"><i class="fa fa-check"></i><b>4.7</b> Getting Info on R Objects</a></li>
+<li class="chapter" data-level="4.8" data-path="data-manip.html"><a href="data-manip.html#changing-the-format-of-your-data"><i class="fa fa-check"></i><b>4.8</b> Changing the Format of Your Data</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="data-manip.html"><a href="data-manip.html#the-one-row-per-observation-format"><i class="fa fa-check"></i><b>4.8.1</b> The “One Row per Observation” Format</a></li>
+<li class="chapter" data-level="4.8.2" data-path="data-manip.html"><a href="data-manip.html#stack"><i class="fa fa-check"></i><b>4.8.2</b> The <code>stack</code> and <code>unstack</code> functions</a></li>
+<li class="chapter" data-level="4.8.3" data-path="data-manip.html"><a href="data-manip.html#tapply"><i class="fa fa-check"></i><b>4.8.3</b> The <code>tapply</code> and <code>aggregate</code> functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="data-manip.html"><a href="data-manip.html#creating-and-editing-data-objects-through-a-visual-interface"><i class="fa fa-check"></i><b>4.9</b> Creating and Editing Data Objects through a Visual Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualising-your-data.html"><a href="visualising-your-data.html"><i class="fa fa-check"></i><b>5</b> Visualising Your Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-your-data.html"><a href="visualising-your-data.html#reading-numbers-in-exponential-notation"><i class="fa fa-check"></i><b>5.1</b> Reading Numbers in Exponential Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="IO.html"><a href="IO.html"><i class="fa fa-check"></i><b>6</b> File Input/Output</a><ul>
+<li class="chapter" data-level="6.1" data-path="IO.html"><a href="IO.html#reading-in-data-from-a-file"><i class="fa fa-check"></i><b>6.1</b> Reading In Data from a File</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="IO.html"><a href="IO.html#read.table"><i class="fa fa-check"></i><b>6.1.1</b> The <code>read.table</code> function</a></li>
+<li class="chapter" data-level="6.1.2" data-path="IO.html"><a href="IO.html#scan"><i class="fa fa-check"></i><b>6.1.2</b> <code>scan</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="IO.html"><a href="IO.html#low-level-file-input"><i class="fa fa-check"></i><b>6.1.3</b> Low-Level File Input</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="IO.html"><a href="IO.html#writing-data-to-a-file"><i class="fa fa-check"></i><b>6.2</b> Writing Data to a file</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="IO.html"><a href="IO.html#write.table"><i class="fa fa-check"></i><b>6.2.1</b> The <code>write.table</code> function</a></li>
+<li class="chapter" data-level="6.2.2" data-path="IO.html"><a href="IO.html#cat"><i class="fa fa-check"></i><b>6.2.2</b> Low-Level File Output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive.html"><a href="descriptive.html"><i class="fa fa-check"></i><b>7</b> Descriptive</a><ul>
+<li class="chapter" data-level="7.1" data-path="descriptive.html"><a href="descriptive.html#tables"><i class="fa fa-check"></i><b>7.1</b> Tables</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive.html"><a href="descriptive.html#the-scale-function"><i class="fa fa-check"></i><b>7.2</b> The <code>scale</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>8</b> Graphics</a><ul>
+<li class="chapter" data-level="8.1" data-path="graphics.html"><a href="graphics.html#overview-of-r-base-graphics-functions"><i class="fa fa-check"></i><b>8.1</b> Overview of R base graphics functions</a></li>
+<li class="chapter" data-level="8.2" data-path="graphics.html"><a href="graphics.html#plot"><i class="fa fa-check"></i><b>8.2</b> The <code>plot</code> Function</a></li>
+<li class="chapter" data-level="8.3" data-path="graphics.html"><a href="graphics.html#drawing-functions"><i class="fa fa-check"></i><b>8.3</b> Drawing Functions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="graphics.html"><a href="graphics.html#the-matplot-function"><i class="fa fa-check"></i><b>8.3.1</b> The <code>matplot</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="graphics.html"><a href="graphics.html#barplots"><i class="fa fa-check"></i><b>8.4</b> Barplots</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="graphics.html"><a href="graphics.html#barplots-with-error-bars"><i class="fa fa-check"></i><b>8.4.1</b> Barplots with Error Bars</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="graphics.html"><a href="graphics.html#boxplots"><i class="fa fa-check"></i><b>8.5</b> Boxplots</a></li>
+<li class="chapter" data-level="8.6" data-path="graphics.html"><a href="graphics.html#histograms"><i class="fa fa-check"></i><b>8.6</b> Histograms</a></li>
+<li class="chapter" data-level="8.7" data-path="graphics.html"><a href="graphics.html#stripcharts"><i class="fa fa-check"></i><b>8.7</b> Stripcharts</a></li>
+<li class="chapter" data-level="8.8" data-path="graphics.html"><a href="graphics.html#interaction-plots"><i class="fa fa-check"></i><b>8.8</b> Interaction Plots</a></li>
+<li class="chapter" data-level="8.9" data-path="graphics.html"><a href="graphics.html#par"><i class="fa fa-check"></i><b>8.9</b> Setting Graphics Parameters</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="graphics.html"><a href="graphics.html#lty"><i class="fa fa-check"></i><b>8.9.1</b> Line type with the <code>lty</code> parameter</a></li>
+<li class="chapter" data-level="8.9.2" data-path="graphics.html"><a href="graphics.html#secpch"><i class="fa fa-check"></i><b>8.9.2</b> Symbols with the <code>pch</code> parameter</a></li>
+<li class="chapter" data-level="8.9.3" data-path="graphics.html"><a href="graphics.html#fonts"><i class="fa fa-check"></i><b>8.9.3</b> Fonts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="graphics.html"><a href="graphics.html#adding-elements-to-a-plot"><i class="fa fa-check"></i><b>8.10</b> Adding Elements to a Plot</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="graphics.html"><a href="graphics.html#legend"><i class="fa fa-check"></i><b>8.10.1</b> Adding a Legend</a></li>
+<li class="chapter" data-level="8.10.2" data-path="graphics.html"><a href="graphics.html#adding-text"><i class="fa fa-check"></i><b>8.10.2</b> Adding Text</a></li>
+<li class="chapter" data-level="8.10.3" data-path="graphics.html"><a href="graphics.html#addgrid"><i class="fa fa-check"></i><b>8.10.3</b> Adding a Grid</a></li>
+<li class="chapter" data-level="8.10.4" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>8.10.4</b> Setting the Axes</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="graphics.html"><a href="graphics.html#creating-layouts-for-multiple-graphs-glayout"><i class="fa fa-check"></i><b>8.11</b> Creating Layouts for Multiple Graphs {glayout}</a><ul>
+<li class="chapter" data-level="8.11.1" data-path="graphics.html"><a href="graphics.html#mfrow-and-mfcol-mfrowmfcol"><i class="fa fa-check"></i><b>8.11.1</b> mfrow and mfcol {mfrowmfcol}</a></li>
+<li class="chapter" data-level="8.11.2" data-path="graphics.html"><a href="graphics.html#layout"><i class="fa fa-check"></i><b>8.11.2</b> layout</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="graphics.html"><a href="graphics.html#graphics-device-regions-and-coordinates"><i class="fa fa-check"></i><b>8.12</b> Graphics Device Regions and Coordinates</a></li>
+<li class="chapter" data-level="8.13" data-path="graphics.html"><a href="graphics.html#plotfromscratch"><i class="fa fa-check"></i><b>8.13</b> Plotting from Scratch</a></li>
+<li class="chapter" data-level="8.14" data-path="graphics.html"><a href="graphics.html#colours-for-graphics"><i class="fa fa-check"></i><b>8.14</b> Colours for Graphics</a><ul>
+<li class="chapter" data-level="8.14.1" data-path="graphics.html"><a href="graphics.html#colour-opacity"><i class="fa fa-check"></i><b>8.14.1</b> Colour Opacity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.15" data-path="graphics.html"><a href="graphics.html#managing-graphic-devices"><i class="fa fa-check"></i><b>8.15</b> Managing Graphic Devices</a><ul>
+<li class="chapter" data-level="8.15.1" data-path="graphics.html"><a href="graphics.html#opening-another-graphics-window"><i class="fa fa-check"></i><b>8.15.1</b> Opening Another Graphics Window</a></li>
+<li class="chapter" data-level="8.15.2" data-path="graphics.html"><a href="graphics.html#exporting-graphics"><i class="fa fa-check"></i><b>8.15.2</b> Exporting Graphics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>9</b> ggplot2</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="ggplot2.html"><a href="ggplot2.html#log-axis-with-pretty-tickmarks"><i class="fa fa-check"></i><b>9.0.1</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>10</b> Plotly</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotly.html"><a href="plotly.html#using-plotly-with-knitr"><i class="fa fa-check"></i><b>10.1</b> Using plotly with knitr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lattice.html"><a href="lattice.html"><i class="fa fa-check"></i><b>11</b> Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.1" data-path="lattice.html"><a href="lattice.html#overview-of-lattice-graphics"><i class="fa fa-check"></i><b>11.1</b> Overview of Lattice Graphics</a></li>
+<li class="chapter" data-level="11.2" data-path="lattice.html"><a href="lattice.html#introduction-to-model-formulae-and-multi-panel-conditioning"><i class="fa fa-check"></i><b>11.2</b> Introduction to model formulae and multi-panel conditioning</a></li>
+<li class="chapter" data-level="11.3" data-path="lattice.html"><a href="lattice.html#barchart"><i class="fa fa-check"></i><b>11.3</b> <code>barchart</code></a></li>
+<li class="chapter" data-level="11.4" data-path="lattice.html"><a href="lattice.html#dotplot"><i class="fa fa-check"></i><b>11.4</b> dotplot</a></li>
+<li class="chapter" data-level="11.5" data-path="lattice.html"><a href="lattice.html#histogram"><i class="fa fa-check"></i><b>11.5</b> histogram</a></li>
+<li class="chapter" data-level="11.6" data-path="lattice.html"><a href="lattice.html#interaction-plots-1"><i class="fa fa-check"></i><b>11.6</b> Interaction Plots</a></li>
+<li class="chapter" data-level="11.7" data-path="lattice.html"><a href="lattice.html#customizingtrellis"><i class="fa fa-check"></i><b>11.7</b> Customising Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="lattice.html"><a href="lattice.html#textual-elements"><i class="fa fa-check"></i><b>11.7.1</b> Textual Elements</a></li>
+<li class="chapter" data-level="11.7.2" data-path="lattice.html"><a href="lattice.html#log-axis-with-pretty-tickmarks-1"><i class="fa fa-check"></i><b>11.7.2</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="lattice.html"><a href="lattice.html#trellispanel"><i class="fa fa-check"></i><b>11.8</b> Writing Panel Functions</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="lattice.html"><a href="lattice.html#combining-panel-functions"><i class="fa fa-check"></i><b>11.8.1</b> Combining Panel Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html"><i class="fa fa-check"></i><b>12</b> Graphics labels and text</a><ul>
+<li class="chapter" data-level="12.1" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html#mathematical-expressions-and-variables"><i class="fa fa-check"></i><b>12.1</b> Mathematical expressions and variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html"><i class="fa fa-check"></i><b>13</b> Probability Distribution Functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#bernoulli"><i class="fa fa-check"></i><b>13.1</b> The Bernoulli distribution</a></li>
+<li class="chapter" data-level="13.2" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#binomial"><i class="fa fa-check"></i><b>13.2</b> The binomial distribution</a></li>
+<li class="chapter" data-level="13.3" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#normal"><i class="fa fa-check"></i><b>13.3</b> The normal distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>14</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="14.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#chi2-test"><i class="fa fa-check"></i><b>14.1</b> <span class="math inline">\(\chi^2\)</span> test</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-hypotheses-about-the-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>14.1.1</b> Testing Hypotheses about the Distribution of a Categorical Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#students-t-test"><i class="fa fa-check"></i><b>14.2</b> Student’s <em>t</em> test</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#one-sample-t-test"><i class="fa fa-check"></i><b>14.2.1</b> One sample <em>t</em>-test</a></li>
+<li class="chapter" data-level="14.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#two-samples-t-test"><i class="fa fa-check"></i><b>14.2.2</b> Two samples t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-levene-test-for-homogeneity-of-variances"><i class="fa fa-check"></i><b>14.3</b> The Levene Test for Homogeneity of Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>15</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-regression"><i class="fa fa-check"></i><b>15.1</b> Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>16</b> ANOVA</a><ul>
+<li class="chapter" data-level="16.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>16.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="16.2" data-path="anova.html"><a href="anova.html#repeated-measures-anova"><i class="fa fa-check"></i><b>16.2</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="anova.html"><a href="anova.html#one-within-subjects-factor"><i class="fa fa-check"></i><b>16.2.1</b> One Within Subjects Factor</a></li>
+<li class="chapter" data-level="16.2.2" data-path="anova.html"><a href="anova.html#two-within-subjects-factors"><i class="fa fa-check"></i><b>16.2.2</b> Two Within Subjects Factors</a></li>
+<li class="chapter" data-level="16.2.3" data-path="anova.html"><a href="anova.html#two-within-subjects-factors-and-one-between"><i class="fa fa-check"></i><b>16.2.3</b> Two Within Subjects Factors and One Between</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="how-to-adjust-the-p-values-for-multiple-comparisons.html"><a href="how-to-adjust-the-p-values-for-multiple-comparisons.html"><i class="fa fa-check"></i><b>17</b> How to Adjust the p-values for Multiple Comparisons</a></li>
+<li class="chapter" data-level="18" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>18</b> R Programming</a><ul>
+<li class="chapter" data-level="18.1" data-path="programming.html"><a href="programming.html#contrstruct"><i class="fa fa-check"></i><b>18.1</b> Control Structures</a></li>
+<li class="chapter" data-level="18.2" data-path="programming.html"><a href="programming.html#stringprocessing"><i class="fa fa-check"></i><b>18.2</b> String Processing</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="programming.html"><a href="programming.html#regexp"><i class="fa fa-check"></i><b>18.2.1</b> Using Regular Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="programming.html"><a href="programming.html#tips-and-tricks"><i class="fa fa-check"></i><b>18.3</b> Tips and Tricks</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="programming.html"><a href="programming.html#convert-a-string-into-a-command"><i class="fa fa-check"></i><b>18.3.1</b> Convert a String into a Command</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="programming.html"><a href="programming.html#creatingsimplerpackages"><i class="fa fa-check"></i><b>18.4</b> Creating Simple R Packages</a><ul>
+<li class="chapter" data-level="18.4.1" data-path="programming.html"><a href="programming.html#the-bare-minimum-to-create-a-package"><i class="fa fa-check"></i><b>18.4.1</b> The Bare Minimum to Create a Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="custom.html"><a href="custom.html"><i class="fa fa-check"></i><b>19</b> Environment Customisation</a></li>
+<li class="chapter" data-level="20" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html"><i class="fa fa-check"></i><b>20</b> ESS: Using Emacs Speaks Statistics with R</a><ul>
+<li class="chapter" data-level="20.1" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-for-editing-and-debugging-r-source-files"><i class="fa fa-check"></i><b>20.1</b> Using ESS for Editing and Debugging R Source Files</a></li>
+<li class="chapter" data-level="20.2" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-to-interact-with-a-r-process"><i class="fa fa-check"></i><b>20.2</b> Using ESS to Interact with a R Process</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html"><i class="fa fa-check"></i><b>21</b> Using Sweave to Write Documents with R and LaTeX</a><ul>
+<li class="chapter" data-level="21.1" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#whats-sweave"><i class="fa fa-check"></i><b>21.1</b> What’s Sweave?</a></li>
+<li class="chapter" data-level="21.2" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#usage"><i class="fa fa-check"></i><b>21.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="soundprocessing.html"><a href="soundprocessing.html"><i class="fa fa-check"></i><b>22</b> Sound Processing</a><ul>
+<li class="chapter" data-level="22.1" data-path="soundprocessing.html"><a href="soundprocessing.html#libraries-for-sound-analysis-and-signal-processing"><i class="fa fa-check"></i><b>22.1</b> Libraries for Sound Analysis and Signal Processing</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html"><i class="fa fa-check"></i><b>A</b> Partial List of Packages by Category</a><ul>
+<li class="chapter" data-level="A.1" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#graphics-packages"><i class="fa fa-check"></i><b>A.1</b> Graphics Packages</a></li>
+<li class="chapter" data-level="A.2" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#gui-packages"><i class="fa fa-check"></i><b>A.2</b> GUI Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="miscellaneous-commands.html"><a href="miscellaneous-commands.html"><i class="fa fa-check"></i><b>B</b> Miscellaneous commands</a></li>
+<li class="chapter" data-level="C" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html"><i class="fa fa-check"></i><b>C</b> Other Manuals and Sources of Information on R</a><ul>
+<li class="chapter" data-level="C.0.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian"><i class="fa fa-check"></i><b>C.0.1</b> In Italian</a></li>
+<li class="chapter" data-level="C.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#other-useful-statistics-resources"><i class="fa fa-check"></i><b>C.1</b> Other useful statistics resources</a><ul>
+<li class="chapter" data-level="C.1.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian-1"><i class="fa fa-check"></i><b>C.1.1</b> In Italian</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="fullcoltable.html"><a href="fullcoltable.html"><i class="fa fa-check"></i><b>D</b> Full Colours Table</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A R Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lattice" class="section level1">
+<h1><span class="header-section-number">11</span> Lattice Graphics</h1>
+<p>The <code>lattice</code> package in R provides an alternative to the base graphics system, it is an implementation of the ideas developed and implemented by Rick Becker and Bill Cleveland in the Trellis graphics system for the S language. Trellis displays were developed as a framework to make it easy the display of the relationship between a dependent variable and multiple factors.</p>
+<p>The best introduction to <code>lattice</code> graphics is the book by Sarkar <span class="citation">(Sarkar <a href="#ref-sarkar2008">2008</a>)</span>, the author of <code>lattice</code>:</p>
+<ul>
+<li>Lattice: Multivariate Data Visualization with R <span class="citation">(Sarkar <a href="#ref-sarkar2008">2008</a>)</span></li>
+</ul>
+<p>the <code>lattice</code> package documentation is available here:</p>
+<ul>
+<li>Lattice Reference Manual <a href="https://cran.r-project.org/web/packages/lattice/lattice.pdf" class="uri">https://cran.r-project.org/web/packages/lattice/lattice.pdf</a></li>
+</ul>
+<p>the following articles also contain useful info:</p>
+<ul>
+<li>Some notes on lattice <span class="citation">(Sarkar <a href="#ref-sarkar03">2003</a>)</span> <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/Sarkar.pdf" class="uri">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/Sarkar.pdf</a></li>
+<li>R Lattice Graphics <span class="citation">(Murrell <a href="#ref-murrell01">2001</a>)</span> <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/Murrell.pdf" class="uri">http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/Murrell.pdf</a></li>
+<li>Lattice, an implementation of Trellis graphics in R <span class="citation">(Sarkar <a href="#ref-sarkar02">2002</a>)</span> <a href="http://cran.r-project.org/doc/Rnews/Rnews_2002-2.pdf" class="uri">http://cran.r-project.org/doc/Rnews/Rnews_2002-2.pdf</a></li>
+</ul>
+<p>Because <code>lattice</code> is mostly compatible with the Trellis graphics system in S-Plus, the following documents written for Trellis also provide a good introduction to <code>lattice</code> and to the concept of trellis displays:</p>
+<ul>
+<li>S-PLUS Trellis Graphics User’s Manual <span class="citation">(Becker and Cleveland <a href="#ref-becker02">2002</a>)</span></li>
+<li>A Tour of Trellis Graphics <span class="citation">(Becker et al. <a href="#ref-becker96">1996</a>)</span></li>
+<li>The Visual Design and Control of Trellis Display <span class="citation">(Becker, Cleveland, and Shyu <a href="#ref-becker96b">1996</a>)</span></li>
+<li>Trellis Display: Modelling Data from Designed Experiments <span class="citation">(W. S. Cleveland and Fuentes <a href="#ref-cleveland97">1997</a>)</span></li>
+</ul>
+<div id="overview-of-lattice-graphics" class="section level2">
+<h2><span class="header-section-number">11.1</span> Overview of Lattice Graphics</h2>
+<table>
+<caption><span id="tab:latticefunctions">Table 11.1: </span> Lattice graphics functions.</caption>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>xyplot</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>barchart</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>dotplot</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>stripplot</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>bwplot</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="introduction-to-model-formulae-and-multi-panel-conditioning" class="section level2">
+<h2><span class="header-section-number">11.2</span> Introduction to model formulae and multi-panel conditioning</h2>
+<p>We will use the <code>rats_trellis.txt</code> dataset to illustrate how conditioning based on one or more factors work in lattice. The dataset contains data from a fictitious experiment in which a researcher is investigating the effects of alcohol and drug consumption on social interactions in rats. The researcher studies two species of rats (Kalamani vs Yuppy), each rat has been observed in four experimental conditions, given by the combination of two factors: administration of drug (Drug vs No-Drug) and administration of alcohol (Al vs No-Al). The dependent variable is the number of social interactions observed in each of the four conditions. We’ll read in the data first:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dats =<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/rats_trellis.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+dats<span class="op">$</span>subj =<span class="st"> </span><span class="kw">as.factor</span>(dats<span class="op">$</span>subj)
+<span class="kw">head</span>(dats)</code></pre></div>
+<pre><code>##   subj socialint alcohol    drug species
+## 1    1         7      Al    Drug   Yuppy
+## 2    1         6   No-Al    Drug   Yuppy
+## 3    1         6      Al No-Drug   Yuppy
+## 4    1         4   No-Al No-Drug   Yuppy
+## 5    2         5      Al    Drug   Yuppy
+## 6    2         4   No-Al    Drug   Yuppy</code></pre>
+<p>we’ll start visualising the data along one dimension, the species. This is a single dimension, that can be easily handled by the base graphics system, but can be equally well displayed with lattice. Since the high level lattice plotting functions require the data to be entered as a dataframe, we’ll use the <code>aggregate</code> function to get a dataframe with the mean values of <code>socialint</code>, the dependent variable, on the bases of the species:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bySpec =<span class="st"> </span><span class="kw">aggregate</span>(dats<span class="op">$</span>socialint, 
+                    <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">species=</span>dats<span class="op">$</span>species), <span class="dt">FUN=</span>mean)
+<span class="kw">names</span>(bySpec)[<span class="kw">which</span>(<span class="kw">names</span>(bySpec)<span class="op">==</span><span class="st">&quot;x&quot;</span>)] =<span class="st"> &quot;socialint&quot;</span>
+bySpec</code></pre></div>
+<pre><code>##    species socialint
+## 1 Kalamani    5.3125
+## 2    Yuppy    5.6875</code></pre>
+<p>lattice uses a model formula syntax, you give it a dataframe, and specify how you want a variable to be displayed along the dimensions of one or more factors. In our case, we want <code>socialint ~ species</code> (you could read the <code>~</code> “as explained by species”), the barchart can be produced with the code below, and is displayed in Figure <a href="lattice.html#fig:ratstrellis1">11.1</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)
+##trellis.device() #optional
+pl1 =<span class="st"> </span><span class="kw">barchart</span>(socialint <span class="op">~</span><span class="st"> </span>species, <span class="dt">data=</span>bySpec)
+<span class="kw">print</span>(pl1)</code></pre></div>
+<div class="figure"><span id="fig:ratstrellis1"></span>
+<img src="graphics_lattice_files/figure-html/ratstrellis1-1.png" alt="Social interactions by species" width="576" />
+<p class="caption">
+Figure 11.1: Social interactions by species
+</p>
+</div>
+<p>Now suppose we want to visualise the relationship between <code>socialint</code> and <code>species</code> on the bases of alcohol administration. We could achieve also this with the barplot in the base graphics system. In lattice there are two ways of doing it, one is by the use of a ``grouping’’ factor, this yields a display similar to the barplot function. The second way is by multi-panel factor conditioning. The advantage of multi-panel conditioning, as we will see soon, is that it can be extended to an unlimited number of factors. Let’s start with the first solution, in which we use a grouping factor. First we create a suitable dataframe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bySpecAl =<span class="st"> </span><span class="kw">aggregate</span>(dats<span class="op">$</span>socialint, 
+                      <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">species=</span>dats<span class="op">$</span>species, 
+                          <span class="dt">alcohol=</span>dats<span class="op">$</span>alcohol), <span class="dt">FUN=</span>mean)
+<span class="kw">names</span>(bySpecAl)[<span class="kw">which</span>(<span class="kw">names</span>(bySpecAl)<span class="op">==</span><span class="st">&quot;x&quot;</span>)] =<span class="st"> &quot;socialint&quot;</span></code></pre></div>
+<p>then we produce the barchart which you can see in Figure <a href="lattice.html#fig:ratstrellis2">11.2</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl2 =<span class="st"> </span><span class="kw">barchart</span>(socialint <span class="op">~</span><span class="st"> </span>species, <span class="dt">groups=</span>alcohol, 
+                 <span class="dt">data=</span>bySpecAl, <span class="dt">auto.key=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(pl2)</code></pre></div>
+<div class="figure"><span id="fig:ratstrellis2"></span>
+<img src="graphics_lattice_files/figure-html/ratstrellis2-1.png" alt="Social interactions by species and alcohol administration with grouping factor" width="576" />
+<p class="caption">
+Figure 11.2: Social interactions by species and alcohol administration with grouping factor
+</p>
+</div>
+<p>the grouping factor is given by the <code>groups</code> argument, notice also that we have set <code>auto.key</code> to <code>TRUE</code> in order to add an automatic legend.</p>
+<p>the second way of doing the graph is by multi-panel conditioning, we achieve this by putting alcohol as a conditioning factor with the <code>|</code> syntax.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl3 =<span class="st"> </span><span class="kw">barchart</span>(socialint <span class="op">~</span><span class="st"> </span>species <span class="op">|</span><span class="st"> </span>alcohol, <span class="dt">data=</span>bySpecAl)
+<span class="kw">print</span>(pl3)</code></pre></div>
+<div class="figure"><span id="fig:ratstrellis3"></span>
+<img src="graphics_lattice_files/figure-html/ratstrellis3-1.png" alt="Social Interactions by species and alcohol administration with multi-panel conditioning" width="576" />
+<p class="caption">
+Figure 11.3: Social Interactions by species and alcohol administration with multi-panel conditioning
+</p>
+</div>
+<p>the resulting graph is displayed in Figure <a href="lattice.html#fig:ratstrellis3">11.3</a>. We could have swapped <code>species</code> for <code>alcohol</code> as the conditioning factor, which way gives the more effective display depends from case to case, and it’s up to the user to decide. Finally we’ll consider the case in which all factors are included in the display, this cannot be easily achieved with traditional graphics, but it is easily done in lattice, we just add <code>drug</code> to the conditioning factors (Figure <a href="lattice.html#fig:ratstrellis4">11.4</a>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bySpecAlDrug =<span class="st"> </span><span class="kw">aggregate</span>(dats<span class="op">$</span>socialint, 
+                          <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">species=</span>dats<span class="op">$</span>species, 
+                          <span class="dt">alcohol=</span>dats<span class="op">$</span>alcohol, <span class="dt">drug=</span>dats<span class="op">$</span>drug), 
+                          <span class="dt">FUN=</span>mean)
+<span class="kw">names</span>(bySpecAlDrug)[<span class="kw">which</span>(<span class="kw">names</span>(bySpecAlDrug)<span class="op">==</span><span class="st">&quot;x&quot;</span>)] =<span class="st"> &quot;socialint&quot;</span>
+pl4 =<span class="st"> </span><span class="kw">barchart</span>(socialint <span class="op">~</span><span class="st"> </span>species <span class="op">|</span><span class="st"> </span>alcohol <span class="op">*</span><span class="st"> </span>drug, 
+                <span class="dt">data=</span>bySpecAlDrug)
+<span class="kw">print</span>(pl4)</code></pre></div>
+<div class="figure"><span id="fig:ratstrellis4"></span>
+<img src="graphics_lattice_files/figure-html/ratstrellis4-1.png" alt="Social interactions by species, alcohol administration and drug with multi-panel conditioning" width="576" />
+<p class="caption">
+Figure 11.4: Social interactions by species, alcohol administration and drug with multi-panel conditioning
+</p>
+</div>
+<p>we could have used a grouping variable also in this case rather than using two conditioning factors (Figure <a href="lattice.html#fig:ratstrellis5">11.5</a>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl5 =<span class="st"> </span><span class="kw">barchart</span>(socialint <span class="op">~</span><span class="st"> </span>species <span class="op">|</span><span class="st"> </span>alcohol, 
+                <span class="dt">groups=</span>drug, <span class="dt">data=</span>bySpecAlDrug,
+                <span class="dt">auto.key=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(pl5)</code></pre></div>
+<div class="figure"><span id="fig:ratstrellis5"></span>
+<img src="graphics_lattice_files/figure-html/ratstrellis5-1.png" alt="Social interactions by species, alcohol administration and drug with grouping factor" width="576" />
+<p class="caption">
+Figure 11.5: Social interactions by species, alcohol administration and drug with grouping factor
+</p>
+</div>
+<p>again what is the best display is up to the user to decide and depends from case to case.</p>
+</div>
+<div id="barchart" class="section level2">
+<h2><span class="header-section-number">11.3</span> <code>barchart</code></h2>
+<p>We will look at an example of a barchart display of a dependent measure conditional on three factors. The dataset <code>line_matching.txt</code> contains data on an imaginary experiment in which a psychophysicist wants to measure the accuracy of matching the length of a segment for three groups of people (Gr.~1, Gr.~2, Gr.~3) for segments of four different lengths (L1, L2, L3, L4). The third factor the psychophysicist is interested in is whether matching accuracy changes depending on the colour (blue vs red) of the segment to be matched, he measures this as a within subjects factor. The matching accuracy is measured as the error, or displacement (positive or negative) from the actual segment length. The dataset contains the mean values for the three groups. Below is the code for producing the barchart, the resulting plot can be seen in Figure @ref(fig:line_matching):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dats =<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/line_matching.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+<span class="co">#trellis.device()</span>
+oldpar =<span class="st"> </span><span class="kw">trellis.par.get</span>(<span class="st">&quot;superpose.polygon&quot;</span>)
+<span class="kw">trellis.par.set</span>(<span class="dt">superpose.polygon =</span> 
+<span class="kw">list</span>(<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkslateblue&quot;</span>, <span class="st">&quot;indianred&quot;</span>)))
+myGraph =<span class="st"> </span><span class="kw">barchart</span>(error <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>group, <span class="dt">groups=</span>color, 
+           <span class="dt">data=</span>dats, <span class="dt">origin=</span><span class="dv">0</span>, <span class="dt">ylab=</span><span class="st">&quot;Error (cm)&quot;</span>, 
+           <span class="dt">xlab=</span><span class="st">&quot;Segment Length&quot;</span>, 
+           <span class="dt">auto.key=</span><span class="ot">TRUE</span>, <span class="dt">as.table=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(myGraph)</code></pre></div>
+<div class="figure"><span id="fig:linematching"></span>
+<img src="graphics_lattice_files/figure-html/linematching-1.png" alt="Line matching barchart" width="576" />
+<p class="caption">
+Figure 11.6: Line matching barchart
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trellis.par.set</span>(<span class="dt">superpose.polygon =</span> oldpar)</code></pre></div>
+<p>We’re showing the bars for the two levels of the “colour” factor side by side in the same panel, this is done by using the factor in the <code>groups</code> argument. A different display could have been achieved by putting the “colour” factor as an additional conditioning variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barchart</span>(error <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>group <span class="op">*</span><span class="st"> </span>color, 
+         <span class="dt">data=</span>dats, <span class="dt">origin=</span><span class="dv">0</span>, <span class="dt">ylab=</span><span class="st">&quot;Error (cm)&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Segment Length&quot;</span>, 
+         <span class="dt">auto.key=</span><span class="ot">TRUE</span>, <span class="dt">as.table=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>in this case the bars for each level of the factor would have been drawn in different panels (the number of panels would have doubled).</p>
+<p>The fill colour for the bars can be modified changing the colour option for <code>superpose.polygon</code>.</p>
+<p>The great thing about trellis graphics is that they allow you to display the relationship between a dependent variable and multiple factors seamlessly. Suppose that, continuing the above example, the psychophysician has tested the line matching accuracy on the three groups both before and after a period of visuo-motor training. The dataset containing the data with this new factor is in the file <code>line_matching_training.txt</code>. We just need to add the new factor <code>session</code> (pre-training vs post-training) to the conditioning variables to obtain the new plot. The modified call to the <code>barchart</code> function is shown below and the resulting graph can be seen in Figure <a href="lattice.html#fig:linematchingtraining">11.7</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dats =<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/line_matching_training.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
+myGraph =<span class="st"> </span><span class="kw">barchart</span>(error <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>group <span class="op">*</span><span class="st"> </span>session, <span class="dt">groups=</span>color, 
+                    <span class="dt">data=</span>dats, <span class="dt">origin=</span><span class="dv">0</span>, <span class="dt">ylab=</span><span class="st">&quot;Error (cm)&quot;</span>, 
+                    <span class="dt">xlab=</span><span class="st">&quot;Segment Length&quot;</span>, 
+                    <span class="dt">auto.key=</span><span class="ot">TRUE</span>, <span class="dt">as.table=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(myGraph)</code></pre></div>
+<div class="figure"><span id="fig:linematchingtraining"></span>
+<img src="graphics_lattice_files/figure-html/linematchingtraining-1.png" alt="Line matching training barchart" width="576" />
+<p class="caption">
+Figure 11.7: Line matching training barchart
+</p>
+</div>
+</div>
+<div id="dotplot" class="section level2">
+<h2><span class="header-section-number">11.4</span> dotplot</h2>
+</div>
+<div id="histogram" class="section level2">
+<h2><span class="header-section-number">11.5</span> histogram</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(dats<span class="op">$</span>adj)
+<span class="kw">histogram</span>(<span class="op">~</span>dats<span class="op">$</span>adj<span class="op">|</span>dats<span class="op">$</span>congr)</code></pre></div>
+</div>
+<div id="interaction-plots-1" class="section level2">
+<h2><span class="header-section-number">11.6</span> Interaction Plots</h2>
+<p>Example of interaction plot with 3 factors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">bwplot</span>(dats<span class="op">$</span>lat<span class="op">~</span>dats<span class="op">$</span>congr<span class="op">|</span>dats<span class="op">$</span>acc,<span class="dt">groups=</span>dats<span class="op">$</span>isi,
+     <span class="dt">panel=</span><span class="st">&#39;panel.superpose&#39;</span>,<span class="dt">panel.groups=</span><span class="st">&#39;panel.linejoin&#39;</span>,
+     <span class="dt">auto.key=</span><span class="kw">list</span>(<span class="dt">points=</span><span class="ot">FALSE</span>,<span class="dt">lines=</span><span class="ot">TRUE</span>,<span class="dt">space=</span><span class="st">&#39;top&#39;</span>),
+     <span class="dt">scales=</span><span class="kw">list</span>(<span class="dt">cex=</span>.<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">280</span>,<span class="dv">400</span>),
+     <span class="dt">ylab=</span><span class="st">&#39;Medie delle latenze in ms&#39;</span>,<span class="dt">xlab=</span><span class="st">&#39;SOA&#39;</span>))</code></pre></div>
+</div>
+<div id="customizingtrellis" class="section level2">
+<h2><span class="header-section-number">11.7</span> Customising Lattice Graphics</h2>
+<div id="textual-elements" class="section level3">
+<h3><span class="header-section-number">11.7.1</span> Textual Elements</h3>
+<div id="strip-labels" class="section level4">
+<h4><span class="header-section-number">11.7.1.1</span> Strip Labels</h4>
+<p>The labels of the panels strips are the names of the levels of the conditioning factor variable. To change their labels you can pass the <code>factor.levels</code> argument to the <code>strip.custom</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>)
+y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>)
+treat =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">each=</span><span class="dv">10</span>))
+<span class="kw">xyplot</span>(y<span class="op">~</span>x<span class="op">|</span>treat, <span class="dt">strip=</span><span class="kw">strip.custom</span>(<span class="dt">factor.levels=</span><span class="kw">c</span>(<span class="st">&quot;Group A&quot;</span>, <span class="st">&quot;Group B&quot;</span>)))</code></pre></div>
+<div class="figure"><span id="fig:strip1"></span>
+<img src="graphics_lattice_files/figure-html/strip1-1.png" alt="Custom strip labels" width="576" />
+<p class="caption">
+Figure 11.8: Custom strip labels
+</p>
+</div>
+<p>Alternatively, you change the names for the factor levels:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(treat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Group A&quot;</span>, <span class="st">&quot;Group B&quot;</span>)</code></pre></div>
+<p>if you have more than one conditioning factor you can customize the strip labels for each by passing a custom strip function. <code>which.given</code> specifies the conditioning variable that the strip corresponds to:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cnd =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>), <span class="dv">10</span>))
+
+customstrip =<span class="st"> </span><span class="cf">function</span>(which.given, ..., factor.levels){
+    levs =<span class="st"> </span><span class="cf">if</span> (which.given<span class="op">==</span><span class="dv">1</span>){
+        <span class="kw">c</span>(<span class="st">&quot;Group A&quot;</span>, <span class="st">&quot;Group B&quot;</span>)
+    } <span class="cf">else</span> <span class="cf">if</span>  (which.given<span class="op">==</span><span class="dv">2</span>){
+        <span class="kw">c</span>(<span class="st">&quot;Cnd. I&quot;</span>, <span class="st">&quot;Cnd. II&quot;</span>)
+    }
+    <span class="kw">strip.default</span>(which.given, ..., <span class="dt">factor.levels =</span> levs)
+}
+<span class="kw">xyplot</span>(y<span class="op">~</span>x <span class="op">|</span><span class="st"> </span>treat <span class="op">+</span><span class="st"> </span>cnd, <span class="dt">strip=</span>customstrip, <span class="dt">as.table=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure"><span id="fig:strip2"></span>
+<img src="graphics_lattice_files/figure-html/strip2-1.png" alt="Custom strip labels with two conditioning factors" width="576" />
+<p class="caption">
+Figure 11.9: Custom strip labels with two conditioning factors
+</p>
+</div>
+</div>
+</div>
+<div id="log-axis-with-pretty-tickmarks-1" class="section level3">
+<h3><span class="header-section-number">11.7.2</span> Log axis with pretty tickmarks</h3>
+<p>The procedure to get a log axis with pretty tickmarks in lattice is a bit involved. We’ll only cover the log base 10 case here. The first step is to define a function that returns the tick locations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log10Ticks =<span class="st"> </span><span class="cf">function</span>(lim, <span class="dt">onlyMajor=</span><span class="ot">FALSE</span>){
+    minPow =<span class="st"> </span><span class="kw">floor</span>(<span class="kw">log10</span>(lim[<span class="dv">1</span>]))
+    maxPow =<span class="st"> </span><span class="kw">ceiling</span>(<span class="kw">log10</span>(lim[<span class="dv">2</span>]))
+    powSeq =<span class="st"> </span><span class="kw">seq</span>(minPow, maxPow)
+    majTicks =<span class="st"> </span><span class="dv">10</span><span class="op">^</span>powSeq
+    minTicks =<span class="st"> </span><span class="kw">numeric</span>()
+    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(majTicks)){
+        bb =<span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)<span class="op">/</span><span class="dv">10</span>;
+        minTicks =<span class="st"> </span><span class="kw">c</span>(minTicks, (bb<span class="op">*</span><span class="dv">10</span><span class="op">^</span>powSeq[i]))
+    }
+    <span class="cf">if</span> (onlyMajor<span class="op">==</span><span class="ot">TRUE</span>){
+        axSeq =<span class="st"> </span>majTicks
+    } <span class="cf">else</span> {
+        axSeq =<span class="st"> </span>minTicks
+    }
+    axSeq =<span class="st"> </span>axSeq[lim[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>axSeq <span class="op">&amp;</span><span class="st"> </span>axSeq <span class="op">&lt;=</span><span class="st"> </span>lim[<span class="dv">2</span>]]
+    <span class="kw">return</span>(axSeq)
+}</code></pre></div>
+<p>by default the function returns both the major (e.g. 1, 10, 100, etc…) and the minor (e.g. 2,3,4,…20,30,40, etc…) tick locations, but return only the major tick locations if <code>onlyMajor=TRUE</code>. This function will be used by the <code>yscale.components.log10</code> function below. This function will be passed as the <code>yscale.components</code> argument in the <code>xyplot</code> call that generates the graph. The <code>yscale.components.log10</code> function will return a list specifying all parameters of the y axis. To simplify this process the function calls the <code>yscale.components.default</code> function to retrieve the default parameters, and then simply modifies some of these parameters to draw the pretty log axis:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yscale.components.log10 =<span class="st"> </span><span class="cf">function</span>(lim, ...){ <span class="co">#the function is automatically passed the limits of the panel as an argument</span>
+    ans =<span class="st"> </span><span class="kw">yscale.components.default</span>(<span class="dt">lim =</span> lim, ...) <span class="co">#retrieve default parameters</span>
+    tick.at =<span class="st"> </span><span class="kw">log10Ticks</span>(<span class="dv">10</span><span class="op">^</span>lim, <span class="dt">onlyMajor=</span><span class="ot">FALSE</span>) <span class="co">#compute major and minor tick locations</span>
+    tick.at.major =<span class="st"> </span><span class="kw">log10Ticks</span>(<span class="dv">10</span><span class="op">^</span>lim, <span class="dt">onlyMajor=</span><span class="ot">TRUE</span>) <span class="co">#compute major tick locations only</span>
+    major =<span class="st"> </span>tick.at <span class="op">%in%</span><span class="st"> </span>tick.at.major <span class="co">#which are the major ticks?</span>
+    ans<span class="op">$</span>left<span class="op">$</span>ticks<span class="op">$</span>at =<span class="st"> </span><span class="kw">log10</span>(tick.at) <span class="co">#where the ticks should be position</span>
+    ans<span class="op">$</span>left<span class="op">$</span>ticks<span class="op">$</span>tck =<span class="st"> </span><span class="kw">ifelse</span>(major, <span class="fl">1.5</span>, <span class="fl">0.75</span>) <span class="co">#set tick length, depending on whether minor or major</span>
+    ans<span class="op">$</span>left<span class="op">$</span>labels<span class="op">$</span>at =<span class="st"> </span><span class="kw">log10</span>(tick.at) <span class="co">#labels location</span>
+    ans<span class="op">$</span>left<span class="op">$</span>labels<span class="op">$</span>labels =<span class="st"> </span><span class="kw">as.character</span>(tick.at) <span class="co">#set tick labels</span>
+    ans<span class="op">$</span>left<span class="op">$</span>labels<span class="op">$</span>labels[<span class="op">!</span>major] =<span class="st"> &quot;&quot;</span> <span class="co">#set minor tick labels as empty</span>
+    ans<span class="op">$</span>left<span class="op">$</span>labels<span class="op">$</span>check.overlap =<span class="st"> </span><span class="ot">FALSE</span>
+    <span class="kw">return</span>(ans)
+}</code></pre></div>
+<p>once the <code>yscale.components.log10</code> function is ready, we can use it in the call to <code>xyplot</code>, note that we also need to set the y scale to log10 in the <code>scales</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cnd1&quot;</span>, <span class="st">&quot;cnd2&quot;</span>)
+y =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.4</span>, <span class="dv">80</span>)
+dat =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)
+<span class="kw">xyplot</span>(y<span class="op">~</span>x, <span class="dt">data=</span>dat,
+       <span class="dt">scales=</span><span class="kw">list</span>(<span class="dt">y=</span><span class="kw">list</span>(<span class="dt">log=</span><span class="dv">10</span>)),
+       <span class="dt">yscale.components =</span> yscale.components.log10)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="graphics_lattice_files/figure-html/unnamed-chunk-10-1.png" alt="log axis with pretty tickmarks" width="576" />
+<p class="caption">
+Figure 11.10: log axis with pretty tickmarks
+</p>
+</div>
+</div>
+</div>
+<div id="trellispanel" class="section level2">
+<h2><span class="header-section-number">11.8</span> Writing Panel Functions</h2>
+<div id="combining-panel-functions" class="section level3">
+<h3><span class="header-section-number">11.8.1</span> Combining Panel Functions</h3>
+<p>Rather than writing a new panel function from scratch, often you just want to add some elements to a plot, for example a regression line, or error bars. The easiest and probably best way to do this is writing a panel function that combines two standard panel functions. There is a number of predefined panel functions (see <code>?panel.functions</code>) that can be used to add lines, grids etc…, to a scatterplot, barchart or other higher level plotting lattice function.</p>
+<p>We will start with a very simple example, adding a horizontal line at a fixed height in a dotplot. The <code>line_matching</code> dataset described in the barchart example, can be very well visualised also through a dotplot (Figure <a href="lattice.html#fig:lmatchdotplot">11.11</a>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oldpar =<span class="st"> </span><span class="kw">trellis.par.get</span>(<span class="st">&quot;superpose.symbol&quot;</span>)
+<span class="kw">trellis.par.set</span>(<span class="dt">superpose.symbol =</span> 
+                <span class="kw">list</span>(<span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkslateblue&quot;</span>, 
+                <span class="st">&quot;indianred&quot;</span>), <span class="dt">pch=</span><span class="dv">19</span>))
+<span class="kw">dotplot</span>(error <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>group, <span class="dt">groups=</span>color, 
+        <span class="dt">data=</span>dats, <span class="dt">origin=</span><span class="dv">0</span>, <span class="dt">ylab=</span><span class="st">&quot;Error (cm)&quot;</span>, 
+        <span class="dt">xlab=</span><span class="st">&quot;Segment Length&quot;</span>, <span class="dt">auto.key=</span><span class="ot">TRUE</span>, 
+        <span class="dt">aspect=</span><span class="dv">1</span>, <span class="dt">as.table=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure"><span id="fig:lmatchdotplot"></span>
+<img src="graphics_lattice_files/figure-html/lmatchdotplot-1.png" alt="Dotplot of the line matching dataset" width="576" />
+<p class="caption">
+Figure 11.11: Dotplot of the line matching dataset
+</p>
+</div>
+<p>however, since the data represent positive or negative displacements from zero, it would be nice to add a horizontal line passing at zero. In order to have this, we will write a panel function that combines the <code>panel.dotplot</code> function with the <code>panel.abline</code> function that we’ll use to add the horizontal line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">panel.hRefDotplot =<span class="st"> </span><span class="cf">function</span>(x, y, <span class="dt">ref=</span><span class="ot">NULL</span>, ...){
+<span class="kw">panel.dotplot</span>(x, y, ...)
+<span class="kw">panel.abline</span>(<span class="dt">h=</span>ref, ...)
+}</code></pre></div>
+<p>our new <code>panel.hRefDotplot</code> panel function accepts three arguments, <code>x</code> and <code>y</code>, which are the “standard” arguments given by the higher level plotting functions like <code>dotplot</code> to panel functions to specify the data to draw. The third argument represents the position at which to draw the horizontal line of reference for the data, we want it to be zero in this case, but passing the argument as a variable rather than hard-coding the value into the panel function will allow us to recycle this panel function in case we want the horizontal reference line drawn at some other points in the future. Besides these arguments, our panel function accepts also an undefined number of other arguments, which are designated by the <code>...</code> notation. These are usually graphics parameters that can be specified in the high level plotting function. The contents of our <code>panel.hRefDotplot</code> function are very simple, we call first <code>panel.dotplot</code> to draw the standard dotplot, and then we call <code>panel.abline</code> giving it the value of <code>ref</code> to draw the horizontal line in each panel. The actual plot is done by calling the high level <code>dotplot</code> function specifying <code>panel.hRefDotplot</code> as the panel function to use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dotplot</span>(error <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>group, <span class="dt">groups=</span>color, 
+        <span class="dt">data=</span>dats, <span class="dt">origin=</span><span class="dv">0</span>, <span class="dt">ylab=</span><span class="st">&quot;Error (cm)&quot;</span>, 
+        <span class="dt">xlab=</span><span class="st">&quot;Segment Length&quot;</span>, <span class="dt">auto.key=</span><span class="ot">TRUE</span>, <span class="dt">aspect=</span><span class="dv">1</span>, 
+        <span class="dt">as.table=</span><span class="ot">TRUE</span>, <span class="dt">ref=</span><span class="dv">0</span>, <span class="dt">panel=</span>panel.hRefDotplot)</code></pre></div>
+<div class="figure"><span id="fig:lmatchdotplotref"></span>
+<img src="graphics_lattice_files/figure-html/lmatchdotplotref-1.png" alt="Dotplot of the line matching dataset, with horizontal reference line" width="576" />
+<p class="caption">
+Figure 11.12: Dotplot of the line matching dataset, with horizontal reference line
+</p>
+</div>
+<p>notice the last line of the call, first we’re telling <code>dotplot</code> to use our <code>hRefDotplot</code> function to do the plotting by specifying the <code>panel</code> argument, second we’re specifying another argument, <code>ref</code> in the call, this is not a standard argument, but it will be automatically passed to our panel function to decide at which height to draw the horizontal line. The resulting plot can be visualised in Figure <a href="lattice.html#fig:lmatchdotplotref">11.12</a>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-becker02">
+<p>Becker, Richard A, and William S Cleveland. 2002. <em>S-Plus Trellis Graphics User’s Manual</em>. Seattle: MathSoft, Inc., Murray Hill: Bell Labs.</p>
+</div>
+<div id="ref-becker96b">
+<p>Becker, Richard A, William S Cleveland, and Ming-Jen Shyu. 1996. “The Visual Design and Control of Trellis Display.” <em>Journal of Computational and Graphical Statistics</em> 5: 123–55.</p>
+</div>
+<div id="ref-becker96">
+<p>Becker, Richard A, William S Cleveland, Ming-Jen Shyu, and S P Kaluzny. 1996. <em>A Tour of Trellis Graphics</em>.</p>
+</div>
+<div id="ref-cleveland97">
+<p>Cleveland, W S, and M Fuentes. 1997. “Trellis Display: Modeling Data from Designed Experiments.” Bell Labs.</p>
+</div>
+<div id="ref-murrell01">
+<p>Murrell, Paul. 2001. “R Lattice Graphics.” In <em>Proceedings of the 2nd International Workshop on Distributed Statistical Computing, March 15-17, 2001, Technische Universität Wien, Vienna, Austria</em>, edited by Kurt Hornik and Friedrich Leisch. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/" class="uri">http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/</a>.</p>
+</div>
+<div id="ref-sarkar02">
+<p>Sarkar, Deepayan. 2002. “Lattice, an Implementation of Trellis Graphics in R.” <em>R News</em> 2 (2): 19–22.</p>
+</div>
+<div id="ref-sarkar03">
+<p>Sarkar, Deepayan. 2003. “Some Notes on Lattice.” In <em>Proceedings of the 3nd International Workshop on Distributed Statistical Computing, March 20-22, 2003, Technische Universität Wien, Vienna, Austria</em>, edited by Kurt Hornik and Friedrich Leisch. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/" class="uri">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/</a>.</p>
+</div>
+<div id="ref-sarkar2008">
+<p>Sarkar, Deepayan. 2008. <em>Lattice: Multivariate Data Visualization with R</em>. New York: Springer. <a href="http://lmdvr.r-forge.r-project.org" class="uri">http://lmdvr.r-forge.r-project.org</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="plotly.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="graphics-labels-and-text.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/sam81/rguide/edit/master/graphics_lattice.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rguide.pdf", "rguide.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

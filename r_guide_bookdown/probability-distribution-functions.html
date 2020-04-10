@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13 Probability Distribution Functions | A R Guide</title>
+  <meta name="description" content="A guide for the R programming language." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13 Probability Distribution Functions | A R Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A guide for the R programming language." />
+  <meta name="github-repo" content="sam81/rguide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13 Probability Distribution Functions | A R Guide" />
+  
+  <meta name="twitter:description" content="A guide for the R programming language." />
+  
+
+<meta name="author" content="Samuele Carcagno" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="graphics-labels-and-text.html"/>
+<link rel="next" href="hypothesis-testing.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./preface.html">A R Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Installing R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#installing-the-base-program"><i class="fa fa-check"></i><b>1.1</b> Installing the Base Program</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices"><i class="fa fa-check"></i><b>1.1.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#windows"><i class="fa fa-check"></i><b>1.1.2</b> Windows</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#mac-os-x"><i class="fa fa-check"></i><b>1.1.3</b> Mac Os X</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#installing-add-on-packages"><i class="fa fa-check"></i><b>1.2</b> Installing Add-On Packages</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices-1"><i class="fa fa-check"></i><b>1.2.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#windows-1"><i class="fa fa-check"></i><b>1.2.2</b> Windows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> A Simple Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#datasets"><i class="fa fa-check"></i><b>2.1</b> Datasets</a></li>
+<li class="chapter" data-level="2.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#firing-up-and-quitting-r"><i class="fa fa-check"></i><b>2.2</b> Firing up and Quitting R</a></li>
+<li class="chapter" data-level="2.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#starting-to-work-with-r"><i class="fa fa-check"></i><b>2.3</b> Starting to Work with R</a></li>
+<li class="chapter" data-level="2.4" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gettinghelp"><i class="fa fa-check"></i><b>2.4</b> Getting Help</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-online-help-system"><i class="fa fa-check"></i><b>2.4.1</b> The Online Help System</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gui"><i class="fa fa-check"></i><b>2.5</b> Working with a Graphical User Interface</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#r-studio"><i class="fa fa-check"></i><b>2.5.1</b> R Studio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-r-commander"><i class="fa fa-check"></i><b>2.5.2</b> The R Commander</a></li>
+<li class="chapter" data-level="2.5.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#jgr"><i class="fa fa-check"></i><b>2.5.3</b> JGR</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html"><i class="fa fa-check"></i><b>3</b> Organising a Working Session</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#setting-and-changing-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting and Changing the Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#objects"><i class="fa fa-check"></i><b>3.2</b> Objects</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#saving-and-using-the-workspace-image"><i class="fa fa-check"></i><b>3.3</b> Saving and Using the “Workspace Image”</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#working-in-batch-mode"><i class="fa fa-check"></i><b>3.4</b> Working in Batch Mode</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-an-r-session"><i class="fa fa-check"></i><b>3.4.1</b> Executing commands written in a file from an R session</a></li>
+<li class="chapter" data-level="3.4.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-a-shell"><i class="fa fa-check"></i><b>3.4.2</b> Executing commands written in a file from a shell</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-manip.html"><a href="data-manip.html"><i class="fa fa-check"></i><b>4</b> Data Types and Data Manipulation</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-manip.html"><a href="data-manip.html#vectors"><i class="fa fa-check"></i><b>4.1</b> Vectors</a></li>
+<li class="chapter" data-level="4.2" data-path="data-manip.html"><a href="data-manip.html#indexing-vectors"><i class="fa fa-check"></i><b>4.2</b> Indexing Vectors</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-manip.html"><a href="data-manip.html#the-seq-function"><i class="fa fa-check"></i><b>4.2.1</b> The <code>seq</code> Function</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-manip.html"><a href="data-manip.html#the-rep-function"><i class="fa fa-check"></i><b>4.2.2</b> The <code>rep</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-manip.html"><a href="data-manip.html#matrix-facilities"><i class="fa fa-check"></i><b>4.3</b> Matrix Facilities</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-manip.html"><a href="data-manip.html#matrix-operations"><i class="fa fa-check"></i><b>4.3.1</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-manip.html"><a href="data-manip.html#Lists"><i class="fa fa-check"></i><b>4.4</b> Lists</a></li>
+<li class="chapter" data-level="4.5" data-path="data-manip.html"><a href="data-manip.html#dataframes"><i class="fa fa-check"></i><b>4.5</b> Dataframes</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-manip.html"><a href="data-manip.html#accessing-parts-of-a-dataframe"><i class="fa fa-check"></i><b>4.5.1</b> Accessing Parts of a Dataframe</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-manip.html"><a href="data-manip.html#change-the-names-of-variables-in-a-dataframe"><i class="fa fa-check"></i><b>4.5.2</b> Change the Names of Variables in a Dataframe</a></li>
+<li class="chapter" data-level="4.5.3" data-path="data-manip.html"><a href="data-manip.html#other-ways-to-subset-a-dataframe"><i class="fa fa-check"></i><b>4.5.3</b> Other Ways to Subset a Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-manip.html"><a href="data-manip.html#factors"><i class="fa fa-check"></i><b>4.6</b> Factors</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-manip.html"><a href="data-manip.html#renaming-the-levels-of-a-factor"><i class="fa fa-check"></i><b>4.6.1</b> Renaming the levels of a factor</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-manip.html"><a href="data-manip.html#gl"><i class="fa fa-check"></i><b>4.6.2</b> Creating Factors with <code>gl</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-manip.html"><a href="data-manip.html#natural-sort-order-for-character-and-factor-vectors"><i class="fa fa-check"></i><b>4.6.3</b> Natural sort order for character and factor vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-manip.html"><a href="data-manip.html#getting-info-on-r-objects"><i class="fa fa-check"></i><b>4.7</b> Getting Info on R Objects</a></li>
+<li class="chapter" data-level="4.8" data-path="data-manip.html"><a href="data-manip.html#changing-the-format-of-your-data"><i class="fa fa-check"></i><b>4.8</b> Changing the Format of Your Data</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="data-manip.html"><a href="data-manip.html#the-one-row-per-observation-format"><i class="fa fa-check"></i><b>4.8.1</b> The “One Row per Observation” Format</a></li>
+<li class="chapter" data-level="4.8.2" data-path="data-manip.html"><a href="data-manip.html#stack"><i class="fa fa-check"></i><b>4.8.2</b> The <code>stack</code> and <code>unstack</code> functions</a></li>
+<li class="chapter" data-level="4.8.3" data-path="data-manip.html"><a href="data-manip.html#tapply"><i class="fa fa-check"></i><b>4.8.3</b> The <code>tapply</code> and <code>aggregate</code> functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="data-manip.html"><a href="data-manip.html#creating-and-editing-data-objects-through-a-visual-interface"><i class="fa fa-check"></i><b>4.9</b> Creating and Editing Data Objects through a Visual Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualising-your-data.html"><a href="visualising-your-data.html"><i class="fa fa-check"></i><b>5</b> Visualising Your Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-your-data.html"><a href="visualising-your-data.html#reading-numbers-in-exponential-notation"><i class="fa fa-check"></i><b>5.1</b> Reading Numbers in Exponential Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="IO.html"><a href="IO.html"><i class="fa fa-check"></i><b>6</b> File Input/Output</a><ul>
+<li class="chapter" data-level="6.1" data-path="IO.html"><a href="IO.html#reading-in-data-from-a-file"><i class="fa fa-check"></i><b>6.1</b> Reading In Data from a File</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="IO.html"><a href="IO.html#read.table"><i class="fa fa-check"></i><b>6.1.1</b> The <code>read.table</code> function</a></li>
+<li class="chapter" data-level="6.1.2" data-path="IO.html"><a href="IO.html#scan"><i class="fa fa-check"></i><b>6.1.2</b> <code>scan</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="IO.html"><a href="IO.html#low-level-file-input"><i class="fa fa-check"></i><b>6.1.3</b> Low-Level File Input</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="IO.html"><a href="IO.html#writing-data-to-a-file"><i class="fa fa-check"></i><b>6.2</b> Writing Data to a file</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="IO.html"><a href="IO.html#write.table"><i class="fa fa-check"></i><b>6.2.1</b> The <code>write.table</code> function</a></li>
+<li class="chapter" data-level="6.2.2" data-path="IO.html"><a href="IO.html#cat"><i class="fa fa-check"></i><b>6.2.2</b> Low-Level File Output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive.html"><a href="descriptive.html"><i class="fa fa-check"></i><b>7</b> Descriptive</a><ul>
+<li class="chapter" data-level="7.1" data-path="descriptive.html"><a href="descriptive.html#tables"><i class="fa fa-check"></i><b>7.1</b> Tables</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive.html"><a href="descriptive.html#the-scale-function"><i class="fa fa-check"></i><b>7.2</b> The <code>scale</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>8</b> Graphics</a><ul>
+<li class="chapter" data-level="8.1" data-path="graphics.html"><a href="graphics.html#overview-of-r-base-graphics-functions"><i class="fa fa-check"></i><b>8.1</b> Overview of R base graphics functions</a></li>
+<li class="chapter" data-level="8.2" data-path="graphics.html"><a href="graphics.html#plot"><i class="fa fa-check"></i><b>8.2</b> The <code>plot</code> Function</a></li>
+<li class="chapter" data-level="8.3" data-path="graphics.html"><a href="graphics.html#drawing-functions"><i class="fa fa-check"></i><b>8.3</b> Drawing Functions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="graphics.html"><a href="graphics.html#the-matplot-function"><i class="fa fa-check"></i><b>8.3.1</b> The <code>matplot</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="graphics.html"><a href="graphics.html#barplots"><i class="fa fa-check"></i><b>8.4</b> Barplots</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="graphics.html"><a href="graphics.html#barplots-with-error-bars"><i class="fa fa-check"></i><b>8.4.1</b> Barplots with Error Bars</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="graphics.html"><a href="graphics.html#boxplots"><i class="fa fa-check"></i><b>8.5</b> Boxplots</a></li>
+<li class="chapter" data-level="8.6" data-path="graphics.html"><a href="graphics.html#histograms"><i class="fa fa-check"></i><b>8.6</b> Histograms</a></li>
+<li class="chapter" data-level="8.7" data-path="graphics.html"><a href="graphics.html#stripcharts"><i class="fa fa-check"></i><b>8.7</b> Stripcharts</a></li>
+<li class="chapter" data-level="8.8" data-path="graphics.html"><a href="graphics.html#interaction-plots"><i class="fa fa-check"></i><b>8.8</b> Interaction Plots</a></li>
+<li class="chapter" data-level="8.9" data-path="graphics.html"><a href="graphics.html#par"><i class="fa fa-check"></i><b>8.9</b> Setting Graphics Parameters</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="graphics.html"><a href="graphics.html#lty"><i class="fa fa-check"></i><b>8.9.1</b> Line type with the <code>lty</code> parameter</a></li>
+<li class="chapter" data-level="8.9.2" data-path="graphics.html"><a href="graphics.html#secpch"><i class="fa fa-check"></i><b>8.9.2</b> Symbols with the <code>pch</code> parameter</a></li>
+<li class="chapter" data-level="8.9.3" data-path="graphics.html"><a href="graphics.html#fonts"><i class="fa fa-check"></i><b>8.9.3</b> Fonts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="graphics.html"><a href="graphics.html#adding-elements-to-a-plot"><i class="fa fa-check"></i><b>8.10</b> Adding Elements to a Plot</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="graphics.html"><a href="graphics.html#legend"><i class="fa fa-check"></i><b>8.10.1</b> Adding a Legend</a></li>
+<li class="chapter" data-level="8.10.2" data-path="graphics.html"><a href="graphics.html#adding-text"><i class="fa fa-check"></i><b>8.10.2</b> Adding Text</a></li>
+<li class="chapter" data-level="8.10.3" data-path="graphics.html"><a href="graphics.html#addgrid"><i class="fa fa-check"></i><b>8.10.3</b> Adding a Grid</a></li>
+<li class="chapter" data-level="8.10.4" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>8.10.4</b> Setting the Axes</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="graphics.html"><a href="graphics.html#creating-layouts-for-multiple-graphs-glayout"><i class="fa fa-check"></i><b>8.11</b> Creating Layouts for Multiple Graphs {glayout}</a><ul>
+<li class="chapter" data-level="8.11.1" data-path="graphics.html"><a href="graphics.html#mfrow-and-mfcol-mfrowmfcol"><i class="fa fa-check"></i><b>8.11.1</b> mfrow and mfcol {mfrowmfcol}</a></li>
+<li class="chapter" data-level="8.11.2" data-path="graphics.html"><a href="graphics.html#layout"><i class="fa fa-check"></i><b>8.11.2</b> layout</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="graphics.html"><a href="graphics.html#graphics-device-regions-and-coordinates"><i class="fa fa-check"></i><b>8.12</b> Graphics Device Regions and Coordinates</a></li>
+<li class="chapter" data-level="8.13" data-path="graphics.html"><a href="graphics.html#plotfromscratch"><i class="fa fa-check"></i><b>8.13</b> Plotting from Scratch</a></li>
+<li class="chapter" data-level="8.14" data-path="graphics.html"><a href="graphics.html#colours-for-graphics"><i class="fa fa-check"></i><b>8.14</b> Colours for Graphics</a><ul>
+<li class="chapter" data-level="8.14.1" data-path="graphics.html"><a href="graphics.html#colour-opacity"><i class="fa fa-check"></i><b>8.14.1</b> Colour Opacity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.15" data-path="graphics.html"><a href="graphics.html#managing-graphic-devices"><i class="fa fa-check"></i><b>8.15</b> Managing Graphic Devices</a><ul>
+<li class="chapter" data-level="8.15.1" data-path="graphics.html"><a href="graphics.html#opening-another-graphics-window"><i class="fa fa-check"></i><b>8.15.1</b> Opening Another Graphics Window</a></li>
+<li class="chapter" data-level="8.15.2" data-path="graphics.html"><a href="graphics.html#exporting-graphics"><i class="fa fa-check"></i><b>8.15.2</b> Exporting Graphics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>9</b> ggplot2</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="ggplot2.html"><a href="ggplot2.html#log-axis-with-pretty-tickmarks"><i class="fa fa-check"></i><b>9.0.1</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>10</b> Plotly</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotly.html"><a href="plotly.html#using-plotly-with-knitr"><i class="fa fa-check"></i><b>10.1</b> Using plotly with knitr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lattice.html"><a href="lattice.html"><i class="fa fa-check"></i><b>11</b> Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.1" data-path="lattice.html"><a href="lattice.html#overview-of-lattice-graphics"><i class="fa fa-check"></i><b>11.1</b> Overview of Lattice Graphics</a></li>
+<li class="chapter" data-level="11.2" data-path="lattice.html"><a href="lattice.html#introduction-to-model-formulae-and-multi-panel-conditioning"><i class="fa fa-check"></i><b>11.2</b> Introduction to model formulae and multi-panel conditioning</a></li>
+<li class="chapter" data-level="11.3" data-path="lattice.html"><a href="lattice.html#barchart"><i class="fa fa-check"></i><b>11.3</b> <code>barchart</code></a></li>
+<li class="chapter" data-level="11.4" data-path="lattice.html"><a href="lattice.html#dotplot"><i class="fa fa-check"></i><b>11.4</b> dotplot</a></li>
+<li class="chapter" data-level="11.5" data-path="lattice.html"><a href="lattice.html#histogram"><i class="fa fa-check"></i><b>11.5</b> histogram</a></li>
+<li class="chapter" data-level="11.6" data-path="lattice.html"><a href="lattice.html#interaction-plots-1"><i class="fa fa-check"></i><b>11.6</b> Interaction Plots</a></li>
+<li class="chapter" data-level="11.7" data-path="lattice.html"><a href="lattice.html#customizingtrellis"><i class="fa fa-check"></i><b>11.7</b> Customising Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="lattice.html"><a href="lattice.html#textual-elements"><i class="fa fa-check"></i><b>11.7.1</b> Textual Elements</a></li>
+<li class="chapter" data-level="11.7.2" data-path="lattice.html"><a href="lattice.html#log-axis-with-pretty-tickmarks-1"><i class="fa fa-check"></i><b>11.7.2</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="lattice.html"><a href="lattice.html#trellispanel"><i class="fa fa-check"></i><b>11.8</b> Writing Panel Functions</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="lattice.html"><a href="lattice.html#combining-panel-functions"><i class="fa fa-check"></i><b>11.8.1</b> Combining Panel Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html"><i class="fa fa-check"></i><b>12</b> Graphics labels and text</a><ul>
+<li class="chapter" data-level="12.1" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html#mathematical-expressions-and-variables"><i class="fa fa-check"></i><b>12.1</b> Mathematical expressions and variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html"><i class="fa fa-check"></i><b>13</b> Probability Distribution Functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#bernoulli"><i class="fa fa-check"></i><b>13.1</b> The Bernoulli distribution</a></li>
+<li class="chapter" data-level="13.2" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#binomial"><i class="fa fa-check"></i><b>13.2</b> The binomial distribution</a></li>
+<li class="chapter" data-level="13.3" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#normal"><i class="fa fa-check"></i><b>13.3</b> The normal distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>14</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="14.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#chi2-test"><i class="fa fa-check"></i><b>14.1</b> <span class="math inline">\(\chi^2\)</span> test</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-hypotheses-about-the-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>14.1.1</b> Testing Hypotheses about the Distribution of a Categorical Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#students-t-test"><i class="fa fa-check"></i><b>14.2</b> Student’s <em>t</em> test</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#one-sample-t-test"><i class="fa fa-check"></i><b>14.2.1</b> One sample <em>t</em>-test</a></li>
+<li class="chapter" data-level="14.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#two-samples-t-test"><i class="fa fa-check"></i><b>14.2.2</b> Two samples t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-levene-test-for-homogeneity-of-variances"><i class="fa fa-check"></i><b>14.3</b> The Levene Test for Homogeneity of Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>15</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-regression"><i class="fa fa-check"></i><b>15.1</b> Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>16</b> ANOVA</a><ul>
+<li class="chapter" data-level="16.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>16.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="16.2" data-path="anova.html"><a href="anova.html#repeated-measures-anova"><i class="fa fa-check"></i><b>16.2</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="anova.html"><a href="anova.html#one-within-subjects-factor"><i class="fa fa-check"></i><b>16.2.1</b> One Within Subjects Factor</a></li>
+<li class="chapter" data-level="16.2.2" data-path="anova.html"><a href="anova.html#two-within-subjects-factors"><i class="fa fa-check"></i><b>16.2.2</b> Two Within Subjects Factors</a></li>
+<li class="chapter" data-level="16.2.3" data-path="anova.html"><a href="anova.html#two-within-subjects-factors-and-one-between"><i class="fa fa-check"></i><b>16.2.3</b> Two Within Subjects Factors and One Between</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="how-to-adjust-the-p-values-for-multiple-comparisons.html"><a href="how-to-adjust-the-p-values-for-multiple-comparisons.html"><i class="fa fa-check"></i><b>17</b> How to Adjust the p-values for Multiple Comparisons</a></li>
+<li class="chapter" data-level="18" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>18</b> R Programming</a><ul>
+<li class="chapter" data-level="18.1" data-path="programming.html"><a href="programming.html#contrstruct"><i class="fa fa-check"></i><b>18.1</b> Control Structures</a></li>
+<li class="chapter" data-level="18.2" data-path="programming.html"><a href="programming.html#stringprocessing"><i class="fa fa-check"></i><b>18.2</b> String Processing</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="programming.html"><a href="programming.html#regexp"><i class="fa fa-check"></i><b>18.2.1</b> Using Regular Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="programming.html"><a href="programming.html#tips-and-tricks"><i class="fa fa-check"></i><b>18.3</b> Tips and Tricks</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="programming.html"><a href="programming.html#convert-a-string-into-a-command"><i class="fa fa-check"></i><b>18.3.1</b> Convert a String into a Command</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="programming.html"><a href="programming.html#creatingsimplerpackages"><i class="fa fa-check"></i><b>18.4</b> Creating Simple R Packages</a><ul>
+<li class="chapter" data-level="18.4.1" data-path="programming.html"><a href="programming.html#the-bare-minimum-to-create-a-package"><i class="fa fa-check"></i><b>18.4.1</b> The Bare Minimum to Create a Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="custom.html"><a href="custom.html"><i class="fa fa-check"></i><b>19</b> Environment Customisation</a></li>
+<li class="chapter" data-level="20" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html"><i class="fa fa-check"></i><b>20</b> ESS: Using Emacs Speaks Statistics with R</a><ul>
+<li class="chapter" data-level="20.1" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-for-editing-and-debugging-r-source-files"><i class="fa fa-check"></i><b>20.1</b> Using ESS for Editing and Debugging R Source Files</a></li>
+<li class="chapter" data-level="20.2" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-to-interact-with-a-r-process"><i class="fa fa-check"></i><b>20.2</b> Using ESS to Interact with a R Process</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html"><i class="fa fa-check"></i><b>21</b> Using Sweave to Write Documents with R and LaTeX</a><ul>
+<li class="chapter" data-level="21.1" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#whats-sweave"><i class="fa fa-check"></i><b>21.1</b> What’s Sweave?</a></li>
+<li class="chapter" data-level="21.2" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#usage"><i class="fa fa-check"></i><b>21.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="soundprocessing.html"><a href="soundprocessing.html"><i class="fa fa-check"></i><b>22</b> Sound Processing</a><ul>
+<li class="chapter" data-level="22.1" data-path="soundprocessing.html"><a href="soundprocessing.html#libraries-for-sound-analysis-and-signal-processing"><i class="fa fa-check"></i><b>22.1</b> Libraries for Sound Analysis and Signal Processing</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html"><i class="fa fa-check"></i><b>A</b> Partial List of Packages by Category</a><ul>
+<li class="chapter" data-level="A.1" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#graphics-packages"><i class="fa fa-check"></i><b>A.1</b> Graphics Packages</a></li>
+<li class="chapter" data-level="A.2" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#gui-packages"><i class="fa fa-check"></i><b>A.2</b> GUI Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="miscellaneous-commands.html"><a href="miscellaneous-commands.html"><i class="fa fa-check"></i><b>B</b> Miscellaneous commands</a></li>
+<li class="chapter" data-level="C" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html"><i class="fa fa-check"></i><b>C</b> Other Manuals and Sources of Information on R</a><ul>
+<li class="chapter" data-level="C.0.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian"><i class="fa fa-check"></i><b>C.0.1</b> In Italian</a></li>
+<li class="chapter" data-level="C.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#other-useful-statistics-resources"><i class="fa fa-check"></i><b>C.1</b> Other useful statistics resources</a><ul>
+<li class="chapter" data-level="C.1.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian-1"><i class="fa fa-check"></i><b>C.1.1</b> In Italian</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="fullcoltable.html"><a href="fullcoltable.html"><i class="fa fa-check"></i><b>D</b> Full Colours Table</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A R Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probability-distribution-functions" class="section level1">
+<h1><span class="header-section-number">13</span> Probability Distribution Functions</h1>
+<div id="bernoulli" class="section level2">
+<h2><span class="header-section-number">13.1</span> The Bernoulli distribution</h2>
+<p>A random variable <span class="math inline">\(X\)</span> that takes a value of 0 or 1 depending on the result of an experiment that can have only two possible outcomes, follows a Bernoulli distribution. If the probability of one outcome is <span class="math inline">\(p\)</span>, the probability of the other outcome will be <span class="math inline">\(p-1\)</span>: <span class="math display">\[ P(X=1) = p\]</span> <span class="math display">\[ P(X=0) = p-1\]</span> The expected value of a Bernoulli random variable is <span class="math inline">\(p\)</span>: <span class="math display">\[ E[X]= 1\cdot p + 0\cdot p = p\]</span> the variance of a Bernoulli random variable is given by: <span class="math display">\[ Var(X) = E[X^2] - E[X]^2 = 1^2\cdot p + 0^2\cdot p - p^2 =\]</span> <span class="math display">\[Var(X) = p-p^2 = p\cdot(1-p)\]</span></p>
+<p>As far as I know, there are no special functions in R for computations related to the Bernoulli distribution (density, distribution, and quantile function). However, since the Bernoulli distribution is a special case of the binomial distribution, with parameter  equal to 1, the R functions for the binomial distribution can be used for the Bernoulli distribution as well. Most of the calculations involved are quite simple anyway. The density function can be calculated as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 0.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 0.7</code></pre>
+<p>The cumulative distribution function can be computed as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pbinom</span>(<span class="dt">q=</span><span class="dv">0</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 0.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pbinom</span>(<span class="dt">q=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>The quantile function can be computed as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qbinom</span>(<span class="dt">p=</span><span class="fl">0.3</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qbinom</span>(<span class="dt">p=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Finally, one can generate a random sample from a Bernoulli distribution as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span><span class="fl">0.7</span>)</code></pre></div>
+<pre><code>##  [1] 0 1 1 0 1 0 1 0 0 1</code></pre>
+</div>
+<div id="binomial" class="section level2">
+<h2><span class="header-section-number">13.2</span> The binomial distribution</h2>
+</div>
+<div id="normal" class="section level2">
+<h2><span class="header-section-number">13.3</span> The normal distribution</h2>
+<div id="pnorm" class="section level4">
+<h4><span class="header-section-number">13.3.0.1</span> pnorm</h4>
+<p>You can use the <code>pnorm</code> command to find out the probability value associated with a given z point in the normal distribution. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="fl">1.96</span>)</code></pre></div>
+<pre><code>## [1] 0.9750021</code></pre>
+<p>will give the value of the area under the normal distribution curve from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(1.96\)</span>.</p>
+</div>
+<div id="qnorm" class="section level4">
+<h4><span class="header-section-number">13.3.0.2</span> qnorm</h4>
+<p>The <code>qnorm</code> command is the inverse of the <code>pnorm</code> command, in that it gives the z point associated with a given probability area under the normal curve. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+</div>
+<div id="dnorm" class="section level4">
+<h4><span class="header-section-number">13.3.0.3</span> dnorm</h4>
+<p>The <code>dnorm</code> function provides the density function for the normal distribution. Using the <code>dnorm</code> function we can for example make a nice plot of a normal distribution with mean equal to <span class="math inline">\(0\)</span> and a standard deviation of <span class="math inline">\(1\)</span> and colour its extreme right <span class="math inline">\(0.05\%\)</span> tail with the following code. The result is displayed in Figure <a href="probability-distribution-functions.html#fig:norm">13.1</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x,<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">from=</span><span class="op">-</span><span class="dv">3</span>, <span class="dt">to=</span><span class="dv">3</span>)
+coord &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span><span class="op">+</span><span class="kw">qnorm</span>(.<span class="dv">95</span>)<span class="op">*</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">3</span>, <span class="dt">length=</span><span class="dv">30</span>)
+dcoord &lt;-<span class="st"> </span><span class="kw">dnorm</span>(coord, <span class="dv">0</span>, <span class="dv">1</span>)
+<span class="kw">polygon</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="dv">0</span><span class="op">+</span><span class="kw">qnorm</span>(.<span class="dv">95</span>)<span class="op">*</span><span class="dv">1</span>, coord, <span class="dv">3</span>),
+        <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">0</span>, dcoord, <span class="dv">0</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:norm"></span>
+<img src="distributions_files/figure-html/norm-1.png" alt="The normal distribution" width="576" />
+<p class="caption">
+Figure 13.1: The normal distribution
+</p>
+</div>
+<p>We can use the <code>pnorm</code> function to test hypotheses with a z-test. Suppose we have a sample of 40 computer science students with a mean short term memory span of <span class="math inline">\(7.4\)</span> digits (that is, they can repeat in sequence, about <span class="math inline">\(7\)</span> digits you read them, without making a mistake), and standard deviation of <span class="math inline">\(2.3\)</span>. The mean for the general population is <span class="math inline">\(6.5\)</span> digits, and the variance in the population is unknown. We’re interested in seeing if the memory span for computer science students is higher than that of the general population. We’ll run a z-test as<span class="math display">\[z=\frac{\overline x - \mu_{\overline x} }{\frac{s}{\sqrt{n-1}}}\]</span> where <span class="math inline">\(\overline x\)</span> is the mean short term memory span for our sample, and <span class="math inline">\(s\)</span> is its standard deviation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span>(<span class="fl">7.4-6.5</span>)<span class="op">/</span>(<span class="fl">2.3</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">40-1</span>))
+z</code></pre></div>
+<pre><code>## [1] 2.443695</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(z)</code></pre></div>
+<pre><code>## [1] 0.9927311</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(z) <span class="co">#this would do for a one tailed test</span></code></pre></div>
+<pre><code>## [1] 0.007268858</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(z))<span class="op">*</span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 0.01453772</code></pre>
+<p>so the z value for our sample is <span class="math inline">\(2.443695\)</span>, we then get the area under the curve from <span class="math inline">\(-\infty\)</span> to our z-value, which gives us the probability of a score lower than <span class="math inline">\(7.4\)</span>. To get the p-value we subtract that probability value from <span class="math inline">\(1\)</span>, this would give us the probability of getting a score equal to or higher than <span class="math inline">\(7.4\)</span> for a one tailed test. Since we want a two-tailed test instead, we multiply that value by two, to get our p-value, which is nonetheless significant.</p>
+<p>The <code>qnorm</code> command on the other hand, can be used to set confidence limits on the mean, for the example above we would use the following formula: <span class="math display">\[CI= \overline x \pm z_{\alpha/2} \frac{s}{\sqrt{n-1}}\]</span> to set a <span class="math inline">\(95\%\)</span> confidence interval on the mean short term memory span for the computer science students:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha &lt;-<span class="st"> </span><span class="fl">0.05</span>
+s &lt;-<span class="st"> </span>(<span class="fl">2.3</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">40-1</span>))
+zp &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>)
+ciup &lt;-<span class="st"> </span><span class="fl">7.4</span><span class="op">+</span>zp<span class="op">*</span>s
+cilow &lt;-<span class="st"> </span><span class="fl">7.4</span><span class="op">-</span>zp<span class="op">*</span>s
+<span class="kw">cat</span>(<span class="st">&quot;The 95% CI is: </span><span class="ch">\n</span><span class="st">&quot;</span>,cilow,<span class="st">&quot;&lt;&quot;</span>,<span class="st">&quot;mu&quot;</span>,<span class="st">&quot;&lt;&quot;</span>,ciup,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre></div>
+<pre><code>## The 95% CI is: 
+##  7.040913 &lt; mu &lt; 7.759087</code></pre>
+<p>The following code summarises the situation graphically, as shown in Figure <a href="probability-distribution-functions.html#fig:compscience">13.2</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s &lt;-<span class="st"> </span>(<span class="fl">2.3</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">40-1</span>))
+up &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">6.5</span><span class="op">+</span><span class="kw">qnorm</span>(.<span class="dv">975</span>)<span class="op">*</span>s, <span class="dt">to =</span> <span class="fl">9.5</span>, <span class="dt">length =</span> <span class="dv">30</span>)
+low &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span><span class="fl">3.5</span> , <span class="dt">to =</span><span class="fl">6.5</span><span class="op">-</span><span class="kw">qnorm</span>(.<span class="dv">975</span>)<span class="op">*</span>s , <span class="dt">length =</span> <span class="dv">30</span>)
+dup &lt;-<span class="st"> </span><span class="kw">dnorm</span>(up,<span class="fl">6.5</span>,s)
+dlow &lt;-<span class="kw">dnorm</span>(low,<span class="fl">6.5</span>,s)
+<span class="kw">curve</span>(<span class="kw">dnorm</span>(x,<span class="fl">6.5</span>,s), <span class="dt">from=</span> <span class="fl">3.5</span>, <span class="dt">to=</span> <span class="fl">9.5</span>)
+<span class="kw">polygon</span>(<span class="dt">x =</span> <span class="kw">c</span>( <span class="fl">6.5</span><span class="op">+</span><span class="kw">qnorm</span>(.<span class="dv">975</span>)<span class="op">*</span>s, up, <span class="fl">9.5</span>),
+        <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, dup, <span class="dv">0</span>), <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>)
+<span class="kw">polygon</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">3.5</span>,low, <span class="fl">6.5</span><span class="op">-</span><span class="kw">qnorm</span>(.<span class="dv">975</span>)<span class="op">*</span>s),
+        <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, dlow, <span class="dv">0</span>), <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>)
+<span class="kw">text</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="fl">7.38</span>,<span class="fl">5.62</span>),<span class="dt">y=</span><span class="kw">c</span>(<span class="fl">0.02</span>,<span class="fl">0.02</span>),<span class="kw">expression</span>(alpha<span class="op">/</span><span class="dv">2</span>))
+<span class="kw">text</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="fl">6.5</span>),<span class="dt">y=</span><span class="kw">c</span>(<span class="fl">0.3</span>),<span class="kw">expression</span>(<span class="dv">1</span><span class="op">-</span>alpha))
+<span class="kw">lines</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="fl">7.4</span>),<span class="dt">y=</span><span class="kw">c</span>(<span class="fl">0.28</span>,<span class="dv">0</span>))
+<span class="kw">text</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="fl">7.4</span>),<span class="dt">y=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.025</span>),<span class="kw">expression</span>(<span class="fl">7.4</span>))
+<span class="kw">text</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="fl">8.4</span>),<span class="dt">y=</span><span class="kw">c</span>(<span class="fl">0.3</span>),<span class="st">&quot;comp. science group score&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:compscience"></span>
+<img src="distributions_files/figure-html/compscience-1.png" alt="Short term memory span experiment, z-test" width="576" />
+<p class="caption">
+Figure 13.2: Short term memory span experiment, z-test
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="graphics-labels-and-text.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/sam81/rguide/edit/master/distributions.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rguide.pdf", "rguide.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

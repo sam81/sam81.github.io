@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>16 ANOVA | A R Guide</title>
+  <meta name="description" content="A guide for the R programming language." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="16 ANOVA | A R Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A guide for the R programming language." />
+  <meta name="github-repo" content="sam81/rguide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="16 ANOVA | A R Guide" />
+  
+  <meta name="twitter:description" content="A guide for the R programming language." />
+  
+
+<meta name="author" content="Samuele Carcagno" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="correlation-and-regression.html"/>
+<link rel="next" href="how-to-adjust-the-p-values-for-multiple-comparisons.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./preface.html">A R Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Installing R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#installing-the-base-program"><i class="fa fa-check"></i><b>1.1</b> Installing the Base Program</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices"><i class="fa fa-check"></i><b>1.1.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#windows"><i class="fa fa-check"></i><b>1.1.2</b> Windows</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#mac-os-x"><i class="fa fa-check"></i><b>1.1.3</b> Mac Os X</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#installing-add-on-packages"><i class="fa fa-check"></i><b>1.2</b> Installing Add-On Packages</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices-1"><i class="fa fa-check"></i><b>1.2.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#windows-1"><i class="fa fa-check"></i><b>1.2.2</b> Windows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> A Simple Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#datasets"><i class="fa fa-check"></i><b>2.1</b> Datasets</a></li>
+<li class="chapter" data-level="2.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#firing-up-and-quitting-r"><i class="fa fa-check"></i><b>2.2</b> Firing up and Quitting R</a></li>
+<li class="chapter" data-level="2.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#starting-to-work-with-r"><i class="fa fa-check"></i><b>2.3</b> Starting to Work with R</a></li>
+<li class="chapter" data-level="2.4" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gettinghelp"><i class="fa fa-check"></i><b>2.4</b> Getting Help</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-online-help-system"><i class="fa fa-check"></i><b>2.4.1</b> The Online Help System</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gui"><i class="fa fa-check"></i><b>2.5</b> Working with a Graphical User Interface</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#r-studio"><i class="fa fa-check"></i><b>2.5.1</b> R Studio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-r-commander"><i class="fa fa-check"></i><b>2.5.2</b> The R Commander</a></li>
+<li class="chapter" data-level="2.5.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#jgr"><i class="fa fa-check"></i><b>2.5.3</b> JGR</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html"><i class="fa fa-check"></i><b>3</b> Organising a Working Session</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#setting-and-changing-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting and Changing the Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#objects"><i class="fa fa-check"></i><b>3.2</b> Objects</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#saving-and-using-the-workspace-image"><i class="fa fa-check"></i><b>3.3</b> Saving and Using the “Workspace Image”</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#working-in-batch-mode"><i class="fa fa-check"></i><b>3.4</b> Working in Batch Mode</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-an-r-session"><i class="fa fa-check"></i><b>3.4.1</b> Executing commands written in a file from an R session</a></li>
+<li class="chapter" data-level="3.4.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-a-shell"><i class="fa fa-check"></i><b>3.4.2</b> Executing commands written in a file from a shell</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-manip.html"><a href="data-manip.html"><i class="fa fa-check"></i><b>4</b> Data Types and Data Manipulation</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-manip.html"><a href="data-manip.html#vectors"><i class="fa fa-check"></i><b>4.1</b> Vectors</a></li>
+<li class="chapter" data-level="4.2" data-path="data-manip.html"><a href="data-manip.html#indexing-vectors"><i class="fa fa-check"></i><b>4.2</b> Indexing Vectors</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-manip.html"><a href="data-manip.html#the-seq-function"><i class="fa fa-check"></i><b>4.2.1</b> The <code>seq</code> Function</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-manip.html"><a href="data-manip.html#the-rep-function"><i class="fa fa-check"></i><b>4.2.2</b> The <code>rep</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-manip.html"><a href="data-manip.html#matrix-facilities"><i class="fa fa-check"></i><b>4.3</b> Matrix Facilities</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-manip.html"><a href="data-manip.html#matrix-operations"><i class="fa fa-check"></i><b>4.3.1</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-manip.html"><a href="data-manip.html#Lists"><i class="fa fa-check"></i><b>4.4</b> Lists</a></li>
+<li class="chapter" data-level="4.5" data-path="data-manip.html"><a href="data-manip.html#dataframes"><i class="fa fa-check"></i><b>4.5</b> Dataframes</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-manip.html"><a href="data-manip.html#accessing-parts-of-a-dataframe"><i class="fa fa-check"></i><b>4.5.1</b> Accessing Parts of a Dataframe</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-manip.html"><a href="data-manip.html#change-the-names-of-variables-in-a-dataframe"><i class="fa fa-check"></i><b>4.5.2</b> Change the Names of Variables in a Dataframe</a></li>
+<li class="chapter" data-level="4.5.3" data-path="data-manip.html"><a href="data-manip.html#other-ways-to-subset-a-dataframe"><i class="fa fa-check"></i><b>4.5.3</b> Other Ways to Subset a Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-manip.html"><a href="data-manip.html#factors"><i class="fa fa-check"></i><b>4.6</b> Factors</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-manip.html"><a href="data-manip.html#renaming-the-levels-of-a-factor"><i class="fa fa-check"></i><b>4.6.1</b> Renaming the levels of a factor</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-manip.html"><a href="data-manip.html#gl"><i class="fa fa-check"></i><b>4.6.2</b> Creating Factors with <code>gl</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-manip.html"><a href="data-manip.html#natural-sort-order-for-character-and-factor-vectors"><i class="fa fa-check"></i><b>4.6.3</b> Natural sort order for character and factor vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-manip.html"><a href="data-manip.html#getting-info-on-r-objects"><i class="fa fa-check"></i><b>4.7</b> Getting Info on R Objects</a></li>
+<li class="chapter" data-level="4.8" data-path="data-manip.html"><a href="data-manip.html#changing-the-format-of-your-data"><i class="fa fa-check"></i><b>4.8</b> Changing the Format of Your Data</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="data-manip.html"><a href="data-manip.html#the-one-row-per-observation-format"><i class="fa fa-check"></i><b>4.8.1</b> The “One Row per Observation” Format</a></li>
+<li class="chapter" data-level="4.8.2" data-path="data-manip.html"><a href="data-manip.html#stack"><i class="fa fa-check"></i><b>4.8.2</b> The <code>stack</code> and <code>unstack</code> functions</a></li>
+<li class="chapter" data-level="4.8.3" data-path="data-manip.html"><a href="data-manip.html#tapply"><i class="fa fa-check"></i><b>4.8.3</b> The <code>tapply</code> and <code>aggregate</code> functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="data-manip.html"><a href="data-manip.html#creating-and-editing-data-objects-through-a-visual-interface"><i class="fa fa-check"></i><b>4.9</b> Creating and Editing Data Objects through a Visual Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualising-your-data.html"><a href="visualising-your-data.html"><i class="fa fa-check"></i><b>5</b> Visualising Your Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-your-data.html"><a href="visualising-your-data.html#reading-numbers-in-exponential-notation"><i class="fa fa-check"></i><b>5.1</b> Reading Numbers in Exponential Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="IO.html"><a href="IO.html"><i class="fa fa-check"></i><b>6</b> File Input/Output</a><ul>
+<li class="chapter" data-level="6.1" data-path="IO.html"><a href="IO.html#reading-in-data-from-a-file"><i class="fa fa-check"></i><b>6.1</b> Reading In Data from a File</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="IO.html"><a href="IO.html#read.table"><i class="fa fa-check"></i><b>6.1.1</b> The <code>read.table</code> function</a></li>
+<li class="chapter" data-level="6.1.2" data-path="IO.html"><a href="IO.html#scan"><i class="fa fa-check"></i><b>6.1.2</b> <code>scan</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="IO.html"><a href="IO.html#low-level-file-input"><i class="fa fa-check"></i><b>6.1.3</b> Low-Level File Input</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="IO.html"><a href="IO.html#writing-data-to-a-file"><i class="fa fa-check"></i><b>6.2</b> Writing Data to a file</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="IO.html"><a href="IO.html#write.table"><i class="fa fa-check"></i><b>6.2.1</b> The <code>write.table</code> function</a></li>
+<li class="chapter" data-level="6.2.2" data-path="IO.html"><a href="IO.html#cat"><i class="fa fa-check"></i><b>6.2.2</b> Low-Level File Output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive.html"><a href="descriptive.html"><i class="fa fa-check"></i><b>7</b> Descriptive</a><ul>
+<li class="chapter" data-level="7.1" data-path="descriptive.html"><a href="descriptive.html#tables"><i class="fa fa-check"></i><b>7.1</b> Tables</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive.html"><a href="descriptive.html#the-scale-function"><i class="fa fa-check"></i><b>7.2</b> The <code>scale</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>8</b> Graphics</a><ul>
+<li class="chapter" data-level="8.1" data-path="graphics.html"><a href="graphics.html#overview-of-r-base-graphics-functions"><i class="fa fa-check"></i><b>8.1</b> Overview of R base graphics functions</a></li>
+<li class="chapter" data-level="8.2" data-path="graphics.html"><a href="graphics.html#plot"><i class="fa fa-check"></i><b>8.2</b> The <code>plot</code> Function</a></li>
+<li class="chapter" data-level="8.3" data-path="graphics.html"><a href="graphics.html#drawing-functions"><i class="fa fa-check"></i><b>8.3</b> Drawing Functions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="graphics.html"><a href="graphics.html#the-matplot-function"><i class="fa fa-check"></i><b>8.3.1</b> The <code>matplot</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="graphics.html"><a href="graphics.html#barplots"><i class="fa fa-check"></i><b>8.4</b> Barplots</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="graphics.html"><a href="graphics.html#barplots-with-error-bars"><i class="fa fa-check"></i><b>8.4.1</b> Barplots with Error Bars</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="graphics.html"><a href="graphics.html#boxplots"><i class="fa fa-check"></i><b>8.5</b> Boxplots</a></li>
+<li class="chapter" data-level="8.6" data-path="graphics.html"><a href="graphics.html#histograms"><i class="fa fa-check"></i><b>8.6</b> Histograms</a></li>
+<li class="chapter" data-level="8.7" data-path="graphics.html"><a href="graphics.html#stripcharts"><i class="fa fa-check"></i><b>8.7</b> Stripcharts</a></li>
+<li class="chapter" data-level="8.8" data-path="graphics.html"><a href="graphics.html#interaction-plots"><i class="fa fa-check"></i><b>8.8</b> Interaction Plots</a></li>
+<li class="chapter" data-level="8.9" data-path="graphics.html"><a href="graphics.html#par"><i class="fa fa-check"></i><b>8.9</b> Setting Graphics Parameters</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="graphics.html"><a href="graphics.html#lty"><i class="fa fa-check"></i><b>8.9.1</b> Line type with the <code>lty</code> parameter</a></li>
+<li class="chapter" data-level="8.9.2" data-path="graphics.html"><a href="graphics.html#secpch"><i class="fa fa-check"></i><b>8.9.2</b> Symbols with the <code>pch</code> parameter</a></li>
+<li class="chapter" data-level="8.9.3" data-path="graphics.html"><a href="graphics.html#fonts"><i class="fa fa-check"></i><b>8.9.3</b> Fonts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="graphics.html"><a href="graphics.html#adding-elements-to-a-plot"><i class="fa fa-check"></i><b>8.10</b> Adding Elements to a Plot</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="graphics.html"><a href="graphics.html#legend"><i class="fa fa-check"></i><b>8.10.1</b> Adding a Legend</a></li>
+<li class="chapter" data-level="8.10.2" data-path="graphics.html"><a href="graphics.html#adding-text"><i class="fa fa-check"></i><b>8.10.2</b> Adding Text</a></li>
+<li class="chapter" data-level="8.10.3" data-path="graphics.html"><a href="graphics.html#addgrid"><i class="fa fa-check"></i><b>8.10.3</b> Adding a Grid</a></li>
+<li class="chapter" data-level="8.10.4" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>8.10.4</b> Setting the Axes</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="graphics.html"><a href="graphics.html#creating-layouts-for-multiple-graphs-glayout"><i class="fa fa-check"></i><b>8.11</b> Creating Layouts for Multiple Graphs {glayout}</a><ul>
+<li class="chapter" data-level="8.11.1" data-path="graphics.html"><a href="graphics.html#mfrow-and-mfcol-mfrowmfcol"><i class="fa fa-check"></i><b>8.11.1</b> mfrow and mfcol {mfrowmfcol}</a></li>
+<li class="chapter" data-level="8.11.2" data-path="graphics.html"><a href="graphics.html#layout"><i class="fa fa-check"></i><b>8.11.2</b> layout</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="graphics.html"><a href="graphics.html#graphics-device-regions-and-coordinates"><i class="fa fa-check"></i><b>8.12</b> Graphics Device Regions and Coordinates</a></li>
+<li class="chapter" data-level="8.13" data-path="graphics.html"><a href="graphics.html#plotfromscratch"><i class="fa fa-check"></i><b>8.13</b> Plotting from Scratch</a></li>
+<li class="chapter" data-level="8.14" data-path="graphics.html"><a href="graphics.html#colours-for-graphics"><i class="fa fa-check"></i><b>8.14</b> Colours for Graphics</a><ul>
+<li class="chapter" data-level="8.14.1" data-path="graphics.html"><a href="graphics.html#colour-opacity"><i class="fa fa-check"></i><b>8.14.1</b> Colour Opacity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.15" data-path="graphics.html"><a href="graphics.html#managing-graphic-devices"><i class="fa fa-check"></i><b>8.15</b> Managing Graphic Devices</a><ul>
+<li class="chapter" data-level="8.15.1" data-path="graphics.html"><a href="graphics.html#opening-another-graphics-window"><i class="fa fa-check"></i><b>8.15.1</b> Opening Another Graphics Window</a></li>
+<li class="chapter" data-level="8.15.2" data-path="graphics.html"><a href="graphics.html#exporting-graphics"><i class="fa fa-check"></i><b>8.15.2</b> Exporting Graphics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>9</b> ggplot2</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="ggplot2.html"><a href="ggplot2.html#log-axis-with-pretty-tickmarks"><i class="fa fa-check"></i><b>9.0.1</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>10</b> Plotly</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotly.html"><a href="plotly.html#using-plotly-with-knitr"><i class="fa fa-check"></i><b>10.1</b> Using plotly with knitr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lattice.html"><a href="lattice.html"><i class="fa fa-check"></i><b>11</b> Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.1" data-path="lattice.html"><a href="lattice.html#overview-of-lattice-graphics"><i class="fa fa-check"></i><b>11.1</b> Overview of Lattice Graphics</a></li>
+<li class="chapter" data-level="11.2" data-path="lattice.html"><a href="lattice.html#introduction-to-model-formulae-and-multi-panel-conditioning"><i class="fa fa-check"></i><b>11.2</b> Introduction to model formulae and multi-panel conditioning</a></li>
+<li class="chapter" data-level="11.3" data-path="lattice.html"><a href="lattice.html#barchart"><i class="fa fa-check"></i><b>11.3</b> <code>barchart</code></a></li>
+<li class="chapter" data-level="11.4" data-path="lattice.html"><a href="lattice.html#dotplot"><i class="fa fa-check"></i><b>11.4</b> dotplot</a></li>
+<li class="chapter" data-level="11.5" data-path="lattice.html"><a href="lattice.html#histogram"><i class="fa fa-check"></i><b>11.5</b> histogram</a></li>
+<li class="chapter" data-level="11.6" data-path="lattice.html"><a href="lattice.html#interaction-plots-1"><i class="fa fa-check"></i><b>11.6</b> Interaction Plots</a></li>
+<li class="chapter" data-level="11.7" data-path="lattice.html"><a href="lattice.html#customizingtrellis"><i class="fa fa-check"></i><b>11.7</b> Customising Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="lattice.html"><a href="lattice.html#textual-elements"><i class="fa fa-check"></i><b>11.7.1</b> Textual Elements</a></li>
+<li class="chapter" data-level="11.7.2" data-path="lattice.html"><a href="lattice.html#log-axis-with-pretty-tickmarks-1"><i class="fa fa-check"></i><b>11.7.2</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="lattice.html"><a href="lattice.html#trellispanel"><i class="fa fa-check"></i><b>11.8</b> Writing Panel Functions</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="lattice.html"><a href="lattice.html#combining-panel-functions"><i class="fa fa-check"></i><b>11.8.1</b> Combining Panel Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html"><i class="fa fa-check"></i><b>12</b> Graphics labels and text</a><ul>
+<li class="chapter" data-level="12.1" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html#mathematical-expressions-and-variables"><i class="fa fa-check"></i><b>12.1</b> Mathematical expressions and variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html"><i class="fa fa-check"></i><b>13</b> Probability Distribution Functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#bernoulli"><i class="fa fa-check"></i><b>13.1</b> The Bernoulli distribution</a></li>
+<li class="chapter" data-level="13.2" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#binomial"><i class="fa fa-check"></i><b>13.2</b> The binomial distribution</a></li>
+<li class="chapter" data-level="13.3" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#normal"><i class="fa fa-check"></i><b>13.3</b> The normal distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>14</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="14.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#chi2-test"><i class="fa fa-check"></i><b>14.1</b> <span class="math inline">\(\chi^2\)</span> test</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-hypotheses-about-the-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>14.1.1</b> Testing Hypotheses about the Distribution of a Categorical Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#students-t-test"><i class="fa fa-check"></i><b>14.2</b> Student’s <em>t</em> test</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#one-sample-t-test"><i class="fa fa-check"></i><b>14.2.1</b> One sample <em>t</em>-test</a></li>
+<li class="chapter" data-level="14.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#two-samples-t-test"><i class="fa fa-check"></i><b>14.2.2</b> Two samples t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-levene-test-for-homogeneity-of-variances"><i class="fa fa-check"></i><b>14.3</b> The Levene Test for Homogeneity of Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>15</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-regression"><i class="fa fa-check"></i><b>15.1</b> Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>16</b> ANOVA</a><ul>
+<li class="chapter" data-level="16.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>16.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="16.2" data-path="anova.html"><a href="anova.html#repeated-measures-anova"><i class="fa fa-check"></i><b>16.2</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="anova.html"><a href="anova.html#one-within-subjects-factor"><i class="fa fa-check"></i><b>16.2.1</b> One Within Subjects Factor</a></li>
+<li class="chapter" data-level="16.2.2" data-path="anova.html"><a href="anova.html#two-within-subjects-factors"><i class="fa fa-check"></i><b>16.2.2</b> Two Within Subjects Factors</a></li>
+<li class="chapter" data-level="16.2.3" data-path="anova.html"><a href="anova.html#two-within-subjects-factors-and-one-between"><i class="fa fa-check"></i><b>16.2.3</b> Two Within Subjects Factors and One Between</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="how-to-adjust-the-p-values-for-multiple-comparisons.html"><a href="how-to-adjust-the-p-values-for-multiple-comparisons.html"><i class="fa fa-check"></i><b>17</b> How to Adjust the p-values for Multiple Comparisons</a></li>
+<li class="chapter" data-level="18" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>18</b> R Programming</a><ul>
+<li class="chapter" data-level="18.1" data-path="programming.html"><a href="programming.html#contrstruct"><i class="fa fa-check"></i><b>18.1</b> Control Structures</a></li>
+<li class="chapter" data-level="18.2" data-path="programming.html"><a href="programming.html#stringprocessing"><i class="fa fa-check"></i><b>18.2</b> String Processing</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="programming.html"><a href="programming.html#regexp"><i class="fa fa-check"></i><b>18.2.1</b> Using Regular Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="programming.html"><a href="programming.html#tips-and-tricks"><i class="fa fa-check"></i><b>18.3</b> Tips and Tricks</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="programming.html"><a href="programming.html#convert-a-string-into-a-command"><i class="fa fa-check"></i><b>18.3.1</b> Convert a String into a Command</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="programming.html"><a href="programming.html#creatingsimplerpackages"><i class="fa fa-check"></i><b>18.4</b> Creating Simple R Packages</a><ul>
+<li class="chapter" data-level="18.4.1" data-path="programming.html"><a href="programming.html#the-bare-minimum-to-create-a-package"><i class="fa fa-check"></i><b>18.4.1</b> The Bare Minimum to Create a Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="custom.html"><a href="custom.html"><i class="fa fa-check"></i><b>19</b> Environment Customisation</a></li>
+<li class="chapter" data-level="20" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html"><i class="fa fa-check"></i><b>20</b> ESS: Using Emacs Speaks Statistics with R</a><ul>
+<li class="chapter" data-level="20.1" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-for-editing-and-debugging-r-source-files"><i class="fa fa-check"></i><b>20.1</b> Using ESS for Editing and Debugging R Source Files</a></li>
+<li class="chapter" data-level="20.2" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-to-interact-with-a-r-process"><i class="fa fa-check"></i><b>20.2</b> Using ESS to Interact with a R Process</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html"><i class="fa fa-check"></i><b>21</b> Using Sweave to Write Documents with R and LaTeX</a><ul>
+<li class="chapter" data-level="21.1" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#whats-sweave"><i class="fa fa-check"></i><b>21.1</b> What’s Sweave?</a></li>
+<li class="chapter" data-level="21.2" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#usage"><i class="fa fa-check"></i><b>21.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="soundprocessing.html"><a href="soundprocessing.html"><i class="fa fa-check"></i><b>22</b> Sound Processing</a><ul>
+<li class="chapter" data-level="22.1" data-path="soundprocessing.html"><a href="soundprocessing.html#libraries-for-sound-analysis-and-signal-processing"><i class="fa fa-check"></i><b>22.1</b> Libraries for Sound Analysis and Signal Processing</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html"><i class="fa fa-check"></i><b>A</b> Partial List of Packages by Category</a><ul>
+<li class="chapter" data-level="A.1" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#graphics-packages"><i class="fa fa-check"></i><b>A.1</b> Graphics Packages</a></li>
+<li class="chapter" data-level="A.2" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#gui-packages"><i class="fa fa-check"></i><b>A.2</b> GUI Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="miscellaneous-commands.html"><a href="miscellaneous-commands.html"><i class="fa fa-check"></i><b>B</b> Miscellaneous commands</a></li>
+<li class="chapter" data-level="C" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html"><i class="fa fa-check"></i><b>C</b> Other Manuals and Sources of Information on R</a><ul>
+<li class="chapter" data-level="C.0.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian"><i class="fa fa-check"></i><b>C.0.1</b> In Italian</a></li>
+<li class="chapter" data-level="C.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#other-useful-statistics-resources"><i class="fa fa-check"></i><b>C.1</b> Other useful statistics resources</a><ul>
+<li class="chapter" data-level="C.1.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian-1"><i class="fa fa-check"></i><b>C.1.1</b> In Italian</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="fullcoltable.html"><a href="fullcoltable.html"><i class="fa fa-check"></i><b>D</b> Full Colours Table</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A R Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova" class="section level1">
+<h1><span class="header-section-number">16</span> ANOVA</h1>
+<div id="one-way-anova" class="section level2">
+<h2><span class="header-section-number">16.1</span> One-Way ANOVA</h2>
+<p>We’ll start directly with an example to show how to perform a one-way ANOVA. Let’s imagine an experimenter is studying the effects of sleep deprivation on verbal memory. He selects a random sample of healthy subjects, and assigns them to three treatments: 4 hours, 6 hours and 8 hours of total sleep. The subjects are then given a memory test, consisting of a long list of words to remember after a minute of delay from their presentation. The dependent variable is the number of words correctly recalled in a minute time. The data are shown in table <a href="anova.html#tab:sleep">16.1</a>:</p>
+<table>
+<caption><span id="tab:sleep">Table 16.1: </span> Data for the one-way ANOVA example.</caption>
+<thead>
+<tr class="header">
+<th align="left">4 hours</th>
+<th align="left">6 hours</th>
+<th align="left">8 hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">12</td>
+<td align="left">13</td>
+<td align="left">15</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">12</td>
+<td align="left">17</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">11</td>
+<td align="left">15</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">7</td>
+<td align="left">13</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">14</td>
+<td align="left">16</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">10</td>
+<td align="left">17</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">10</td>
+<td align="left">12</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">10</td>
+<td align="left">16</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">12</td>
+<td align="left">14</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">9</td>
+<td align="left">15</td>
+</tr>
+</tbody>
+</table>
+<p>The data are stored in a text file <code>sleepdep.txt</code> in the above format, but without any header. First we read in the data with the <code>scan</code> function and assign them to a vector that we’ll call <code>recalled</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">recalled &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;datasets/sleepdep.txt&quot;</span>)</code></pre></div>
+<p>then we need to create another vector which holds the <em>level</em> of the factor “hours of sleep” for each observation. Since our data, stored in the vector “recalled” are organised in an ordered sequence, with observations belonging to treatment 4 h, 6 h, 8 h, etc… repeated 10 times, we need to mimic this structure to create our new vector. We’ll use the <code>rep</code> function to do this, we’ll call our levels 1, 2, and 3 for sake of simplicity.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">treatment &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">10</span>))</code></pre></div>
+<p>now we’ll put the two vectors together into a data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleepdata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(recalled, treatment)</code></pre></div>
+<p>well, the data are now in a proper format to perform our analysis of variance, we can call this format “one row per observation”, since in each row of our data frame we hold the value of the dependent variable in one column and the level of the factor that we are manipulating in the other column for a single observation. As for the analysis, we go like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aov1 =<span class="st"> </span><span class="kw">oneway.test</span>(recalled<span class="op">~</span>treatment, <span class="dt">data=</span>sleepdata, <span class="dt">var.equal=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>the <code>summary</code> function tells R to print out a nicely formatted summary with the results of our analysis. The actual function that performs the analysis is <code>aov</code>, and what follows this command is the specification of our model for the analysis. In this case we want to see if the number of words recalled depends on the treatment, the <code>(recalled ~ treatment)</code> statement does just this, because the tilde <code>~</code> means “explain recalled on the basis of treatment”. Finally, the <code>data</code> statement specifies the object in which are stored the data for this analysis.</p>
+<p>Below there is the summary produced by R for this analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aov1</code></pre></div>
+<pre><code>## 
+##  One-way analysis of means
+## 
+## data:  recalled and treatment
+## F = 27.838, num df = 2, denom df = 27, p-value = 2.746e-07</code></pre>
+<p>We have the sums of squares for the treatment effect and for the error term and the F value for the treatment effect with its significance value. Since the p value in this case is very, very small, it is written in scientific notation. However we can use the significance codes given at the bottom of the print out to interpret the p value as very close to zero, at least smaller than 0.001, so it is highly significant.</p>
+</div>
+<div id="repeated-measures-anova" class="section level2">
+<h2><span class="header-section-number">16.2</span> Repeated Measures ANOVA</h2>
+<div id="one-within-subjects-factor" class="section level3">
+<h3><span class="header-section-number">16.2.1</span> One Within Subjects Factor</h3>
+<p>The syntax for performing a repeated measures ANOVA is a little more complex than the syntax for fully randomised designs. In a repeated measures design we take into account the effects of the subjects on our measures, that is the fact that different subjects will have different different baseline means on a given measure (e.g. on a reaction time test). In this way we are able to tell apart the variability given by inter individual differences between our subjects, from the variability due to the manipulation of one or more independent variables, with a view to identify the latter with more precision. A consequence of this procedure is that while with other designs we used a common error term, in a repeated measures design we have to use different error terms to test the effects we are interested in and we have to specify this in the formula we use with R for <code>aov</code>. A good explanation of repeated measures designs in R is given by Baron and Li <span class="citation">(Baron and Li <a href="#ref-baron03">2003</a>)</span>, and what follows in this discussion is mainly inspired by their work.</p>
+<p>We will start with a simple example of a repeated measures design with one within subject factor at three levels. Let’s imagine we want to test the effects of three different colours on a simple detection task. The data are presented in Table <a href="anova.html#tab:rts">16.2</a>, and represent subjects’ reaction times (measured with a button press) for the detection of squares of three different colours (blue, black and red). Each subject was tested under all the three conditions. The data are store in the file <code>rts.txt</code>, with the same format as that shown in the table, but without any header and without the column specifying the subject’s number.</p>
+<table>
+<caption><span id="tab:rts">Table 16.2: </span> Example for repeated measures ANOVA with one within subjects factor.</caption>
+<thead>
+<tr class="header">
+<th>Subj</th>
+<th align="left">Blue</th>
+<th>Black</th>
+<th align="left">Red</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="left">0.120</td>
+<td>0.132</td>
+<td align="left">0.102</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="left">0.096</td>
+<td>0.103</td>
+<td align="left">0.087</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="left">0.113</td>
+<td>0.134</td>
+<td align="left">0.109</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="left">0.132</td>
+<td>0.147</td>
+<td align="left">0.123</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td align="left">0.124</td>
+<td>0.139</td>
+<td align="left">0.124</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td align="left">0.105</td>
+<td>0.115</td>
+<td align="left">0.102</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="left">0.109</td>
+<td>0.129</td>
+<td align="left">0.097</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="left">0.143</td>
+<td>0.150</td>
+<td align="left">0.119</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="left">0.127</td>
+<td>0.145</td>
+<td align="left">0.113</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td align="left">0.098</td>
+<td>0.117</td>
+<td align="left">0.092</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td align="left">0.115</td>
+<td>0.126</td>
+<td align="left">0.098</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td align="left">0.117</td>
+<td>0.132</td>
+<td align="left">0.103</td>
+</tr>
+</tbody>
+</table>
+<p>We will first read in the data and apply the usual transformations to get the one row per observation format:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;datasets/rts.txt&quot;</span>) <span class="co">#read in the data</span>
+colour &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dv">12</span>)) <span class="co">#create a factor for colours with 3 lev.</span>
+subj &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,<span class="dt">each=</span><span class="dv">3</span>)) <span class="co">#create factor for subjects</span>
+dfr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dat,colour,subj) <span class="co">#put everything in a dataframe</span></code></pre></div>
+<p>Now the data are ready for further analyses. We can first have a look at variability for the three colours by drawing a boxplot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(dfr<span class="op">$</span>dat <span class="op">~</span><span class="st"> </span>dfr<span class="op">$</span>colour)</code></pre></div>
+<div class="figure"><span id="fig:rts"></span>
+<img src="anova_files/figure-html/rts-1.png" alt="Boxplot showing the distribution of RTs for the three colours" width="576" />
+<p class="caption">
+Figure 16.1: Boxplot showing the distribution of RTs for the three colours
+</p>
+</div>
+<p>As you can see from Figure <a href="anova.html#fig:rts">16.1</a>, the variability for the three conditions is pretty much the same and the three distributions seems to be approximately normal. The medians for the three distributions seems to differ, our analysis will tell us if these differences are significant.</p>
+<p>Below is shown the syntax for the analysis and with its output:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(dat <span class="op">~</span><span class="st"> </span>colour <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subj<span class="op">/</span>colour), <span class="dt">data=</span>dfr))</code></pre></div>
+<pre><code>## 
+## Error: subj
+##           Df   Sum Sq   Mean Sq F value Pr(&gt;F)
+## Residuals 11 0.005386 0.0004897               
+## 
+## Error: subj:colour
+##           Df   Sum Sq   Mean Sq F value   Pr(&gt;F)    
+## colour     2 0.003772 0.0018861   95.36 1.45e-11 ***
+## Residuals 22 0.000435 0.0000198                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The statement</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Error</span>(subj<span class="op">/</span>colour)</code></pre></div>
+<p>is a shorthand for</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Error</span>(subj <span class="op">+</span><span class="st"> </span>subj<span class="op">:</span>colour)</code></pre></div>
+<p>It tells R to partition the residuals into two error terms, one represents the effects of the differences between subjects (<code>subj</code>) and the other is the subjects by colour interaction (<code>subj:colour</code>) which is the appropriate error term for testing the effects of <code>colour</code> on the RTs.</p>
+<p>To understand this procedure we have to remember that while in a fully randomised design we use a common error term to test the effects of all the different factors and their interactions, in a repeated measures design we have to split up this error term into different partitions, some of which we will use to test the effects of our factors and their interactions.</p>
+<p>In the case at hand the subjects’ error term will not be used to test any effects, it will just be subtracted from the common residuals entry, so that the variability due to differences between subjects doesn’t inflate the error term we will use to test for the effects of colours. The subjects’ error terms is in this case just the Sum of Squares Between.</p>
+<p>The second error term, the subject by colour interaction is the one we want to use to test for the effects of <code>colour</code>. This term is what’s left from the Sum of Squares Total once you have subtracted the effects do to the subjects and the effects due to the colour, so in the specific design of this experiment it represents just random variability, errors, (A subject is faster with blue stimuli and gets depressed with black ones, while another subject does just the opposite?! We’re not interested in these differences in this experiment, though we might want to test similar effects in other case. So for this time this interaction is just errors.)</p>
+<p>All this is quite tricky at first. Don’t worry, remember as a rule of thumb that in a repeated measures design with R you have to add the <code>Error()</code> term to the formula, and this error term is defined as <code>subjects/your within subj factors</code>. More examples with Between and Within Subjects factors will be presented in the next sections.</p>
+<p>As for the results of this analysis, the <em>F</em> statistics for the colour effect is significant. The RTs for detecting stimuli of these three different colours are different.</p>
+</div>
+<div id="two-within-subjects-factors" class="section level3">
+<h3><span class="header-section-number">16.2.2</span> Two Within Subjects Factors</h3>
+<p>The basic principles for running a repeated measures ANOVA with more than one within subject factors are the same as in the case of a within subjects factor only, with just some further complications due to the fact that now we also want to test for interactions between our factors. We’ll start straight with an example. Let’s say your data look something like the ones in Table <a href="anova.html#tab:rats">16.3</a>,</p>
+<table>
+<caption><span id="tab:rats">Table 16.3: </span> Data for the repeated measures ANOVA example.</caption>
+<thead>
+<tr class="header">
+<th>Drug Alchohol</th>
+<th>Drug No-Alcohol</th>
+<th>No-Drug Alcohol</th>
+<th>No-Drug No-Alcohol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>8</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>8</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>7</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>imagining that you have 15 rats exposed to two factors (Alcohol and Drug), with two levels each (administered and not-administered), and the dependent variable is the number of social interaction in a cage with other rats. Here each row represents a subject, you need to reorganise the data so that each row contains a single observation, and the different columns represent:</p>
+<ul>
+<li>an identifier for the subject</li>
+<li>the values of the dependent variable (the data that you see in the table)</li>
+<li>the level of the first factor for each observation</li>
+<li>the level of the second factor for each observation</li>
+</ul>
+<p>The measures you have collected are stored in a text file <code>rats.txt</code>, in the format of the table above, but with no header and no number indicating each subject. The first thing we can do, is to read in these data in R as a number vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">socialint &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;datasets/rats.txt&quot;</span>)</code></pre></div>
+<p>then we need a column specifying to which subject, each observation of the <code>socialint</code> vector belongs to. In addition, we want this new vector to be considered as a factor vector rather than as numerical vector. We can use the `rep()} function to do this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subj &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">each =</span> <span class="dv">4</span>))</code></pre></div>
+<p>next we need to specify in a new vector the levels of the first factor for each observation. If we use a character vector to store the levels of the factor, it is not necessary to use the <code>as.factor()</code> command, as later, when we will put the all the vectors in a data frame, R will automatically interpret character vectors as factors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alcohol &lt;-<span class="st"> </span><span class="kw">rep</span>( <span class="kw">c</span>(<span class="st">&quot;Al&quot;</span>,<span class="st">&quot;No-Al&quot;</span>), <span class="dv">30</span>)</code></pre></div>
+<p>we do basically the same for the second factor:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drug &lt;-<span class="st"> </span><span class="kw">rep</span>( <span class="kw">c</span>(<span class="st">&quot;Drug&quot;</span>,<span class="st">&quot;No-Drug&quot;</span>), <span class="dv">15</span>, <span class="dt">each =</span> <span class="dv">2</span>)</code></pre></div>
+<p>It’s almost done, we need now to put all this vectors in a data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rats &lt;-<span class="st"> </span><span class="kw">data.frame</span> (subj, socialint, alcohol, drug)</code></pre></div>
+<p>Done! Now the analysis:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aovRats =<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(socialint <span class="op">~</span><span class="st"> </span>alcohol <span class="op">*</span><span class="st"> </span>drug <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subj<span class="op">/</span>(alcohol <span class="op">*</span><span class="st"> </span>drug)),
+                      <span class="dt">data =</span> rats))</code></pre></div>
+<p>the above formula specifies our model for the analysis, we are telling R we want to explain the variable <code>socialint</code> by the effects of the factors <code>alcohol</code>, <code>drug</code> and their interaction, in the case of a repeated measures ANOVA however, we also have to specify the error terms that R will use to calculate the F statistics. The statement</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Error</span>(subj<span class="op">/</span>(alcohol <span class="op">*</span><span class="st"> </span>drug))</code></pre></div>
+<p>is a shorthand for</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Error</span>(subj <span class="op">+</span><span class="st"> </span>subj<span class="op">:</span>alcohol <span class="op">+</span><span class="st"> </span>subj<span class="op">:</span>drug <span class="op">+</span><span class="st"> </span>subj<span class="op">:</span>alcohol<span class="op">:</span>drug)</code></pre></div>
+<p>Again, as in the example with only one within subjects factor, we are telling R to partition the residuals into different error terms. The first is the effect due to differences between subjects. It will not be used to test any effects, it will just be subtracted from the residuals to compute the other error terms. The <code>subj:alcohol</code> and the <code>subj:drug</code> interactions are the error terms to be used to test the effects of <code>alcohol</code> and <code>drug</code> respectively, while the <code>subj:alcohol:drug</code> interaction will be used to test the interaction between between <code>alcohol</code> and <code>drug</code>. Below there is the output from the analysis:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aovRats</code></pre></div>
+<pre><code>## 
+## Error: subj
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 14  69.43    4.96               
+## 
+## Error: subj:alcohol
+##           Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+## alcohol    1 26.667  26.667   42.26 1.4e-05 ***
+## Residuals 14  8.833   0.631                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subj:drug
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## drug       1   60.0   60.00   57.93 2.43e-06 ***
+## Residuals 14   14.5    1.04                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subj:alcohol:drug
+##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## alcohol:drug  1  4.267   4.267   18.47 0.000736 ***
+## Residuals    14  3.233   0.231                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>As you can see R splits the summary into different sections, based on the partition of the error terms that we have specified. Each effect is then tested against its appropriate error term.</p>
+<p>The results tell us that there is a significant effect of both the <code>alcohol</code> and the <code>drug</code> factors, as well as their interaction.</p>
+</div>
+<div id="two-within-subjects-factors-and-one-between" class="section level3">
+<h3><span class="header-section-number">16.2.3</span> Two Within Subjects Factors and One Between</h3>
+<p>Now let’s see the case in which we also have a between subjects factor. Suppose we want to run again the experiment on the effects of alcohol and drug on the social interactions in rats, but this time we want to use two different species of rats, the yuppy rats and the kilamany rats, as we have reasons to believe that the kilamany will have different reactions to alcohol and drugs from the yuppy, that is the species that we had tested before. So we manage to gather 8 rats from each species and run our experiment. The results are shown in Table <a href="anova.html#tab:ratsbetween">16.4</a>.</p>
+<table>
+<caption><span id="tab:ratsbetween">Table 16.4: </span> Data for the repeated measures ANOVA example with two within-subject factors and one between-subject factor.</caption>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th>Drug Alchohol</th>
+<th>Drug No-Alcohol</th>
+<th>No-Drug Alcohol</th>
+<th>No-Drug No-Alcohol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Yuppy</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Yuppy</td>
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td align="left">Yuppy</td>
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Yuppy</td>
+<td>8</td>
+<td>8</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td align="left">Yuppy</td>
+<td>6</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td align="left">Yuppy</td>
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td align="left">Yuppy</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Yuppy</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td align="left">Kalamani</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Kalamani</td>
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td align="left">Kalamani</td>
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Kalamani</td>
+<td>8</td>
+<td>8</td>
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td align="left">Kalamani</td>
+<td>6</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td align="left">Kalamani</td>
+<td>8</td>
+<td>7</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td align="left">Kalamani</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="left">Kalamani</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>the data are in the file <code>two_within_one_between.txt</code>, in each row of this file are recorded the number of social interactions for a rat under the 4 experimental conditions it participated in. We need to get the “one row per observation format”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">socialint &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;datasets/two_within_one_between.txt&quot;</span>)
+subj &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,<span class="dt">each=</span><span class="dv">4</span>)  ##read in the data
+subj &lt;-<span class="st"> </span><span class="kw">as.factor</span>(subj)
+alcohol &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Al&quot;</span>,<span class="st">&quot;No-Al&quot;</span>),<span class="dv">32</span>)
+alcohol &lt;-<span class="st"> </span><span class="kw">as.factor</span>(alcohol)
+drug &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Drug&quot;</span>,<span class="st">&quot;No-Drug&quot;</span>),<span class="dv">16</span>,<span class="dt">each=</span><span class="dv">2</span>)
+drug &lt;-<span class="st"> </span><span class="kw">as.factor</span>(drug)
+group &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Yuppy&quot;</span>,<span class="st">&quot;Kalamani&quot;</span>),<span class="dt">each=</span><span class="dv">32</span>)
+group &lt;-<span class="st"> </span><span class="kw">as.factor</span>(group)
+dats &lt;-<span class="st"> </span><span class="kw">data.frame</span>(subj,socialint,alcohol,drug,group)</code></pre></div>
+<p>now the ANOVA</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(socialint<span class="op">~</span>alcohol<span class="op">*</span>drug<span class="op">*</span>group <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(subj<span class="op">/</span>(alcohol<span class="op">*</span>drug)),
+            <span class="dt">data=</span>dats))</code></pre></div>
+<pre><code>## 
+## Error: subj
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## group      1   2.25   2.250   0.462  0.508
+## Residuals 14  68.25   4.875               
+## 
+## Error: subj:alcohol
+##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## alcohol        1 22.562  22.562  22.766 0.000298 ***
+## alcohol:group  1  0.062   0.062   0.063 0.805367    
+## Residuals     14 13.875   0.991                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subj:drug
+##            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## drug        1  60.06   60.06  81.048 3.38e-07 ***
+## drug:group  1   5.06    5.06   6.831   0.0204 *  
+## Residuals  14  10.37    0.74                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subj:alcohol:drug
+##                    Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## alcohol:drug        1    4.0    4.00      16 0.00132 **
+## alcohol:drug:group  1    0.0    0.00       0 1.00000   
+## Residuals          14    3.5    0.25                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-baron03">
+<p>Baron, Jonathan, and Yuelin Li. 2003. <em>Notes on the use of R for psychology experiments and questionnaires</em>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlation-and-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-to-adjust-the-p-values-for-multiple-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/sam81/rguide/edit/master/anova.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rguide.pdf", "rguide.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

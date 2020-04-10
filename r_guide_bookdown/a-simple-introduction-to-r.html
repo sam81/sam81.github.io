@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 A Simple Introduction to R | A R Guide</title>
+  <meta name="description" content="A guide for the R programming language." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 A Simple Introduction to R | A R Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A guide for the R programming language." />
+  <meta name="github-repo" content="sam81/rguide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 A Simple Introduction to R | A R Guide" />
+  
+  <meta name="twitter:description" content="A guide for the R programming language." />
+  
+
+<meta name="author" content="Samuele Carcagno" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="organising-a-working-session.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./preface.html">A R Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Installing R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#installing-the-base-program"><i class="fa fa-check"></i><b>1.1</b> Installing the Base Program</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices"><i class="fa fa-check"></i><b>1.1.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#windows"><i class="fa fa-check"></i><b>1.1.2</b> Windows</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#mac-os-x"><i class="fa fa-check"></i><b>1.1.3</b> Mac Os X</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#installing-add-on-packages"><i class="fa fa-check"></i><b>1.2</b> Installing Add-On Packages</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#gnulinux-and-other-unices-1"><i class="fa fa-check"></i><b>1.2.1</b> GNU/Linux and Other Unices</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#windows-1"><i class="fa fa-check"></i><b>1.2.2</b> Windows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> A Simple Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#datasets"><i class="fa fa-check"></i><b>2.1</b> Datasets</a></li>
+<li class="chapter" data-level="2.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#firing-up-and-quitting-r"><i class="fa fa-check"></i><b>2.2</b> Firing up and Quitting R</a></li>
+<li class="chapter" data-level="2.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#starting-to-work-with-r"><i class="fa fa-check"></i><b>2.3</b> Starting to Work with R</a></li>
+<li class="chapter" data-level="2.4" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gettinghelp"><i class="fa fa-check"></i><b>2.4</b> Getting Help</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-online-help-system"><i class="fa fa-check"></i><b>2.4.1</b> The Online Help System</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#gui"><i class="fa fa-check"></i><b>2.5</b> Working with a Graphical User Interface</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#r-studio"><i class="fa fa-check"></i><b>2.5.1</b> R Studio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#the-r-commander"><i class="fa fa-check"></i><b>2.5.2</b> The R Commander</a></li>
+<li class="chapter" data-level="2.5.3" data-path="a-simple-introduction-to-r.html"><a href="a-simple-introduction-to-r.html#jgr"><i class="fa fa-check"></i><b>2.5.3</b> JGR</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html"><i class="fa fa-check"></i><b>3</b> Organising a Working Session</a><ul>
+<li class="chapter" data-level="3.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#setting-and-changing-the-working-directory"><i class="fa fa-check"></i><b>3.1</b> Setting and Changing the Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#objects"><i class="fa fa-check"></i><b>3.2</b> Objects</a></li>
+<li class="chapter" data-level="3.3" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#saving-and-using-the-workspace-image"><i class="fa fa-check"></i><b>3.3</b> Saving and Using the “Workspace Image”</a></li>
+<li class="chapter" data-level="3.4" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#working-in-batch-mode"><i class="fa fa-check"></i><b>3.4</b> Working in Batch Mode</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-an-r-session"><i class="fa fa-check"></i><b>3.4.1</b> Executing commands written in a file from an R session</a></li>
+<li class="chapter" data-level="3.4.2" data-path="organising-a-working-session.html"><a href="organising-a-working-session.html#executing-commands-written-in-a-file-from-a-shell"><i class="fa fa-check"></i><b>3.4.2</b> Executing commands written in a file from a shell</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-manip.html"><a href="data-manip.html"><i class="fa fa-check"></i><b>4</b> Data Types and Data Manipulation</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-manip.html"><a href="data-manip.html#vectors"><i class="fa fa-check"></i><b>4.1</b> Vectors</a></li>
+<li class="chapter" data-level="4.2" data-path="data-manip.html"><a href="data-manip.html#indexing-vectors"><i class="fa fa-check"></i><b>4.2</b> Indexing Vectors</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-manip.html"><a href="data-manip.html#the-seq-function"><i class="fa fa-check"></i><b>4.2.1</b> The <code>seq</code> Function</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-manip.html"><a href="data-manip.html#the-rep-function"><i class="fa fa-check"></i><b>4.2.2</b> The <code>rep</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-manip.html"><a href="data-manip.html#matrix-facilities"><i class="fa fa-check"></i><b>4.3</b> Matrix Facilities</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-manip.html"><a href="data-manip.html#matrix-operations"><i class="fa fa-check"></i><b>4.3.1</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-manip.html"><a href="data-manip.html#Lists"><i class="fa fa-check"></i><b>4.4</b> Lists</a></li>
+<li class="chapter" data-level="4.5" data-path="data-manip.html"><a href="data-manip.html#dataframes"><i class="fa fa-check"></i><b>4.5</b> Dataframes</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-manip.html"><a href="data-manip.html#accessing-parts-of-a-dataframe"><i class="fa fa-check"></i><b>4.5.1</b> Accessing Parts of a Dataframe</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-manip.html"><a href="data-manip.html#change-the-names-of-variables-in-a-dataframe"><i class="fa fa-check"></i><b>4.5.2</b> Change the Names of Variables in a Dataframe</a></li>
+<li class="chapter" data-level="4.5.3" data-path="data-manip.html"><a href="data-manip.html#other-ways-to-subset-a-dataframe"><i class="fa fa-check"></i><b>4.5.3</b> Other Ways to Subset a Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-manip.html"><a href="data-manip.html#factors"><i class="fa fa-check"></i><b>4.6</b> Factors</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-manip.html"><a href="data-manip.html#renaming-the-levels-of-a-factor"><i class="fa fa-check"></i><b>4.6.1</b> Renaming the levels of a factor</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-manip.html"><a href="data-manip.html#gl"><i class="fa fa-check"></i><b>4.6.2</b> Creating Factors with <code>gl</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="data-manip.html"><a href="data-manip.html#natural-sort-order-for-character-and-factor-vectors"><i class="fa fa-check"></i><b>4.6.3</b> Natural sort order for character and factor vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-manip.html"><a href="data-manip.html#getting-info-on-r-objects"><i class="fa fa-check"></i><b>4.7</b> Getting Info on R Objects</a></li>
+<li class="chapter" data-level="4.8" data-path="data-manip.html"><a href="data-manip.html#changing-the-format-of-your-data"><i class="fa fa-check"></i><b>4.8</b> Changing the Format of Your Data</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="data-manip.html"><a href="data-manip.html#the-one-row-per-observation-format"><i class="fa fa-check"></i><b>4.8.1</b> The “One Row per Observation” Format</a></li>
+<li class="chapter" data-level="4.8.2" data-path="data-manip.html"><a href="data-manip.html#stack"><i class="fa fa-check"></i><b>4.8.2</b> The <code>stack</code> and <code>unstack</code> functions</a></li>
+<li class="chapter" data-level="4.8.3" data-path="data-manip.html"><a href="data-manip.html#tapply"><i class="fa fa-check"></i><b>4.8.3</b> The <code>tapply</code> and <code>aggregate</code> functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="data-manip.html"><a href="data-manip.html#creating-and-editing-data-objects-through-a-visual-interface"><i class="fa fa-check"></i><b>4.9</b> Creating and Editing Data Objects through a Visual Interface</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualising-your-data.html"><a href="visualising-your-data.html"><i class="fa fa-check"></i><b>5</b> Visualising Your Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualising-your-data.html"><a href="visualising-your-data.html#reading-numbers-in-exponential-notation"><i class="fa fa-check"></i><b>5.1</b> Reading Numbers in Exponential Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="IO.html"><a href="IO.html"><i class="fa fa-check"></i><b>6</b> File Input/Output</a><ul>
+<li class="chapter" data-level="6.1" data-path="IO.html"><a href="IO.html#reading-in-data-from-a-file"><i class="fa fa-check"></i><b>6.1</b> Reading In Data from a File</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="IO.html"><a href="IO.html#read.table"><i class="fa fa-check"></i><b>6.1.1</b> The <code>read.table</code> function</a></li>
+<li class="chapter" data-level="6.1.2" data-path="IO.html"><a href="IO.html#scan"><i class="fa fa-check"></i><b>6.1.2</b> <code>scan</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="IO.html"><a href="IO.html#low-level-file-input"><i class="fa fa-check"></i><b>6.1.3</b> Low-Level File Input</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="IO.html"><a href="IO.html#writing-data-to-a-file"><i class="fa fa-check"></i><b>6.2</b> Writing Data to a file</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="IO.html"><a href="IO.html#write.table"><i class="fa fa-check"></i><b>6.2.1</b> The <code>write.table</code> function</a></li>
+<li class="chapter" data-level="6.2.2" data-path="IO.html"><a href="IO.html#cat"><i class="fa fa-check"></i><b>6.2.2</b> Low-Level File Output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive.html"><a href="descriptive.html"><i class="fa fa-check"></i><b>7</b> Descriptive</a><ul>
+<li class="chapter" data-level="7.1" data-path="descriptive.html"><a href="descriptive.html#tables"><i class="fa fa-check"></i><b>7.1</b> Tables</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive.html"><a href="descriptive.html#the-scale-function"><i class="fa fa-check"></i><b>7.2</b> The <code>scale</code> Function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>8</b> Graphics</a><ul>
+<li class="chapter" data-level="8.1" data-path="graphics.html"><a href="graphics.html#overview-of-r-base-graphics-functions"><i class="fa fa-check"></i><b>8.1</b> Overview of R base graphics functions</a></li>
+<li class="chapter" data-level="8.2" data-path="graphics.html"><a href="graphics.html#plot"><i class="fa fa-check"></i><b>8.2</b> The <code>plot</code> Function</a></li>
+<li class="chapter" data-level="8.3" data-path="graphics.html"><a href="graphics.html#drawing-functions"><i class="fa fa-check"></i><b>8.3</b> Drawing Functions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="graphics.html"><a href="graphics.html#the-matplot-function"><i class="fa fa-check"></i><b>8.3.1</b> The <code>matplot</code> function</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="graphics.html"><a href="graphics.html#barplots"><i class="fa fa-check"></i><b>8.4</b> Barplots</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="graphics.html"><a href="graphics.html#barplots-with-error-bars"><i class="fa fa-check"></i><b>8.4.1</b> Barplots with Error Bars</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="graphics.html"><a href="graphics.html#boxplots"><i class="fa fa-check"></i><b>8.5</b> Boxplots</a></li>
+<li class="chapter" data-level="8.6" data-path="graphics.html"><a href="graphics.html#histograms"><i class="fa fa-check"></i><b>8.6</b> Histograms</a></li>
+<li class="chapter" data-level="8.7" data-path="graphics.html"><a href="graphics.html#stripcharts"><i class="fa fa-check"></i><b>8.7</b> Stripcharts</a></li>
+<li class="chapter" data-level="8.8" data-path="graphics.html"><a href="graphics.html#interaction-plots"><i class="fa fa-check"></i><b>8.8</b> Interaction Plots</a></li>
+<li class="chapter" data-level="8.9" data-path="graphics.html"><a href="graphics.html#par"><i class="fa fa-check"></i><b>8.9</b> Setting Graphics Parameters</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="graphics.html"><a href="graphics.html#lty"><i class="fa fa-check"></i><b>8.9.1</b> Line type with the <code>lty</code> parameter</a></li>
+<li class="chapter" data-level="8.9.2" data-path="graphics.html"><a href="graphics.html#secpch"><i class="fa fa-check"></i><b>8.9.2</b> Symbols with the <code>pch</code> parameter</a></li>
+<li class="chapter" data-level="8.9.3" data-path="graphics.html"><a href="graphics.html#fonts"><i class="fa fa-check"></i><b>8.9.3</b> Fonts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="graphics.html"><a href="graphics.html#adding-elements-to-a-plot"><i class="fa fa-check"></i><b>8.10</b> Adding Elements to a Plot</a><ul>
+<li class="chapter" data-level="8.10.1" data-path="graphics.html"><a href="graphics.html#legend"><i class="fa fa-check"></i><b>8.10.1</b> Adding a Legend</a></li>
+<li class="chapter" data-level="8.10.2" data-path="graphics.html"><a href="graphics.html#adding-text"><i class="fa fa-check"></i><b>8.10.2</b> Adding Text</a></li>
+<li class="chapter" data-level="8.10.3" data-path="graphics.html"><a href="graphics.html#addgrid"><i class="fa fa-check"></i><b>8.10.3</b> Adding a Grid</a></li>
+<li class="chapter" data-level="8.10.4" data-path="graphics.html"><a href="graphics.html#axes"><i class="fa fa-check"></i><b>8.10.4</b> Setting the Axes</a></li>
+</ul></li>
+<li class="chapter" data-level="8.11" data-path="graphics.html"><a href="graphics.html#creating-layouts-for-multiple-graphs-glayout"><i class="fa fa-check"></i><b>8.11</b> Creating Layouts for Multiple Graphs {glayout}</a><ul>
+<li class="chapter" data-level="8.11.1" data-path="graphics.html"><a href="graphics.html#mfrow-and-mfcol-mfrowmfcol"><i class="fa fa-check"></i><b>8.11.1</b> mfrow and mfcol {mfrowmfcol}</a></li>
+<li class="chapter" data-level="8.11.2" data-path="graphics.html"><a href="graphics.html#layout"><i class="fa fa-check"></i><b>8.11.2</b> layout</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="graphics.html"><a href="graphics.html#graphics-device-regions-and-coordinates"><i class="fa fa-check"></i><b>8.12</b> Graphics Device Regions and Coordinates</a></li>
+<li class="chapter" data-level="8.13" data-path="graphics.html"><a href="graphics.html#plotfromscratch"><i class="fa fa-check"></i><b>8.13</b> Plotting from Scratch</a></li>
+<li class="chapter" data-level="8.14" data-path="graphics.html"><a href="graphics.html#colours-for-graphics"><i class="fa fa-check"></i><b>8.14</b> Colours for Graphics</a><ul>
+<li class="chapter" data-level="8.14.1" data-path="graphics.html"><a href="graphics.html#colour-opacity"><i class="fa fa-check"></i><b>8.14.1</b> Colour Opacity</a></li>
+</ul></li>
+<li class="chapter" data-level="8.15" data-path="graphics.html"><a href="graphics.html#managing-graphic-devices"><i class="fa fa-check"></i><b>8.15</b> Managing Graphic Devices</a><ul>
+<li class="chapter" data-level="8.15.1" data-path="graphics.html"><a href="graphics.html#opening-another-graphics-window"><i class="fa fa-check"></i><b>8.15.1</b> Opening Another Graphics Window</a></li>
+<li class="chapter" data-level="8.15.2" data-path="graphics.html"><a href="graphics.html#exporting-graphics"><i class="fa fa-check"></i><b>8.15.2</b> Exporting Graphics</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>9</b> ggplot2</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="ggplot2.html"><a href="ggplot2.html#log-axis-with-pretty-tickmarks"><i class="fa fa-check"></i><b>9.0.1</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>10</b> Plotly</a><ul>
+<li class="chapter" data-level="10.1" data-path="plotly.html"><a href="plotly.html#using-plotly-with-knitr"><i class="fa fa-check"></i><b>10.1</b> Using plotly with knitr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lattice.html"><a href="lattice.html"><i class="fa fa-check"></i><b>11</b> Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.1" data-path="lattice.html"><a href="lattice.html#overview-of-lattice-graphics"><i class="fa fa-check"></i><b>11.1</b> Overview of Lattice Graphics</a></li>
+<li class="chapter" data-level="11.2" data-path="lattice.html"><a href="lattice.html#introduction-to-model-formulae-and-multi-panel-conditioning"><i class="fa fa-check"></i><b>11.2</b> Introduction to model formulae and multi-panel conditioning</a></li>
+<li class="chapter" data-level="11.3" data-path="lattice.html"><a href="lattice.html#barchart"><i class="fa fa-check"></i><b>11.3</b> <code>barchart</code></a></li>
+<li class="chapter" data-level="11.4" data-path="lattice.html"><a href="lattice.html#dotplot"><i class="fa fa-check"></i><b>11.4</b> dotplot</a></li>
+<li class="chapter" data-level="11.5" data-path="lattice.html"><a href="lattice.html#histogram"><i class="fa fa-check"></i><b>11.5</b> histogram</a></li>
+<li class="chapter" data-level="11.6" data-path="lattice.html"><a href="lattice.html#interaction-plots-1"><i class="fa fa-check"></i><b>11.6</b> Interaction Plots</a></li>
+<li class="chapter" data-level="11.7" data-path="lattice.html"><a href="lattice.html#customizingtrellis"><i class="fa fa-check"></i><b>11.7</b> Customising Lattice Graphics</a><ul>
+<li class="chapter" data-level="11.7.1" data-path="lattice.html"><a href="lattice.html#textual-elements"><i class="fa fa-check"></i><b>11.7.1</b> Textual Elements</a></li>
+<li class="chapter" data-level="11.7.2" data-path="lattice.html"><a href="lattice.html#log-axis-with-pretty-tickmarks-1"><i class="fa fa-check"></i><b>11.7.2</b> Log axis with pretty tickmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="lattice.html"><a href="lattice.html#trellispanel"><i class="fa fa-check"></i><b>11.8</b> Writing Panel Functions</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="lattice.html"><a href="lattice.html#combining-panel-functions"><i class="fa fa-check"></i><b>11.8.1</b> Combining Panel Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html"><i class="fa fa-check"></i><b>12</b> Graphics labels and text</a><ul>
+<li class="chapter" data-level="12.1" data-path="graphics-labels-and-text.html"><a href="graphics-labels-and-text.html#mathematical-expressions-and-variables"><i class="fa fa-check"></i><b>12.1</b> Mathematical expressions and variables</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html"><i class="fa fa-check"></i><b>13</b> Probability Distribution Functions</a><ul>
+<li class="chapter" data-level="13.1" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#bernoulli"><i class="fa fa-check"></i><b>13.1</b> The Bernoulli distribution</a></li>
+<li class="chapter" data-level="13.2" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#binomial"><i class="fa fa-check"></i><b>13.2</b> The binomial distribution</a></li>
+<li class="chapter" data-level="13.3" data-path="probability-distribution-functions.html"><a href="probability-distribution-functions.html#normal"><i class="fa fa-check"></i><b>13.3</b> The normal distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>14</b> Hypothesis Testing</a><ul>
+<li class="chapter" data-level="14.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#chi2-test"><i class="fa fa-check"></i><b>14.1</b> <span class="math inline">\(\chi^2\)</span> test</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#testing-hypotheses-about-the-distribution-of-a-categorical-variable"><i class="fa fa-check"></i><b>14.1.1</b> Testing Hypotheses about the Distribution of a Categorical Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#students-t-test"><i class="fa fa-check"></i><b>14.2</b> Student’s <em>t</em> test</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#one-sample-t-test"><i class="fa fa-check"></i><b>14.2.1</b> One sample <em>t</em>-test</a></li>
+<li class="chapter" data-level="14.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#two-samples-t-test"><i class="fa fa-check"></i><b>14.2.2</b> Two samples t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-levene-test-for-homogeneity-of-variances"><i class="fa fa-check"></i><b>14.3</b> The Levene Test for Homogeneity of Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>15</b> Correlation and Regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html#linear-regression"><i class="fa fa-check"></i><b>15.1</b> Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>16</b> ANOVA</a><ul>
+<li class="chapter" data-level="16.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>16.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="16.2" data-path="anova.html"><a href="anova.html#repeated-measures-anova"><i class="fa fa-check"></i><b>16.2</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="anova.html"><a href="anova.html#one-within-subjects-factor"><i class="fa fa-check"></i><b>16.2.1</b> One Within Subjects Factor</a></li>
+<li class="chapter" data-level="16.2.2" data-path="anova.html"><a href="anova.html#two-within-subjects-factors"><i class="fa fa-check"></i><b>16.2.2</b> Two Within Subjects Factors</a></li>
+<li class="chapter" data-level="16.2.3" data-path="anova.html"><a href="anova.html#two-within-subjects-factors-and-one-between"><i class="fa fa-check"></i><b>16.2.3</b> Two Within Subjects Factors and One Between</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="how-to-adjust-the-p-values-for-multiple-comparisons.html"><a href="how-to-adjust-the-p-values-for-multiple-comparisons.html"><i class="fa fa-check"></i><b>17</b> How to Adjust the p-values for Multiple Comparisons</a></li>
+<li class="chapter" data-level="18" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>18</b> R Programming</a><ul>
+<li class="chapter" data-level="18.1" data-path="programming.html"><a href="programming.html#contrstruct"><i class="fa fa-check"></i><b>18.1</b> Control Structures</a></li>
+<li class="chapter" data-level="18.2" data-path="programming.html"><a href="programming.html#stringprocessing"><i class="fa fa-check"></i><b>18.2</b> String Processing</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="programming.html"><a href="programming.html#regexp"><i class="fa fa-check"></i><b>18.2.1</b> Using Regular Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="programming.html"><a href="programming.html#tips-and-tricks"><i class="fa fa-check"></i><b>18.3</b> Tips and Tricks</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="programming.html"><a href="programming.html#convert-a-string-into-a-command"><i class="fa fa-check"></i><b>18.3.1</b> Convert a String into a Command</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="programming.html"><a href="programming.html#creatingsimplerpackages"><i class="fa fa-check"></i><b>18.4</b> Creating Simple R Packages</a><ul>
+<li class="chapter" data-level="18.4.1" data-path="programming.html"><a href="programming.html#the-bare-minimum-to-create-a-package"><i class="fa fa-check"></i><b>18.4.1</b> The Bare Minimum to Create a Package</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="custom.html"><a href="custom.html"><i class="fa fa-check"></i><b>19</b> Environment Customisation</a></li>
+<li class="chapter" data-level="20" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html"><i class="fa fa-check"></i><b>20</b> ESS: Using Emacs Speaks Statistics with R</a><ul>
+<li class="chapter" data-level="20.1" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-for-editing-and-debugging-r-source-files"><i class="fa fa-check"></i><b>20.1</b> Using ESS for Editing and Debugging R Source Files</a></li>
+<li class="chapter" data-level="20.2" data-path="ess-using-emacs-speaks-statistics-with-r.html"><a href="ess-using-emacs-speaks-statistics-with-r.html#using-ess-to-interact-with-a-r-process"><i class="fa fa-check"></i><b>20.2</b> Using ESS to Interact with a R Process</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html"><i class="fa fa-check"></i><b>21</b> Using Sweave to Write Documents with R and LaTeX</a><ul>
+<li class="chapter" data-level="21.1" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#whats-sweave"><i class="fa fa-check"></i><b>21.1</b> What’s Sweave?</a></li>
+<li class="chapter" data-level="21.2" data-path="using-sweave-to-write-documents-with-r-and-latex.html"><a href="using-sweave-to-write-documents-with-r-and-latex.html#usage"><i class="fa fa-check"></i><b>21.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="soundprocessing.html"><a href="soundprocessing.html"><i class="fa fa-check"></i><b>22</b> Sound Processing</a><ul>
+<li class="chapter" data-level="22.1" data-path="soundprocessing.html"><a href="soundprocessing.html#libraries-for-sound-analysis-and-signal-processing"><i class="fa fa-check"></i><b>22.1</b> Libraries for Sound Analysis and Signal Processing</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html"><i class="fa fa-check"></i><b>A</b> Partial List of Packages by Category</a><ul>
+<li class="chapter" data-level="A.1" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#graphics-packages"><i class="fa fa-check"></i><b>A.1</b> Graphics Packages</a></li>
+<li class="chapter" data-level="A.2" data-path="partial-list-of-packages-by-category.html"><a href="partial-list-of-packages-by-category.html#gui-packages"><i class="fa fa-check"></i><b>A.2</b> GUI Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="miscellaneous-commands.html"><a href="miscellaneous-commands.html"><i class="fa fa-check"></i><b>B</b> Miscellaneous commands</a></li>
+<li class="chapter" data-level="C" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html"><i class="fa fa-check"></i><b>C</b> Other Manuals and Sources of Information on R</a><ul>
+<li class="chapter" data-level="C.0.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian"><i class="fa fa-check"></i><b>C.0.1</b> In Italian</a></li>
+<li class="chapter" data-level="C.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#other-useful-statistics-resources"><i class="fa fa-check"></i><b>C.1</b> Other useful statistics resources</a><ul>
+<li class="chapter" data-level="C.1.1" data-path="other-manuals-and-sources-of-information-on-r.html"><a href="other-manuals-and-sources-of-information-on-r.html#in-italian-1"><i class="fa fa-check"></i><b>C.1.1</b> In Italian</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="fullcoltable.html"><a href="fullcoltable.html"><i class="fa fa-check"></i><b>D</b> Full Colours Table</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A R Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-simple-introduction-to-r" class="section level1">
+<h1><span class="header-section-number">2</span> A Simple Introduction to R</h1>
+<p>This chapter will give a simple introduction to R, just to get familiar with it and get a general idea of how it works. This chapter assumes no previous knowledge of programming or anything similar. If you know other computer languages, or have even a basic knowledge of programming, getting started will be easy. If you don’t, don’t worry, R syntax is very elegant and simple, it might take a little while, but after looking at some examples, and importantly, trying them out yourself, you’ll be up and running without problems. This tutorial deals only with learning to use R from the command line, if you’d rather use R with a GUI, that is, with a “point and click” interface, please have a look at Section <a href="a-simple-introduction-to-r.html#gui">2.5</a> for some information on how to get started.</p>
+<div id="datasets" class="section level2">
+<h2><span class="header-section-number">2.1</span> Datasets</h2>
+<p>This guide uses several datasets. If you want to follow the examples given in the guide you can download the datasets from this URL: <a href="http://samcarcagno.altervista.org/soft/rguide_datasets.zip" class="uri">http://samcarcagno.altervista.org/soft/rguide_datasets.zip</a></p>
+</div>
+<div id="firing-up-and-quitting-r" class="section level2">
+<h2><span class="header-section-number">2.2</span> Firing up and Quitting R</h2>
+<p>Under GNU/Linux systems you can start R from a shell, just type <code>R</code> and press <kbd>Enter</kbd>. Under Windows you can click on the R icon to start the R GUI.</p>
+<p>You can save yourself a lot of typing by using the up arrow key ↑ to retrieve past commands.</p>
+<p>Commands can be terminated either by a semi-colon <code>;</code> or by pressing <kbd>Enter</kbd> and starting a newline. If you start a newline before a command is complete, R will prompt you to complete the command with a <code>+</code> sign, you can then complete the command. If you don’t know how to complete the command and get stuck, you can stop R prompting you with the plus sign by pressing the <kbd>CTRL</kbd> and <kbd>C</kbd> keys simultaneously.</p>
+<p>To quit R type <code>quit()</code> or <code>q()</code>, R will ask you if you want to save the current session, if you answer <code>y</code>, R will save all the objects active in the current session and the command history.</p>
+</div>
+<div id="starting-to-work-with-r" class="section level2">
+<h2><span class="header-section-number">2.3</span> Starting to Work with R</h2>
+<p>The first thing you can try, is doing some math, at the command prompt type <code>5+4</code> and press <kbd>Enter</kbd>, the result will be</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<p>well, obviously 9. Other arithmetic operators are listed in Table <a href="a-simple-introduction-to-r.html#tab:arithmetic">2.1</a></p>
+<table>
+<caption><span id="tab:arithmetic">Table 2.1: </span> Arithmetic Operators.</caption>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Subtraction</td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td><code>^</code></td>
+<td>Exponentiation</td>
+</tr>
+</tbody>
+</table>
+<p>Now let’s create a variable, we’ll call it <code>foo</code>, and assign to it a number</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo =<span class="st"> </span><span class="dv">5</span></code></pre></div>
+<p>the equal sign <code>=</code> is the assignment operator in R, in the above case it means the value of <code>foo</code> is 5, <code>foo</code> is an object, since it is of a numeric type, we can perform arithmetic operations on it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo <span class="op">*</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>we can also store the results of an arithmetic operation in an object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">another_foo =<span class="st"> </span><span class="dv">5</span><span class="op">^</span><span class="dv">2</span></code></pre></div>
+<p>if you want to display the value of this new object you can use</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(another_foo)</code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<p>or, for short, just type its name and press <kbd>Enter</kbd></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">another_foo</code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<p>since the two objects we have created are both numeric we can also do</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo <span class="op">+</span><span class="st"> </span>another_foo</code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<p>Let’s look at something more interesting, we can create an object that stores a series of numbers, for example the money we have spent each day of a week, in Euros, we can do this using the <code>c</code> function, which concatenates a series of values in a <em>vector</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expenses =<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">9</span>,<span class="dv">45</span>,<span class="dv">3</span>)</code></pre></div>
+<p>you might want to find out how much you’ve spent in average during the week, this is easily accomplished with the function <code>mean</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(expenses)</code></pre></div>
+<pre><code>## [1] 15.28571</code></pre>
+<p>the function <code>sd</code> gives you the standard deviation</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(expenses)</code></pre></div>
+<pre><code>## [1] 14.24446</code></pre>
+<p>Surely you’ve wondered why <code>[1]</code> appears every time R gives you a result, now that we’ve introduced the vector we can get to it. Try to create a long vector, you can easily do this by creating a sequence of numbers, for example</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long_vec =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">by=</span><span class="dv">1</span>)</code></pre></div>
+<p>will create a vector containing the sequence of numbers from 1 to 100, now try to display it and see what happens. All the elements of the vector won’t fit in a single line of the screen, and at the start of each line you’ll get between  the index, that is the position, of the first element on that line. There’s also a shorthand to create such a vector</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long_vec =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></code></pre></div>
+</div>
+<div id="gettinghelp" class="section level2">
+<h2><span class="header-section-number">2.4</span> Getting Help</h2>
+<p>R comes with an excellent online help facility which documents and gives examples for all available functions. There is also a web interface for the help system which is easier to use, you can start it with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help.start</span>()</code></pre></div>
+<p>this fires up a web browser from which you can access a search engine for all the available documentation. The documentation is also available as a <code>pdf</code> file, the `<code>Full Reference Manual'' which documents the base system. Printable</code>pdf` manuals are also available for all the other additional packages.</p>
+<div id="the-online-help-system" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> The Online Help System</h3>
+<p>You can quickly look up the documentation for a function, for example <code>sd</code>, with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?sd</code></pre></div>
+<p>or</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(sd)</code></pre></div>
+<p>it is often indifferent using quotes or not, but sometimes they are required, for example</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="op">*</span><span class="st"> </span>## doesn&#39;t work
+Error<span class="op">:</span><span class="st"> </span>syntax error
+?<span class="st">&quot;*&quot;</span>  ## this works!</code></pre></div>
+<p>to quit the help screen press <kbd>Q</kbd>.</p>
+<p>You can easily run the example code given in the help pages for a given function with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">example</span>(function_name)</code></pre></div>
+<p>it is better to set the graphics parameter <code>ask</code> as <code>TRUE</code> before running the examples</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">ask=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>to pause between successive plots, if there is more than one.</p>
+<p>The online help system searches by default the available documentation for the base system and all the packages that are currently loaded. If you want to look the documentation for a function present in a package that is not loaded, you need to specify the package in question:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">&quot;levene.test&quot;</span>, <span class="dt">package=</span>car)</code></pre></div>
+<p>if you know the function exists but don’t know the package it is in, try</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(levene.test, <span class="dt">try.all.packages=</span><span class="ot">TRUE</span>)
+Help <span class="cf">for</span> topic <span class="st">&#39;levene.test&#39;</span> is not <span class="cf">in</span> any loaded package but can be
+found <span class="cf">in</span> the following packages<span class="op">:</span>
+
+Package               Library
+car                   <span class="op">/</span>usr<span class="op">/</span>lib<span class="op">/</span>R<span class="op">/</span>site<span class="op">-</span>library</code></pre></div>
+<p>The function <code>help.search</code> can be used when you don’t exactly know the name of the function you’re looking for</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help.search</span>(<span class="st">&quot;levene&quot;</span>)
+Help files with alias or concept or title matching <span class="st">&#39;levene&#39;</span> using
+fuzzy matching<span class="op">:</span>
+
+
+<span class="kw">levene.test</span>(car)        Levene<span class="st">&#39;s Test</span>
+<span class="st">...</span></code></pre></div>
+</div>
+</div>
+<div id="gui" class="section level2">
+<h2><span class="header-section-number">2.5</span> Working with a Graphical User Interface</h2>
+<p>The default version of R for Windows and macOS comes with a very limited graphical user interface (GUI), while the GNU/Linux version comes with no GUI at all. There are however several independent projects aimed at developing a GUI for R. The following sections give some information on them.</p>
+<div id="r-studio" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> R Studio</h3>
+<p>R Studio is currently the most popular GUI for R. It can be installed on all major operating systems: <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>.</p>
+</div>
+<div id="the-r-commander" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> The R Commander</h3>
+<p>An extensive GUI for R is provided by the <code>Rcmdr</code> package (R commander). This GUI allows you to do many of the operations you can do using R from the command line, through a point and click visual interface. The R commander is just a R package, so in order to use it, you need to have R installed in the first place, then you have to install the <code>Rcmdr</code> package and all the other packages it depends on. After everything is installed correctly, fire up R and call the R commander as you do with any other package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rcmdr)</code></pre></div>
+<p>you will be greeted by a GUI with menus that allow you to type in data, perform statistical analyses and create graphs. The R commander works on both GNU/Linux and Windows platforms. For further information, please refer to the R commander manual or look up the following web page: <a href="http://www.rcommander.com/" class="uri">http://www.rcommander.com/</a>.</p>
+</div>
+<div id="jgr" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> JGR</h3>
+<p>The JGR package provides a clean, simple graphical user interface for R, which is platform independent. The package is written in JAVA and requires the JAVA SDK to run. More info is available at the project webpage: <a href="https://www.rforge.net/JGR/" class="uri">https://www.rforge.net/JGR/</a></p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="organising-a-working-session.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/sam81/rguide/edit/master/intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rguide.pdf", "rguide.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
