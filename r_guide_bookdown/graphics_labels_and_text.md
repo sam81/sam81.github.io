@@ -57,7 +57,8 @@ the second argument to the function is a list of all the variable values that ne
 
 ```r
 plot(x,y)
-title(main=substitute(paste(rho == v1, "; ", italic(p) == v2), list(v1=round(corrEst,2), v2=round(corrPVal, 2))))
+title(main=substitute(paste(rho == v1, "; ", italic(p) == v2),
+                      list(v1=round(corrEst,2), v2=round(corrPVal, 2))))
 ```
 
 <img src="graphics_labels_and_text_files/figure-html/unnamed-chunk-5-1.png" width="576" />
@@ -69,13 +70,16 @@ uVText = expression(paste("Amplitude (", mu, "V)"))
 dF0Text = expression(paste( Delta, 'F0 (%)'))
 dpText = expression(paste(italic("d' ")))
 subText1 = expression(paste(sigma, scriptscriptstyle(c), " (Cents)"))
-subText2 = expression(paste(delta, scriptscriptstyle(k)  %+-% 162.5, ' Cents', sep=''))
+subText2 = expression(paste(delta, scriptscriptstyle(k)  %+-% 162.5,
+                            ' Cents', sep=''))
 sqText = expression(paste('F0 Acceleration (Hz/', s^2, ')'))
 piText = expression(paste('Start Phase 1.5', pi,))
 betaText = expression(beta[0])
 log10Text = expression(log[10](nu))
-uVsqText = expression(paste('Level ', italic('re'), ' 1 ', mu, V^{2}, ' (dB)'))
-bdText = expression(paste( bold("Enhancement ("), italic("d'"), bold("units)")))
+uVsqText = expression(paste('Level ', italic('re'), ' 1 ',
+                            mu, V^{2}, ' (dB)'))
+bdText = expression(paste( bold("Enhancement ("),
+                          italic("d'"), bold("units)")))
 zScoreText = expression(paste(italic(z), " Score"))
 densText = expression(paste("Density (", kg/m^3, ")"))
 beta2Text = expression(mu[beta[0]])
@@ -83,7 +87,8 @@ noiseText = expression(paste("Noise [", log[10], "(Energy)]"))
 PTAText = expression(paste("PTA"["0.5-2"], " (dB)"))
 RSqText = expression("R"^"2")
 atopText = expression(atop("PTA"["1-2"],"(dB SPL)"))
-latencyText = expression(paste("Latency (", italic(z), " Score)"))
+latencyText = expression(paste("Latency (", italic(z),
+                               " Score)"))
 
 par(mfrow=c(2,2))
 

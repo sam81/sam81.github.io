@@ -1,4 +1,4 @@
-# Data Types and Data Manipulation {#data_manip}
+# Data Types and Data Manipulation {#datamanip}
 
 
 
@@ -182,7 +182,7 @@ temperature["Tony"]
 
 
 
-###The `seq` Function
+### The `seq` Function
 
 The `seq` function can be used to create evenly spaced sequences of numbers
 
@@ -591,7 +591,7 @@ this is OK only if you're working with a single dataframe, and you don't want to
 
 
 
-###Change the Names of Variables in a Dataframe
+### Change the Names of Variables in a Dataframe
 
 Sometimes you might want to change the names of the variables in a dataframe, for example when you create new dataframes with the `unstack` function, or just because you don't like the way you called it initially. You can visualise the names for the variables with the function `names`
 
@@ -1025,7 +1025,7 @@ dats = unstack(dats,form=lat~congr:isi)
 ```
 unstacks the values of the response variable according to the levels of both factors, thus creating $3x3= 9$ columns, the first column contains the values at level 1 of `congr` and level 1 of `isi`, the second one contains the values at level 1 of `congr` and level 2 of `isi`, and so on for all the possible combinations.
 
-###The `tapply` and `aggregate` functions {#tapply}
+### The `tapply` and `aggregate` functions {#tapply}
 
 
 The `tapply` function allows you to extract information from a dataframe, for example the mean or standard deviation of a given variable on the bases of one or more factor. The function name is related to the fact that it is used to *apply* a function (e.g. the mean) to a subsets of the dataframe chosen on the basis of one or more factors. We'll use the `InsectSprays` dataset to illustrate the use of `tapply`. The dataset contains the number of insects still alive in agricultural experimental units treated with six different types of pesticide.

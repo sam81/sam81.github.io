@@ -34,7 +34,7 @@ plot(x=a, y=b) ## or for short plot(a, b)
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/scatterplot-1.png" alt="A scatterplot." width="576" />
+<img src="graphics_files/figure-html/scatterplot-1.png" alt="A scatterplot." width="326.4" />
 <p class="caption">(\#fig:scatterplot)A scatterplot.</p>
 </div>
 
@@ -49,7 +49,7 @@ plot(ti, b, type='l')
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/timewlines-1.png" alt="Values connected by lines." width="576" />
+<img src="graphics_files/figure-html/timewlines-1.png" alt="Values connected by lines." width="326.4" />
 <p class="caption">(\#fig:timewlines)Values connected by lines.</p>
 </div>
 
@@ -64,7 +64,7 @@ vec = seq(from=0, to=4*pi, length=120)
 plot(vec,sin(vec), type="l")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-2-1.png" width="576" />
+<img src="graphics_files/figure-html/unnamed-chunk-2-1.png" width="326.4" />
 
 in this case is necessary to use `l` as the type of plot, otherwise the plot would resemble a messy scatterplot. It is also possible to plot markers on the points in which the function is actually evaluated. Using the option `b` for the plot type, both a continuous line and markers are plotted.
 There are lots of options to define the appearance of a plot, next comes an overloaded example used just to introduce some of these options. A more detailed description is given in Section \@ref(par).
@@ -84,7 +84,7 @@ matplot(x=aa, y=cs, type="l", lwd=1.8, ylab="sine and cosine functions")
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/sincos-1.png" alt="Sine and cosine functions with `matplot`." width="576" />
+<img src="graphics_files/figure-html/sincos-1.png" alt="Sine and cosine functions with `matplot`." width="326.4" />
 <p class="caption">(\#fig:sincos)Sine and cosine functions with `matplot`.</p>
 </div>
 
@@ -169,7 +169,7 @@ barplot(test_means, col=c("darkred","salmon2","plum4"))
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/barplotsimple-1.png" alt="Simple barplot." width="576" />
+<img src="graphics_files/figure-html/barplotsimple-1.png" alt="Simple barplot." width="326.4" />
 <p class="caption">(\#fig:barplotsimple)Simple barplot.</p>
 </div>
 
@@ -213,7 +213,7 @@ barplot2(test_means,col=c("darkred","salmon2","plum4"),
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/barplotbars-1.png" alt="Barplot with error bars." width="576" />
+<img src="graphics_files/figure-html/barplotbars-1.png" alt="Barplot with error bars." width="326.4" />
 <p class="caption">(\#fig:barplotbars)Barplot with error bars.</p>
 </div>
 
@@ -230,7 +230,7 @@ boxplot(dats$score~dats$group, names=c("group a", "group b"))
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/boxplot1-1.png" alt="Boxplots comparing the distribution for two groups." width="576" />
+<img src="graphics_files/figure-html/boxplot1-1.png" alt="Boxplots comparing the distribution for two groups." width="326.4" />
 <p class="caption">(\#fig:boxplot1)Boxplots comparing the distribution for two groups.</p>
 </div>
 
@@ -249,7 +249,7 @@ hist(my_distr)
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/hist-1.png" alt="Frequency distribution of a random sample." width="576" />
+<img src="graphics_files/figure-html/hist-1.png" alt="Frequency distribution of a random sample." width="326.4" />
 <p class="caption">(\#fig:hist)Frequency distribution of a random sample.</p>
 </div>
 
@@ -264,7 +264,7 @@ stripchart(dats$score~dats$group, method="jitter",
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/stripchart1-1.png" alt="Stripchart example." width="576" />
+<img src="graphics_files/figure-html/stripchart1-1.png" alt="Stripchart example." width="326.4" />
 <p class="caption">(\#fig:stripchart1)Stripchart example.</p>
 </div>
 
@@ -287,7 +287,7 @@ interaction.plot(dats$SOA,dats$congr,dats$errors,
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/int-1.png" alt="Interaction plot with different line types." width="576" />
+<img src="graphics_files/figure-html/int-1.png" alt="Interaction plot with different line types." width="326.4" />
 <p class="caption">(\#fig:int)Interaction plot with different line types.</p>
 </div>
 
@@ -315,7 +315,7 @@ interaction.plot(dats$SOA,dats$congr,dats$errors,
 ```
 
 <div class="figure">
-<img src="graphics_files/figure-html/intb-1.png" alt="Interaction plot with different line types and different symbols." width="576" />
+<img src="graphics_files/figure-html/intb-1.png" alt="Interaction plot with different line types and different symbols." width="326.4" />
 <p class="caption">(\#fig:intb)Interaction plot with different line types and different symbols.</p>
 </div>
 

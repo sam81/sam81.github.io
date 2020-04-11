@@ -43,6 +43,6 @@ p
 ```
 
 <div class="figure">
-<img src="graphics_ggplot2_files/figure-html/unnamed-chunk-3-1.png" alt="log axis with pretty tickmarks" width="576" />
+<img src="graphics_ggplot2_files/figure-html/unnamed-chunk-3-1.png" alt="log axis with pretty tickmarks" width="326.4" />
 <p class="caption">(\#fig:unnamed-chunk-3)log axis with pretty tickmarks</p>
 </div>

@@ -1,9 +1,8 @@
-
 ## Setting Graphics Parameters {#par}
 
 
 
-Graphics parameters allow you to tweak many elements of a plot, such as the font for the labels, the symbols or line types to use and so on, see `?par` to get a full list and description of these parameters. Graphics parameters can be set and accessed with the function `par`, called without arguments, as `par`, it will give you a full list of the current defaults, if you want to query only one or a few parameters use:
+Graphics parameters allow you to tweak many elements of a plot, such as the font for the labels, the symbols or line types to use and so on, see `?par` to get a full list and description of these parameters. Graphics parameters can be set and accessed with the function `par`, called without arguments, as `par()`, it will give you a full list of the current defaults, if you want to query only one or a few parameters use:
 
 ```r
 par("lwd")          ## see current line width
@@ -43,9 +42,9 @@ e = rnorm(15,9,3)
 plot(d~e, type="p", pch=3)
 ```
 
-The following sections will give a more in depth explanation of some graphics parameters, before that however we'll have a closer look at how to use `par`.
+The following sections will give a more in depth explanation of some graphics parameters. Before that, however, we'll have a closer look at how to use `par`.
 
-#### Saving and Restoring Graphics Parameters
+### Saving and Restoring Graphics Parameters
 
 Often you'll want to change the graphics parameters only for a few plots, and then reset them back to the defaults. The function `par` when used to change the value of some graphics parameters returns a list with the *old* values of the graphics parameters that have changed:
 
@@ -77,7 +76,7 @@ oldpar
 ```
 
 ```r
-s <- seq(0, 10, .1) 
+s = seq(0, 10, .1) 
 plot(s, sin(s))           #we plot something
 ```
 
@@ -85,39 +84,9 @@ plot(s, sin(s))           #we plot something
 par(oldpar)              # and then we restore the old parameters
 ```
 
-notice that calling `par`, opens a graphics device if there is not one already open, the changes you do using `par` apply only to this graphics device, any other new graphic device that you open will have the default graphics parameters. 
-
-#### List of Graphics Parameters by Category
-
-Parameter   Function
----------   --------------------------
-`col`       plotting colour
-`col.axis`  colour for axis annotation 
-`col.lab`   colour for x and y labels 
-`col.main`  colour for main title 
-`col.sub`   colour for sub-titles 
-`bg`        background colour
-`fg`        foreground colour
-
-Table: (\#tab:parcolours) Parameters for colours.
-
-
-Parameter   Function
----------   ------------------------------------------
-`family`    font family (e.g. "sans", "serif", "mono")
-`font`      font type for text (1=plain, 2=bold, 3=italic etc...)
-`font.axis` font type for axis annotation (1=plain, 2=bold, 3=italic etc...)
-`font.lab`  font type for x and y labels (1=plain, 2=bold, 3=italic etc...)
-`font.main` font type for main titles (1=plain, 2=bold, 3=italic etc...)
-`font.sub`  font type for sub titles (1=plain, 2=bold, 3=italic etc...)
-`ps`        point size of text
-
-Table: (\#tab:parfonts) Parameters for fonts.
-
-
+note that calling `par`, opens a graphics device if one is not already open, the changes you do using `par` apply only to this graphics device, any other new graphic device that you open will have the default graphics parameters. 
 
 ### Line type with the `lty` parameter {#lty}
-
 
 There are six line types that you can call in R just with names or numbers (actually there are seven, the first one is "blank" or 0 which just draws nothing). These are listed in Table \@ref(tab:lty) and shown in Figure \@ref(fig:lty). There is a different, more complicated way for setting many more line types, please, consult the manual for further information on that.
 
@@ -136,10 +105,6 @@ Table: (\#tab:lty) The six default line types in R.
 <img src="graphics_par_files/figure-html/lty-1.png" alt="The six default line types in R" width="576" />
 <p class="caption">(\#fig:lty)The six default line types in R</p>
 </div>
-
-
-
-
 
 ### Symbols with the `pch` parameter {#secpch}
 
@@ -166,19 +131,44 @@ pch=5
 <p class="caption">(\#fig:pch)Plotting symbols from 0 to 25</p>
 </div>
 
-### Fonts {#fonts}
+### Fonts {#parfonts}
 
-The interface for setting font parameters for plots in R is somehow complex and I have a limited knowledge of how it works. I nonetheless hope that the notes below can be of some use to other people.
+The `par` interface can be used to set a number of font parameters. One thing to keep in mind is that certain font properties can also be set at the device (X11, pdf, png, etc...) level. Properties set with `par` after opening the device will override properties set at the device level. Additionally, each device deals with fonts differently, and setting a given font family with `par` for a given deice (e.g. X11) will not necessarily work for other devices (e.g. pdf). The font parameters that can be set through the `par` interface are listed in Table \@ref(tab:parfonts)
 
-One of the reasons why setting font parameters can be confusing is that font parameters can be affected by several graphics parameters. For example the graphics parameter `ps` sets the point size of the font, but this size can be scaled by the `cex` parameter. Also font parameters can be set not only using the `par` interface, but directly when opening a graphics device, and these two ways of setting font parameters can have subtle differences. For example, the font point size can be set by using the `pointsize` argument when opening a `pdf` device:
+Parameter   Function
+---------   ------------------------------------------
+`family`    font family (e.g. "sans", "serif", "mono")
+`font`       font type for text (1=plain, 2=bold, 3=italic, 4=bold italic)
+`font.axis` font type for axis annotation (1=plain, 2=bold, 3=italic, 4=bolditalic)
+`font.lab`  font type for x and y labels (1=plain, 2=bold, 3=italic, 4=bolditalic)
+`font.main` font type for main titles (1=plain, 2=bold, 3=italic, 4=bolditalic)
+`font.sub`  font type for sub titles (1=plain, 2=bold, 3=italic, 4=bolditalic)
+`ps`          point size of text
+
+Table: (\#tab:parfonts) Parameters for fonts.
+
+The various parameters starting with "font" (`font`, `font.axis`, `font.lab`, etc...) do not change the *family*, they change the *style* (e.g. plain, bold, italic). These parameters are set via a number: a value of 1 corresponds to a normal (or plain) style, 2 to bold, 3 to italics, 4 to bold italics, and 5 will map the font to a symbol:
+
+<div class="figure">
+<img src="graphics_par_files/figure-html/unnamed-chunk-7-1.png" alt="Changing font style" width="576" />
+<p class="caption">(\#fig:unnamed-chunk-7)Changing font style</p>
+</div>
+
+Note that setting `font` only changes the font style of plotted text. If you want to change the font style of other textual elements such as the axis labels or the plot title you have to set the corresponding graphics parameters:
+
+<div class="figure">
+<img src="graphics_par_files/figure-html/unnamed-chunk-8-1.png" alt="Changing font style for other textual elements" width="576" />
+<p class="caption">(\#fig:unnamed-chunk-8)Changing font style for other textual elements</p>
+</div>
+
+The `ps` parameters sets the *base* point size of the font; the final pointsize is scaled by the `cex` parameter (i.e. text size = ps*cex), so if `cex` is different than 1, the final pointsize will not be equal to `ps`. Note that `ps` changes only the size of the text font:
 
 
 
-this changes the size of both the font and the plotting symbols. The graphics parameter `ps`, however, changes only the size of the font:
+while setting the `pointsize` when opening certain graphics devices, such as the `pdf` device, changes the size of both the font and the plotting symbols:
 
 
-
-the documentation for the graphics parameter `ps` also says that "unlike the pointsize argument of most devices, this does not change the relationship between `mar` and `mai` (nor `oma` and `omi`).". I'm not sure what this means, but just be aware setting `ps` with a call to `par` or setting `pointsize` when opening a graphics device are not equivalent. Also, note that if you set the font size when you open a graphics device, the setting may be overridden by subsequent calls to `par`:
+The documentation for the graphics parameter `ps` also says that "unlike the pointsize argument of most devices, this does not change the relationship between `mar` and `mai` (nor `oma` and `omi`).". I'm not sure what this means, but just be aware setting `ps` with a call to `par` or setting `pointsize` when opening a graphics device are not equivalent. Also, keep in mind that if you set the font size when you open a graphics device, the setting may be overridden by subsequent calls to `par`:
 
 
 
@@ -186,44 +176,39 @@ the documentation for the graphics parameter `ps` also says that "unlike the poi
 
 
 
-The `par` setting `family` can be used to choose a serif, sans serif, or mono font:
+The `par` setting `family` can be used to choose a `serif`, `sans`, or `mono` font:
 
 <div class="figure">
-<img src="graphics_par_files/figure-html/unnamed-chunk-11-1.png" alt="Changing font family" width="576" />
-<p class="caption">(\#fig:unnamed-chunk-11)Changing font family</p>
+<img src="graphics_par_files/figure-html/unnamed-chunk-13-1.png" alt="Changing font family" width="576" />
+<p class="caption">(\#fig:unnamed-chunk-13)Changing font family</p>
 </div>
 
-however, specifying the exact font used is more complicated. One way to do this is by using the `extrafont` package https://cran.r-project.org/web/packages/extrafont/README.html
-
+Note that `serif`, `sans`, or `mono` are generic font families. The actual font family (e.g. Helvetica, Arial, Times New Roman, etc...) that gets used depends on a mapping, which is different between graphics devices, between these generic names and an actual system font. It is possible to directly specify a system font when calling `par`:
 
 ```r
-library(ggplot2)
-n=100
-dat=data.frame(x=rnorm(n), y=rnorm(n))
-p = ggplot(dat, aes(x=x, y=y)) + geom_point()
-p = p + xlab("X-Label") + ylab("Y-Label")
-p = p + theme(text=element_text(size=12, family="Ubuntu"))
-## NOT RUN
-##ggsave("cairo_pdf_graphic.pdf", p, width=3.4, height=3.4, device=cairo_pdf)
+plot.new(); plot.window(xlim=c(1,10), ylim=c(1, 10))
+par(family="Palatino")
+plot(1:10)
 ```
 
-System fonts in pdf files can be used with the `cairo_pdf` device; this has the additional advantage of directly embedding the fonts in the pdf. For R base graphics you can invoke `cairo_pdf()` instead of `pdf()`. For `ggplot2`, when you invoke the `ggsave` function you can pass the argument `device=cairo_pdf` to use the `cairo_pdf` device.
+<img src="graphics_par_files/figure-html/unnamed-chunk-14-1.png" width="576" />
 
+however, this may or may not work depending on 1) whether the font is actually installed on your system 2) the graphics device (not all graphics devices have access to all installed system fonts). More information on how to use system fonts is available in Chapter \@ref(fonts)
 
-Changing the font style is easy using the `font` parameter, a value of 1 corresponds to a normal (or plain) style, 2 to bold, 3 to italics, 4 to bold italics, and 5 will map the font to a symbol:
+	
+### Colors {#parcolors}
 
+Parameter   Function
+---------   --------------------------
+`col`       plotting colour
+`col.axis`  colour for axis annotation 
+`col.lab`   colour for x and y labels 
+`col.main`  colour for main title 
+`col.sub`   colour for sub-titles 
+`bg`        background colour
+`fg`        foreground colour
 
-<div class="figure">
-<img src="graphics_par_files/figure-html/unnamed-chunk-13-1.png" alt="Changing font style" width="576" />
-<p class="caption">(\#fig:unnamed-chunk-13)Changing font style</p>
-</div>
-
-but note that setting `font` only changes the font style of plotted text. If you want to change the font style of other textual elements such as the axis labels or the plot title you have to set other graphics parameters:
-
-<div class="figure">
-<img src="graphics_par_files/figure-html/unnamed-chunk-14-1.png" alt="Changing font style for other textual elements" width="576" />
-<p class="caption">(\#fig:unnamed-chunk-14)Changing font style for other textual elements</p>
-</div>
+Table: (\#tab:parcolours) Parameters for colours.
 	
 ## Adding Elements to a Plot
 

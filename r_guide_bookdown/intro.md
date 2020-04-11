@@ -55,7 +55,7 @@ This chapter will give a simple introduction to R, just to get familiar with it 
 
 ## Datasets
 
-This guide uses several datasets. If you want to follow the examples given in the guide you can download the datasets from this URL: http://samcarcagno.altervista.org/soft/rguide_datasets.zip
+This guide uses several datasets. If you want to follow the examples given in the guide you can download the datasets from this URL: https://sam81.github.io/r_guide_bookdown/rguide_datasets.zip
 
 ## Firing up and Quitting R
 
@@ -335,7 +335,7 @@ this however doesn't remove objects whose name starts with a dot, to remove also
 rm(list=ls(all=TRUE))
 ```
 
-##Saving and Using the "Workspace Image"
+## Saving and Using the "Workspace Image"
 
 You can use a ``workspace image'' that you have previously saved by starting R from the directory in which it was saved. In this way you can use the objects created in a previous session and the up arrow as well to retrieve commands from that session. To take full advantage from workspace images you'd better use different working directories for different analyses, studies, experiments and so on, in this way you can restore the workspace image of a specific analysis you were running and above all, you avoid accidentally overwriting objects from different analyses by creating another object with the same name during your current analysis.
 

@@ -1,4 +1,6 @@
-#Full Colours Table {#fullcoltable}
+# Full Colours Table {#fullcoltable}
+
+All named colors are listed below:
 
 ![](Figures/t1.png)
 

@@ -360,7 +360,7 @@ summary(aov(socialint~alcohol*drug*group + Error(subj/(alcohol*drug)),
 ##            Df Sum Sq Mean Sq F value   Pr(>F)    
 ## drug        1  60.06   60.06  81.048 3.38e-07 ***
 ## drug:group  1   5.06    5.06   6.831   0.0204 *  
-## Residuals  14  10.37    0.74                     
+## Residuals  14  10.38    0.74                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 

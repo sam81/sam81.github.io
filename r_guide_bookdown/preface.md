@@ -6,11 +6,11 @@
 
 Based on a work at https://github.com/sam81/rguide.
 
-The latest html version of this guide is available at http://samcarcagno.altervista.org/soft/r.html
+The latest html version of this guide is available at https://sam81.github.io/r_guide_bookdown/preface.html
 
-A pdf version of this guide can be downloaded at http://samcarcagno.altervista.org/soft/rguide.pdf
+A pdf version of this guide can be downloaded at https://sam81.github.io/r_guide_bookdown/rguide.pdf
 
-Associated datasets available at http://samcarcagno.altervista.org/soft/rguide_datasets.zip
+Associated datasets available at https://sam81.github.io/r_guide_bookdown/rguide_datasets.zip
 
 I started writing this guide in 2006 while I was learning R. It was always a work in progress, with incomplete bits and parts, and it wasn't updated for several years. Much as changed since then both in the R ecosystem, and in the way I use R for data analysis. I'm now in the process of revising it to reflect these changes. Because this guide was initially written when I still had very little knowledge not only of R but of programming in general, it tends to explain things with a very simple, beginner-friendly approach. I hope to maintain this aspect of the guide as I revise it. This remains very much a work in progress and  comes with NO WARRANTY whatsoever of being correct in any of its parts.
 

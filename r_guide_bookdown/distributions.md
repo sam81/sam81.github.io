@@ -82,7 +82,7 @@ rbinom(n=10, size=1, prob=0.7)
 ```
 
 ```
-##  [1] 0 1 1 0 1 0 1 0 0 1
+##  [1] 1 0 1 1 1 0 1 1 1 1
 ```
 
 ## The binomial distribution {#binomial}
