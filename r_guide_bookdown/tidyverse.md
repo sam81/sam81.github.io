@@ -54,16 +54,16 @@ dat[dat$y=="A", "x"]
 ## # A tibble: 10 x 1
 ##          x
 ##      <dbl>
-##  1 -0.567 
-##  2  1.18  
-##  3  2.43  
-##  4  1.03  
-##  5  0.494 
-##  6  0.325 
-##  7  1.57  
-##  8 -0.660 
-##  9 -0.0444
-## 10  0.107
+##  1  0.465 
+##  2  0.447 
+##  3  1.08  
+##  4 -0.451 
+##  5 -0.600 
+##  6  0.741 
+##  7 -0.0313
+##  8  0.445 
+##  9 -0.220 
+## 10  1.32
 ```
 
 but it returns a 1-column tibble instead. Furthermore trying `as.numeric(dat[dat$y=="A", "x"])` to convert it to a vector doesn't work. The solution is to use the `pull` function from `dplyr`:
@@ -75,8 +75,8 @@ pull(dat[dat$y=="A", ], x)
 ```
 
 ```
-##  [1] -0.56670946  1.18067808  2.42977331  1.02689503  0.49403496  0.32483926
-##  [7]  1.56802113 -0.65978199 -0.04441054  0.10675514
+##  [1]  0.46466777  0.44677708  1.08058815 -0.45116775 -0.60039529  0.74099766
+##  [7] -0.03128845  0.44525450 -0.21962249  1.31834134
 ```
 
 More succintly, if, for example, you wanted to run a $t$-test on the groups indicated by the `y` variable, you could do the following through `dplyr`:
@@ -92,13 +92,13 @@ t.test(dat %>% filter(y=="A") %>% pull(x),
 ## 	Welch Two Sample t-test
 ## 
 ## data:  dat %>% filter(y == "A") %>% pull(x) and dat %>% filter(y == "B") %>% pull(x)
-## t = 1.185, df = 16.552, p-value = 0.2528
+## t = 1.0118, df = 14.1, p-value = 0.3287
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3546875  1.2593691
+##  -0.4687659  1.3071513
 ## sample estimates:
-## mean of x mean of y 
-## 0.5860095 0.1336687
+##   mean of x   mean of y 
+##  0.31941525 -0.09977749
 ```
 
 

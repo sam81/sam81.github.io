@@ -348,18 +348,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="correlation-and-regression" class="section level1">
 <h1><span class="header-section-number">16</span> Correlation and Regression</h1>
-<p>Let’s imagine we want to see if there is a correlation between a manual and an oculomotor reaction time (RT) task. The manual RT task requires to press one of two buttons depending on the colour assumed by the fixation point after a variable delay. The oculomotor RT task requires to make a saccade towards the right or the left depending on the colour taken by the fixation point. The mean RTs in milliseconds, for 37 subjects are in the file <code>m_o_rt.txt</code>. We read in the data, and then calculate the correlation for the sample:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1">dats &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/m_o_rt.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb399-2" title="2"><span class="kw">cor</span>(dats<span class="op">$</span>man,dats<span class="op">$</span>ocul)</a></code></pre></div>
+<p>Let’s imagine we want to see if there is a correlation between a manual and an oculomotor reaction time (RT) task. The manual RT task requires to press one of two buttons depending on the colour taken by the fixation point after a variable delay. The oculomotor RT task requires to make a saccade towards the right or the left depending on the colour taken by the fixation point. The mean RTs in milliseconds, for 37 subjects are in the file <code>m_o_rt.txt</code>. We read in the data, and then calculate the correlation for the sample:</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1">dat =<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/m_o_rt.txt&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb399-2" title="2"><span class="kw">cor</span>(dat<span class="op">$</span>man, dat<span class="op">$</span>ocul)</a></code></pre></div>
 <pre><code>## [1] 0.7922632</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">cor</span>(dats<span class="op">$</span>man,dats<span class="op">$</span>ocul)<span class="op">^</span><span class="dv">2</span> <span class="co">## R squared</span></a></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">cor</span>(dat<span class="op">$</span>man, dat<span class="op">$</span>ocul)<span class="op">^</span><span class="dv">2</span> <span class="co">## R squared</span></a></code></pre></div>
 <pre><code>## [1] 0.627681</code></pre>
-<p>the correlation between the two measures in the sample is moderate, and it would account for about 25% of the variance. We need also to test if this correlation could be extended to the population</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="kw">cor.test</span>(dats<span class="op">$</span>man,dats<span class="op">$</span>ocul)</a></code></pre></div>
+<p>the correlation between the two measures in the sample is high, and it would account for ~60% of the variance. We need also to test if this correlation could be extended to the population:</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="kw">cor.test</span>(dat<span class="op">$</span>man, dat<span class="op">$</span>ocul)</a></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
-## data:  dats$man and dats$ocul
+## data:  dat$man and dat$ocul
 ## t = 8.9956, df = 48, p-value = 7.197e-12
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
@@ -371,11 +371,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="linear-regression" class="section level2">
 <h2><span class="header-section-number">16.1</span> Linear Regression</h2>
 <p>Regression models are expressed in R with a symbolic syntax that is clean and convenient. If you have a dependent variable <code>rts</code> and you want to check the influence of an independent variable <code>age</code> on it, this would be expressed as:</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1">rtfit &lt;-<span class="st"> </span><span class="kw">lm</span>(rts<span class="op">~</span>age)</a>
-<a class="sourceLine" id="cb405-2" title="2"><span class="kw">plot</span>(rts<span class="op">~</span>age)</a>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1">rtfit =<span class="st"> </span><span class="kw">lm</span>(rts <span class="op">~</span><span class="st"> </span>age)</a>
+<a class="sourceLine" id="cb405-2" title="2"><span class="kw">plot</span>(rts <span class="op">~</span><span class="st"> </span>age)</a>
 <a class="sourceLine" id="cb405-3" title="3"><span class="kw">abline</span>(rtfit)</a></code></pre></div>
 <p>if you want to add another predictor <code>score</code></p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1">rtfit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(rts<span class="op">~</span>age<span class="op">+</span>score)</a></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1">rtfit2 =<span class="st"> </span><span class="kw">lm</span>(rts <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>score)</a></code></pre></div>
 
 </div>
 </div>

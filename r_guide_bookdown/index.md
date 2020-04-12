@@ -1,8 +1,8 @@
 --- 
 title: "A R Guide"
-subtitle: "0.3.7"
+subtitle: "0.3.8"
 author: "Samuele Carcagno"
-date: "11 aprile, 2020"
+date: "12 aprile, 2020"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: memoir
