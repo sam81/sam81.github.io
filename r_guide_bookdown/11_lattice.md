@@ -361,6 +361,20 @@ xyplot(y~x, data=dat,
        yscale.components = yscale.components.log10)
 ```
 
+```
+## Warning in order(as.numeric(x)): si è prodotto un NA per coercizione
+```
+
+```
+## Warning in diff(as.numeric(x[ord])): si è prodotto un NA per coercizione
+```
+
+```
+## Warning in (function (x, y, type = "p", groups = NULL, pch = if
+## (is.null(groups)) plot.symbol$pch else superpose.symbol$pch, : si è prodotto un
+## NA per coercizione
+```
+
 <div class="figure">
 <img src="11_lattice_files/figure-html/unnamed-chunk-10-1.png" alt="Log axis with pretty tickmarks" width="326.4" />
 <p class="caption">(\#fig:unnamed-chunk-10)Log axis with pretty tickmarks</p>

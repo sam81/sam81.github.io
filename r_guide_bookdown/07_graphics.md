@@ -860,12 +860,12 @@ axis(side=2)
 The command `colours` gives a list of built-in colours available for graphics in R. You can see some of these colours in Figure \@ref(fig:color1). There are 101 built-in shades of gray, from `gray0`, that is almost black, to `gray100` that is almost white, you can see some of them in Figure \@ref(fig:gray). A complete table of built-in R colours is given in Appendix \@ref(fullcoltable).
 
 <div class="figure">
-<img src="graphics/colours_table.png" alt="Some built-in colours in R." width="289" />
+<img src="graphics/colours_table.png" alt="Some built-in colours in R."  />
 <p class="caption">(\#fig:color1)Some built-in colours in R.</p>
 </div>
 
 <div class="figure">
-<img src="graphics/grays_table.png" alt="Different shades of gray." width="276" />
+<img src="graphics/grays_table.png" alt="Different shades of gray."  />
 <p class="caption">(\#fig:gray)Different shades of gray.</p>
 </div>
 

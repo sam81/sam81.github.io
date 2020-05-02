@@ -27,7 +27,7 @@ ggsave("ggplot2_cairo_pdf.pdf", p, width=3.4, height=3.4,
        device=cairo_pdf)
 ```
 
-An alternative solution for using system fonts in pdfs is by using the `extrafont` package https://cran.r-project.org/web/packages/extrafont/README.html . Another alternative is the `showtext` package https://cran.rstudio.com/web/packages/showtext/index.html . Compared to `extrafont` the `showtext` package has the advantage of being able to use open type fonts; however `showtext` has the disadvantage of not rendering the fonts as "drawings" (you can't copy and paste text). Overall, my favorite solution is to use `cairo_pdf` because it handles both TTF and OTF fonts.
+An alternative solution for using system fonts in pdfs is by using the [`extrafont`](https://cran.r-project.org/web/packages/extrafont/README.html) package. Another alternative is the [`showtext`](https://cran.rstudio.com/web/packages/showtext/index.html) package. Compared to `extrafont` the `showtext` package has the advantage of being able to use open type fonts; however `showtext` has the disadvantage of not rendering the fonts as "drawings" (you can't copy and paste text). Overall, my favorite solution is to use `cairo_pdf` because it handles both TTF and OTF fonts.
 
 
 

@@ -46,6 +46,7 @@ x[[1]] #first item in list (first column in file)
 x[["weight"]] #item named weight in list (third column in file)
   [1] "300" "246" "317" "229" "230" "245"
 ```
+
 `scan` can do much more than what was shown in this example, like specifying the separator between the fields of the data file (comma, tabs, or whatever else, defaults to blank space), or specifying the maximum number of lines to be read, see `?scan` for more details. I'll present just another simple example in which we'll read in a file whose data are all numeric. The file is `rts.txt`
 
 ```r
@@ -54,6 +55,7 @@ x = scan("rts.txt", what=numeric())
 str(x)
    num [1:36] 0.12 0.132 0.102 0.096 0.103 0.087 0.113 ...
 ```
+
 in this case the object returned is a long vector of the same mode as the `what` argument, a numeric vector. The file is however organised into three columns, which represent three different numeric variables. It is easy to reorganise our vector to reflect the structure of our data:
 
 ```r
@@ -74,11 +76,13 @@ xm
   [11,] 0.115 0.126 0.098
   [12,] 0.117 0.132 0.103
 ```
+
 so we've got a matrix with the 3 columns of data originally found in the file, turning it into a dataframe would be equally easy at this point
 
 ```r
 xd = as.data.frame(xm)
 ```
+
 However also in this case it is possible to simply read in each column of the file as the element of a list:
 
 ```r
@@ -94,9 +98,9 @@ str(x)
 
 ### Low-Level File Input
 
-Sometimes the file to be read is not nicely organised into separate columns each representing a variable, in this case the function `readLines` can either read the file one line at the time, or all the lines at once, to be then further processed to extract the data.
+Sometimes the file to be read is not nicely organised into separate columns each representing a variable, in this case the function `readLines` can either read the file one line at the time, or read all the lines at once. The lines can then be further processed to extract the data.
 
-## Writing Data to a file
+## Writing data to a file
 
 ### The `write.table` function {#write.table}
 
@@ -108,30 +112,55 @@ write.table(mydats, file="my_data.txt",
 ```
 will store it in the text file `my_data.txt` with the labels for the variables or factors it contains in the first row(`col.names=T`), but without the numbers associated with each row (`row.names=F)`. The `sep` option is used to choose the separator for the data, the default is a blank space `sep=" "`, but you can choose a comma `sep=","` a semicolon `sep=";"` or other meaningful separators.
 
+### Saving objecs in binary format 
+
+Probably the most convenent function to save R objects (dataframes, lists, matricies, etc...) in binary format is `saveRDS`:
+
+```r
+saveRDS(iris, file="iris.rds")
+```
+
+the `readRDS` function can be used to read back the object into R:
+
+```r
+iris_dset = readRDS("iris.rds")
+```
+
 ### Low-Level File Output {#cat}
 
- Perhaps the most user friendly low-level function for writing to a file is `cat`. Suppose you have two vectors, one with the heights of 5 individuals, and one with an identifier for each, and you want to write these data to a file:
+Perhaps the most user friendly low-level function for writing to a file is `cat`. Suppose you have two vectors, one with the heights of 5 individuals, and one with an identifier for each, and you want to write these data to a file:
 
 ```r
 height = c(176, 180, 159, 156, 183)
 id = c("s1", "s2", "s3", "s4", "s5")
 ```
-you can use `cat` in a for loop to write the data to the file, but let's first write an header
+you can use `cat` in a `for` loop to write the data to the file, but let's first write a header
 
 ```r
 cat("id height \n", file="foo.txt", sep=" ", append=FALSE)
 ```
-the first argument is the object to write, in this case a character string with the names of our variables to make a header, and a newline character to start a new line. Now the for loop:
+the first argument is the object to write, in this case a character string with the names of our variables to make a header, and a newline (`\n') character to start a new line. Now the `for` loop:
 
 ```r
 for (i in 1:length(id)){
-  + cat(id[i], height[i], "\n", file="foo.txt",
-  +     sep=" ", append=TRUE)}
+  cat(id[i], height[i], "\n", file="foo.txt",
+      sep=" ", append=TRUE)}
 ```
-notice that this time we've set `append=TRUE` to avoid overwriting both the header, and any previous output from the preceding cycle in the for loop. We've been using a blank space as a separator, but we could have used something else, for example a comma (`sep=","`).
+note that this time we've set `append=TRUE` to avoid overwriting both the header, and any previous output from the preceding cycle in the for loop. We've been using a blank space as a separator, but we could have used something else, for example a comma (`sep=","`).
+
+While using `cat` to automatically open and close a file as we did above is convenient, when we need to repeatedly write to the same file it's more efficient to explicitly open a file connection first, write to it, and then close it as shown below:
 
 
+```r
+fHandle = file("test_write.txt", "w")
 
-TODO: ADD FILE CONNECTIONS, CAT, PASTE
+cat("id height \n", file=fHandle, sep=" ")
+for (i in 1:length(id)){
+    cat(id[i], height[i], "\n", file=fHandle,
+        sep=" ")
+}
+
+close(fHandle)
+```
 
 

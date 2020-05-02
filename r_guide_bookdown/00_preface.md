@@ -1,8 +1,8 @@
 --- 
 title: "A R Guide"
-subtitle: "0.3.10"
+subtitle: "0.3.11"
 author: "Samuele Carcagno"
-date: "14 aprile, 2020"
+date: "02 maggio, 2020"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: memoir
@@ -15,17 +15,21 @@ geometry: margin=3.4cm
 always_allow_html: yes
 description: "A guide for the R programming language."
 ---
+
 \pagestyle{bodypagestyle}
 
+<img src="images/psych_fun.png" style="display: block; margin: auto;" />
 
 ```{=latex}
+\newpage
 \setlength{\parindent}{0pt}
 \rule{\textwidth}{0.5mm}
 ```
 
-[A R Guide](http://samcarcagno.altervista.org/soft/r.html) by Samuele Carcagno <sam.carcagno@gmail.com> is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+[A R Guide](http://samcarcagno.altervista.org/soft/r.html) by Samuele Carcagno <sam.carcagno@gmail.com> is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). 
 
-![Creative Commons License](images/by-sa_88x31.png)
+
+<img src="images/by-sa_88x31.png" style="display: block; margin: auto;" />
 
 Based on a work at https://github.com/sam81/rguide.
 
