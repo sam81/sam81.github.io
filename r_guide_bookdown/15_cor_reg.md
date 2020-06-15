@@ -1,4 +1,4 @@
-# Correlation and Regression
+# Correlation and regression
 
 
 
@@ -42,7 +42,7 @@ cor.test(dat$man, dat$ocul)
 the *p*-value tells us that we can extend our finding in the population, so people with a quick hand would also have a quick eye.
 
 
-## Linear Regression
+## Linear regression
 
 Regression models are expressed in R with a symbolic syntax that is clean and convenient. If you have a dependent variable `rts` and you want to check the influence of an independent variable `age` on it, this would be expressed as:
 

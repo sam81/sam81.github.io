@@ -38,14 +38,14 @@ head(iris, n=10)
 
 ## Reading Numbers in Exponential Notation
 
-Often R prints out numbers in exponential notation, this may lead to confusion. In order to understand the exponential notation is first necessary to introduce the *scientific notation*.
+Often R prints out numbers in exponential notation. In order to understand exponential notation it's first necessary to introduce *scientific notation*.
 
  A number in scientific notation is in the form $a\cdot 10^b$, for example 300 could be written in scientific notation as $3\cdot 10^2$. The components of a number in scientific notation are also named as $mantissa \cdot 10^{characteristic}$. Remember that a number with a negative exponent, for example $10^{-2}$ can be rewritten as
 \[10^{-2}= \frac{1}{10^2}=0.01\]
 so, for example, $0.003$ can be rewritten in scientific notation as $3\cdot 10^{-3}$, because
 \[3\cdot 10^{-3}= 3\cdot \frac{1}{10^3}= 0.003\]
 
-R, as most calculators doesn't actually use the scientific notation, it uses instead the *exponential* notation. The exponential notation is a shorthand version of the scientific notation, in which, for example, $10^3$ is replaced by $e3$, where $e$ stands for \emph{exponent}. So in our previous examples 300 would be written as $3e2$ and 0.003 would be written as $3e3$. Below are a few conversion examples.
+R, as most calculators doesn't actually use scientific notation, it uses instead *exponential* notation. The exponential notation is a shorthand version of the scientific notation, in which, for example, $10^3$ is replaced by $e3$, where $e$ stands for *exponent*. So in our previous examples 300 would be written as $3e2$ and 0.003 would be written as $3e3$. Below are a few conversion examples.
 
 Number    Scientific Notation  Exponential Notation
 ------    -------------------  --------------------

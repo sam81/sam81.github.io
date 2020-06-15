@@ -27,7 +27,6 @@
 - `system("foo")` execute the system command `foo` as if it were from the shell
 
 
-
 #### R administration
 
 - `library()` list all installed packages
@@ -36,7 +35,7 @@
 
 #### Syntax
 
-- `\#` starts a comment
+- `#` starts a comment
 - `mydata$foo` refer to the variable `foo` in the dataframe `mydata`
 - `:` interaction operator for model formulae, `a:b` is the interaction between `a` and `b`
 - `*` crossing operator for model formulae, `a*b = a+b+a:b`

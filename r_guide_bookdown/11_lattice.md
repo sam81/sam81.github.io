@@ -1,33 +1,25 @@
-# Lattice Graphics {#lattice}
+# Lattice graphics {#lattice}
 
 
 
-The `lattice` package in R provides an alternative to the base graphics system, it is an implementation of the ideas developed and implemented by Rick Becker and Bill Cleveland in the Trellis graphics system for the S language. Trellis displays were developed as a framework to make it easy the display of the relationship between a dependent variable and multiple factors. 
+The `lattice` package provides an alternative to the base R graphics system; it is an implementation of the ideas developed and implemented by Rick Becker and Bill Cleveland in the Trellis graphics system for the S language. Trellis displays were developed as a framework to easily display of the relationship between a dependent variable and multiple factors. 
 
-The best introduction to `lattice` graphics is the book by Sarkar [@sarkar2008], the author of `lattice`:
+The best introduction to `lattice` graphics is the book by @Sarkar2008, the author of `lattice`: Lattice: Multivariate Data Visualization with R. The `lattice` package documentation, available [here](https://cran.r-project.org/web/packages/lattice/lattice.pdf), is a good reference.
 
-- Lattice: Multivariate Data Visualization with R [@sarkar2008]
+The following articles also contain useful info:
 
-the `lattice` package documentation is available here:
-
-- Lattice Reference Manual https://cran.r-project.org/web/packages/lattice/lattice.pdf
-
-the following articles also contain useful info:
-
-- Some notes on lattice [@sarkar03] http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/Sarkar.pdf
-- R Lattice Graphics [@murrell01] http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/Murrell.pdf
-- Lattice, an implementation of Trellis graphics in R [@sarkar02] http://cran.r-project.org/doc/Rnews/Rnews_2002-2.pdf
+- [Some notes on lattice](http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/Sarkar.pdf) [@Sarkar2003] 
+- [R Lattice Graphics](http://www.ci.tuwien.ac.at/Conferences/DSC-2001/Proceedings/Murrell.pdf) [@Murrell2001] 
+- [Lattice, an implementation of Trellis graphics in R](https://cran.r-project.org/doc/Rnews/Rnews_2002-2.pdf) [@Sarkar2002]
 
 Because `lattice` is mostly compatible with the Trellis graphics system in S-Plus, the following documents written for Trellis also provide a good introduction to `lattice` and to the concept of trellis displays:
 
-- S-PLUS Trellis Graphics User's Manual [@becker02]
-- A Tour of Trellis Graphics [@becker96]
-- The Visual Design and Control of Trellis Display [@becker96b]
-- Trellis Display: Modelling Data from Designed Experiments [@cleveland97]
+- S-PLUS Trellis Graphics User's Manual [@BeckerAndCleveland2002]
+- A Tour of Trellis Graphics [@BeckerEtAl1996]
+- The Visual Design and Control of Trellis Display [@BeckerEtAl1996b]
+- Trellis Display: Modelling Data from Designed Experiments [@ClevelandAndFuentes1997]
 
-
-
-## Overview of Lattice Graphics
+## Overview of lattice graphics
 
   Function
   ---------
@@ -60,7 +52,7 @@ head(dats)
 ## 6    2         4   No-Al    Drug   Yuppy
 ```
 
-we'll start visualising the data along one dimension, the species. This is a single dimension, that can be easily handled by the base graphics system, but can be equally well displayed with lattice. Since the high level lattice plotting functions require the data to be entered as a dataframe, we'll use the `aggregate` function to get a dataframe with the mean values of `socialint`, the dependent variable, on the bases of the species:
+we'll start visualising the data along one dimension, the species. This is a single dimension, that can be easily handled by the base graphics system, but can be equally well displayed with lattice. Since the high level lattice plotting functions require the data to be entered as a dataframe, we'll use the `aggregate` function to get a dataframe with the mean values of `socialint`, the dependent variable, on the basis of the species:
 
 
 ```r
@@ -91,7 +83,7 @@ print(pl1)
 <p class="caption">(\#fig:ratstrellis1)Social interactions by species</p>
 </div>
 
-Now suppose we want to visualise the relationship between `socialint` and `species` on the bases of alcohol administration. We could achieve also this with the barplot in the base graphics system. In lattice there are two ways of doing it, one is by the use of a ``grouping'' factor, this yields a display similar to the barplot function. The second way is by multi-panel factor conditioning. The advantage of multi-panel conditioning, as we will see soon, is that it can be extended to an unlimited number of factors. Let's start with the first solution, in which we use a grouping factor. First we create a suitable dataframe:
+Now suppose we want to visualise the relationship between `socialint` and `species` on the basis of alcohol administration. In lattice there are two ways of doing it, one is by the use of a "grouping" factor, this yields a display similar to the `barplot` function. The second way is by multi-panel factor conditioning. The advantage of multi-panel conditioning, as we will see soon, is that it can be extended to an unlimited number of factors. Let's start with the first solution, in which we use a grouping factor. First we create a suitable dataframe:
 
 ```r
 bySpecAl = aggregate(dats$socialint, 
@@ -114,7 +106,7 @@ print(pl2)
 <p class="caption">(\#fig:ratstrellis2)Social interactions by species and alcohol administration with grouping factor</p>
 </div>
 
-the grouping factor is given by the `groups` argument, notice also that we have set `auto.key` to `TRUE` in order to add an automatic legend.
+the grouping factor is given by the `groups` argument, note also that we have set `auto.key` to `TRUE` in order to automatically add a legend.
 
 the second way of doing the graph is by multi-panel conditioning, we achieve this by putting alcohol as a conditioning factor with the `|` syntax.
 
@@ -128,7 +120,7 @@ print(pl3)
 <p class="caption">(\#fig:ratstrellis3)Social Interactions by species and alcohol administration with multi-panel conditioning</p>
 </div>
 
-the resulting graph is displayed in Figure \@ref(fig:ratstrellis3). We could have swapped `species` for `alcohol` as the conditioning factor, which way gives the more effective display depends from case to case, and it's up to the user to decide. Finally we'll consider the case in which all factors are included in the display, this cannot be easily achieved with traditional graphics, but it is easily done in lattice, we just add `drug` to the conditioning factors (Figure \@ref(fig:ratstrellis4))
+the resulting graph is displayed in Figure \@ref(fig:ratstrellis3). We could have swapped `species` for `alcohol` as the conditioning factor, which way gives the more effective display depends from case to case, and it's up to the user to decide. Finally we'll consider the case in which all factors are included in the display, this cannot be easily achieved with base R graphics, but it is easily done in lattice, we just add `drug` to the conditioning factors (Figure \@ref(fig:ratstrellis4))
 
 
 ```r
@@ -221,32 +213,51 @@ print(myGraph)
 <p class="caption">(\#fig:linematchingtraining)Line matching training barchart</p>
 </div>
 
-## histogram
+## Histograms
 
 
 ```r
-histogram(dats$adj)
-histogram(~dats$adj|dats$congr)
+data(iris)
+p = histogram(~Sepal.Length, data=iris)
+print(p)
 ```
 
-## Interaction Plots
+<img src="11_lattice_files/figure-html/latticehist1-1.png" width="326.4" />
+
+
+```r
+p = histogram(~Sepal.Length|Species, data=iris)
+print(p)
+```
+
+<img src="11_lattice_files/figure-html/latticehist2-1.png" width="652.8" />
+
+## Interaction plots
 
 Example of interaction plot with 3 factors:
 
 
 ```r
-print(bwplot(dats$lat~dats$congr|dats$acc,groups=dats$isi,
-     panel='panel.superpose',panel.groups='panel.linejoin',
-     auto.key=list(points=FALSE,lines=TRUE,space='top'),
-     scales=list(cex=.8),ylim=c(280,400),
-     ylab='Medie delle latenze in ms',xlab='SOA'))
+dat = read.table("datasets/lattice_int_plot_data.csv", sep=",", header=T)
+dat$time = factor(dat$time); dat$cond=factor(dat$cond); dat$id = factor(dat$id)
+p = bwplot(prop~time | id, groups=cond, data=dat,
+           panel='panel.superpose', panel.groups='panel.linejoin',
+           auto.key=list(points=FALSE, lines=TRUE, space='top'),
+           scales=list(cex=.8),
+           ylab='Proportion', xlab='Time (ms)', as.table=TRUE)
+print(p)
 ```
 
-## Customising Lattice Graphics {#customizingtrellis}
+<div class="figure">
+<img src="11_lattice_files/figure-html/latticeintplot-1.png" alt="Interaction plot with three factors" width="652.8" />
+<p class="caption">(\#fig:latticeintplot)Interaction plot with three factors</p>
+</div>
 
-### Textual Elements
+## Customizing lattice graphics {#customizingtrellis}
 
-#### Strip Labels
+### Textual elements
+
+#### Strip labels
 
 The labels of the panels strips are the names of the levels of the conditioning factor variable. To change their labels you can pass the `factor.levels` argument to the `strip.custom` function:
 
@@ -319,7 +330,7 @@ log10Ticks = function(lim, onlyMajor=FALSE){
 }
 ```
 
-by default the function returns both the major (e.g. 1, 10, 100, etc...) and the minor (e.g. 2,3,4,...20,30,40, etc...) tick locations, but return only the major tick locations if `onlyMajor=TRUE`.
+by default the function returns both the major (e.g. 1, 10, 100, etc...) and the minor (e.g. 2,3,4,...20,30,40, etc...) tick locations, but returns only the major tick locations if `onlyMajor=TRUE`.
 This function will be used by the `yscale.components.log10` function below. This function will be passed as the `yscale.components` argument in the `xyplot` call that generates the graph. The `yscale.components.log10` function will return a list specifying all parameters of the y axis. To simplify this process the function calls the `yscale.components.default` function to retrieve the default parameters, and then simply modifies some of these parameters to draw the pretty log axis:
 
 
@@ -376,20 +387,20 @@ xyplot(y~x, data=dat,
 ```
 
 <div class="figure">
-<img src="11_lattice_files/figure-html/unnamed-chunk-10-1.png" alt="Log axis with pretty tickmarks" width="326.4" />
-<p class="caption">(\#fig:unnamed-chunk-10)Log axis with pretty tickmarks</p>
+<img src="11_lattice_files/figure-html/unnamed-chunk-8-1.png" alt="Log axis with pretty tickmarks" width="326.4" />
+<p class="caption">(\#fig:unnamed-chunk-8)Log axis with pretty tickmarks</p>
 </div>
 
 
 
 
-## Writing Panel Functions {#trellispanel}
+## Writing panel functions {#trellispanel}
 
-### Combining Panel Functions
+### Combining panel functions
 
 Rather than writing a new panel function from scratch, often you just want to add some elements to a plot, for example a regression line, or error bars. The easiest and probably best way to do this is writing a panel function that combines two standard panel functions. There is a number of predefined panel functions (see `?panel.functions`) that can be used to add lines, grids etc..., to a scatterplot, barchart or other higher level plotting lattice function.
 
-We will start with a very simple example, adding a horizontal line at a fixed height in a dotplot. The `line_matching` dataset described in the barchart example, can be very well visualised also through a dotplot (Figure \@ref(fig:lmatchdotplot))
+We will start with a very simple example, adding a horizontal line at a fixed height in a dotplot. The `line_matching` dataset described in the barchart example, can be visualised very well also through a dotplot (Figure \@ref(fig:lmatchdotplot))
 
 
 ```r
@@ -429,8 +440,8 @@ dotplot(error ~ length | group, groups=color,
 ```
 
 <div class="figure">
-<img src="11_lattice_files/figure-html/lmatchdotplotref-1.png" alt="Dotplot of the line matching dataset, with horizontal reference line" width="652.8" />
-<p class="caption">(\#fig:lmatchdotplotref)Dotplot of the line matching dataset, with horizontal reference line</p>
+<img src="11_lattice_files/figure-html/lmatchdotplotref-1.png" alt="Dotplot of the line matching dataset, with an horizontal reference line" width="652.8" />
+<p class="caption">(\#fig:lmatchdotplotref)Dotplot of the line matching dataset, with an horizontal reference line</p>
 </div>
 
-notice the last line of the call, first we're telling `dotplot` to use our `hRefDotplot` function to do the plotting by specifying the `panel` argument, second we're specifying another argument, `ref` in the call, this is not a standard argument, but it will be automatically passed to our panel function to decide at which height to draw the horizontal line. The resulting plot can be visualised in Figure \@ref(fig:lmatchdotplotref).
+note the last line of the call, first we're telling `dotplot` to use our `hRefDotplot` function to do the plotting by specifying the `panel` argument, second we're specifying another argument, `ref` in the call, this is not a standard argument, but it will be automatically passed to our panel function to decide at which height to draw the horizontal line. The resulting plot can be visualised in Figure \@ref(fig:lmatchdotplotref).

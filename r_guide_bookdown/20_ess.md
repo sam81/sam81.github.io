@@ -1,6 +1,6 @@
 # ESS: Using Emacs Speaks Statistics with R
 
-If you have  the `ESS` package installed, you can use Emacs for both editing R source files when working in batch mode, and running a R process from  within Emacs. ESS provides an extended set of facilities for both these tasks, among these are syntax highlighting, indentation of code and the ability to work with multiple buffers.
+If you have  the Emacs Speaks Statistics (ESS) package installed, you can use Emacs for both editing R source files when working in batch mode, and running a R process from  within Emacs. ESS provides an extended set of facilities for both these tasks, among these are syntax highlighting, indentation of code and the ability to work with multiple buffers.
 
 To get syntax highlighting, just use the `.R` extension for naming your file.
 
@@ -10,7 +10,7 @@ Another nice way of running an R session from inside Emacs is to run first a she
 
 For sake of clarity, the use of ESS for editing R source files, and for running a R session will be addressed in two separate sections, however this separation is quite artificial, first because the most proficient use of ESS involves editing a `.R` while running a R session, and second because some of the tips given in one section apply also to the usage of ESS illustrated in the other section. Therefore you're invited to at least skim through both sections, even if you're interested on one usage of ESS only.
 
-## Using ESS for Editing and Debugging R Source Files
+## Using ESS for editing and debugging R source files
 
 If you have a basic knowledge of Emacs you will feel at home. A good way to use ESS is to split the Emacs window horizontally (`C-x 2`) and have a R source file in one buffer and a R process running in the other buffer. You basically write the R code in the first buffer, and then send it to the R process for evaluation. Here are the shortcuts for sending input to the R process:
 
@@ -41,7 +41,7 @@ To comment/uncomment a region you can use
 
 If you want to switch from a buffer to the other one you can use `C-x o`. Moreover, when you are in a buffer you can make the other window scroll without moving the cursor with `C-M-v`.
 
-#### Italian Keyboard Mapping Issues
+#### Italian keyboard mapping issues
 
 Many Italian keyboards don't have the  braces `{` `}` and some other symbols like the tilde `~`, however, in Linux, if you've chosen an Italian keyboard layout they're mapped somewhere, and you can access them through a combination of keys, likely combinations are:
 ```
@@ -58,7 +58,7 @@ In Microsoft Windows the braces `{` `}` can be accessed as above, while to acces
 Ctrl-q 176 RETURN
 ```
 
-## Using ESS to Interact with a R Process
+## Using ESS to interact with a R process
 
 To start a R process type `M-x R`. `C-p` and `C-n`, or `C`-&#8593; and `C`-&#8595; are for scrolling through the command history.
 

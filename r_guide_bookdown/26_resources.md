@@ -1,4 +1,4 @@
-# Other Manuals and Sources of Information on R
+# Other manuals and sources of information on R
 
 - R Project Homepage http://www.r-project.org/
 
@@ -7,8 +7,6 @@
 - R mailing lists http://www.r-project.org/mail.html
 
 - Notes on the use of R for psychology experiments and questionnaires by J. Baron and Y. Li http://www.psych.upenn.edu/~baron/rpsych.pdf
-
-- R manual for biometry by K.J. Hoff https://www.biostat.uni-hannover.de/fileadmin/institut/pdf/RMANUAL_ENGLISH.PDF
 
 - Simple R by J.Verzani http://www.math.csi.cuny.edu/Statistics/R/simpleR
 
@@ -21,7 +19,6 @@
 - P.M.E. Altham's page on multivariate analysis with R notes http://www.statslab.cam.ac.uk/~pat/
 
 - Patrick Burns' R page http://www.burns-stat.com/
-
 
 
 ### In Italian

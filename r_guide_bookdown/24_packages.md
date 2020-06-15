@@ -1,9 +1,9 @@
 # (APPENDIX) Appendix {-} 
 
-# Partial List of Packages by Category
+# Partial list of packages by category
 
 
-## Graphics Packages
+## Graphics packages
 
 - ggplot2 http://ggplot2.org/
 - lattice https://cran.r-project.org/web/packages/lattice/index.html
@@ -13,7 +13,7 @@
 - rpanel provides a set of functions to build simple GUI controls for R functions. These are built on the tcltk package. Uses could include changing a parameter on a graph by animating it with a slider or a "doublebutton", up to more sophisticated control panels. https://cran.r-project.org/web/packages/rpanel/index.html
 
 
-## GUI Packages
+## GUI packages
 
 - Rcmdr https://cran.r-project.org/web/packages/Rcmdr/index.html
 - JGR https://cran.r-project.org/web/packages/JGR/index.html

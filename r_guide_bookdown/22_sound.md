@@ -1,8 +1,8 @@
-# Sound Processing {#soundprocessing}
+# Sound processing {#soundprocessing}
 
 
 
-## Libraries for Sound Analysis and Signal Processing
+## Libraries for sound analysis and signal processing
 
 
 #### seewave

@@ -1,4 +1,4 @@
-# Full Colours Table {#fullcoltable}
+# Full colors table {#fullcoltable}
 
 All named colors are listed below:
 

@@ -91,6 +91,35 @@ ggplot(dat, aes(x=width, y=height, color=weight)) + geom_point(size=3)
 
 although by doing this we are modifying an aesthetic quality of the plot, this does not generate an *aesthetic mapping* between the data and the graphic in the sense of the grammar of graphics. Aesthetic mappings always go within an `aes` call, while changes of the visual properties of the data that are not aesthetic mappings go outside it.
 
+Some common aesthetics are listed in Table \@ref(tab:aes). https://stackoverflow.com/questions/11657380/is-there-a-table-or-catalog-of-aesthetics-for-ggplot2
+
+Aesthetic 
+------------- ---
+`color`
+`fill`
+`shape` 
+`size`
+`linetype`
+
+Table: (\#tab:aes) Common `ggplot2` aesthetics.
+
+Some common geometries are listed in Table \@ref(tab:geoms):
+
+Geometry
+----------------- ---
+`geom_point`
+`geom_line`
+`geom_path`
+`geom_bar` 
+`geom_col`
+`geom_errorbar`
+`geom_smooth`
+`geom_hline`
+`geom_vline`
+`geom_abline`
+
+Table: (\#tab:geoms) Common `ggplot2` geometries.
+
 ## Common charts
 
 ### Barplots
@@ -194,13 +223,41 @@ p
 and the following one will count the number of cars by manufacturer and type of transmission:
 
 ```r
-p = ggplot(mpg, aes(manufacturer, fill=trans)) + geom_bar(position=position_dodge(0.9))
+p = ggplot(mpg, aes(manufacturer, fill=trans))
+p = p + geom_bar(position=position_dodge(0.9))
 p = p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p
 ```
 
 <img src="09_ggplot2_files/figure-html/unnamed-chunk-17-1.png" width="432" />
 
+### Interaction plots
+
+Figure \@ref(fig:ggtoothgrowth)
+
+
+```r
+data(ToothGrowth)
+ToothGrowthSumm = ToothGrowth %>% group_by(supp, dose) %>%
+                                  summarize(meanLen=mean(len))
+ToothGrowthSumm$dose = factor(ToothGrowthSumm$dose)
+
+p = ggplot(ToothGrowthSumm, aes(x=supp, y=meanLen,
+                                shape=dose, linetype=dose, group=dose))
+p = p + geom_point()
+p = p + geom_line()
+p = p + theme_classic()
+p = p + scale_shape_discrete(name="Dose")
+p = p + scale_linetype_discrete(name="Dose")
+p = p + xlab("Delivery Method")
+p = p + ylab("Mean Growth")
+p
+```
+
+<div class="figure">
+<img src="09_ggplot2_files/figure-html/ggtoothgrowth-1.png" alt="Tooth growth by vitamin C dose and delivery method in guinea pigs." width="326.4" />
+<p class="caption">(\#fig:ggtoothgrowth)Tooth growth by vitamin C dose and delivery method in guinea pigs.</p>
+</div>
 
 ## Scales
 
@@ -330,3 +387,12 @@ p
 ```
 
 <img src="09_ggplot2_files/figure-html/unnamed-chunk-24-1.png" width="326.4" />
+
+
+## Related packages
+
+- [egg](https://cran.r-project.org/web/packages/egg/index.html)
+- [gridExtra](https://cran.r-project.org/web/packages/gridExtra/index.html)
+- [gtable](https://cran.r-project.org/web/packages/gtable/index.html)
+- [cowplot](https://cran.r-project.org/web/packages/cowplot/index.html)
+- [patchwork](https://cran.r-project.org/web/packages/patchwork/index.html)

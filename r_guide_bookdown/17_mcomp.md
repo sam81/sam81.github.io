@@ -1,4 +1,4 @@
-# Adjusting the *p*-values for Multiple Comparisons
+# Adjusting the *p*-values for multiple comparisons
 
 
 

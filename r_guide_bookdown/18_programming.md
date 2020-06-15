@@ -1,10 +1,10 @@
-# R Programming {#programming}
+# R programming {#programming}
 
 
 
-## Control Structures {#contrstruct}
+## Control structures {#contrstruct}
 
-#### If..Else Conditional Execution {#conditionalexecution}
+#### If..else conditional execution {#conditionalexecution}
 
 It is possible to insert and execute control structures directly from the R interpreter, but for the following examples, I'll assume you're writing the commands to a batch file, and then executing them through the `source()` command.
 
@@ -107,7 +107,7 @@ print(shopping)
 ```
 
 
-#### ifelse {#ifelse}
+#### `ifelse` {#ifelse}
 
 The `ifelse` function is handy for testing all the elements of a vector on a given condition, the general form is:
 
@@ -130,7 +130,7 @@ admission
 so, the first argument of the `ifelse` function, is the condition that we want to test, the second argument is the value that should be returned if the condition is met, and the third argument is the value that should be returned if it is not.
 
 
-#### xor {#xor}
+#### `xor` {#xor}
 
 The  function `xor` implements the exclusive logical "or" operator, that is, it evaluates to `TRUE` if exclusively one of two alternative conditions is met, otherwise, it evaluates to false. The latter occurs both, when none of the conditions is met and when both are met simultaneously.
 
@@ -168,10 +168,9 @@ a=a[-which(a>5)]
 ```
 
 
-## String Processing {#stringprocessing}
+## String processing {#stringprocessing}
 
-One of the strengths of R, in my opinion, lies in the way it deals with character strings. Certain objects, for example dataframes, allow to mix strings with other data types, subsets of certain objects (again dataframes are an example, but also lists), can be easily given meaningful names and retrieved. This adds much flexibility and ease of use of R compared to other languages (e.g. MATLAB). One aspect that is perhaps less known however, are the powerful string processing functions that R gives you. Once you get to know them you'll realise you can do all your data analysis in R, without the need to use other languages, like python or perl for pre-processing.
-
+One of the strengths of R, in my opinion, lies in the way it deals with character strings. Certain objects, for example dataframes, allow to mix strings with other data types, subsets of certain objects (again dataframes are an example, but also lists), can be easily given meaningful names and retrieved. This adds much flexibility and ease of use to R compared to other languages (e.g. MATLAB). One aspect that is perhaps less known however, are the powerful string processing functions that R gives you. Once you get to know them you'll realise you can do all your data analysis in R, without the need to use other languages, like python or perl for pre-processing.
 
 The simplest thing you can do with a string, is counting its characters, which you can do with the `nchar` function:
 
@@ -221,9 +220,7 @@ my_string
 ## [1] "qqqove R"
 ```
 
-
-
-### Using Regular Expressions {#regexp}
+### Using regular expressions {#regexp}
 
 
 ```r
@@ -301,9 +298,9 @@ glob2rx('the')
 ## [1] "^the$"
 ```
 
-## Tips and Tricks
+## Tips and tricks
 
-### Convert a String into a Command
+### Convert a string into a command
 
 
 ```r
@@ -311,7 +308,7 @@ cmd = "vec = c(1,2,3)"
 eval(parse(text=cmd))
 ```
 
-## Creating Simple R Packages {#creatingsimplerpackages}
+## Creating simple R packages {#creatingsimplerpackages}
 
 If you start writing your own functions and you use them often, probably you will soon get tired of sourcing the files containing each function to make them available at each session. There are at least two ways around this problem:
 
@@ -359,7 +356,7 @@ now each time you call `sourceDir` with a directory as an argument, you will hav
 
 Building a R package requires a bit more work. The detailed documentation for doing this is provided in the **Writing R Extensions** manual available at the CRAN website http://cran.r-project.org/. That documentation looks at best daunting for a beginner, indeed writing a R package is not trivial, however if all you have is pure R code, and you just want to build a simple package for your own use, the task should not be too difficult to achieve. A very useful document is **An introduction to the R package mechanism**, it can be found at the following URL http://biosun1.harvard.edu/courses/individual/bio271/lectures/L6/Rpkg.pdf. In the following sections I'll try to explain how to build a simple R package, much of what I say is drawn from the above cited documents.
 
-### The Bare Minimum to Create a Package
+### The bare minimum to create a package
 
 The quickest way to get started is to use the function `package.skeleton` to create the first ``draft'' of your package. Start a R session, make sure that there are not R objects in your session, otherwise they will be bundled in your package
 
@@ -438,7 +435,7 @@ URL: http://www.example.com
 ```
 
 
-#### Editing the Documentation
+#### Editing the documentation
 
 The documentation files reside in the `man` directory of your package. There is one documentation file for each function or data set present in the package. The documentation files are written in a \LaTeX\ like format called `Rd`. `package.skeleton` creates a skeleton of the documentation file, which just needs to be edited, the default fields are pretty much self-explanatory. For a more detailed explanation you can read the *Writing R Extensions* manual http://cran.r-project.org/doc/manuals/R-exts.html. I'll give you just a few tips:
 
@@ -460,7 +457,7 @@ In the `Examples` section, you write code as if you were writing it in a R scrip
 
 The documentation requires the presence of one or more standard keywords. One way to get a list of these keywords is to download the tarball with the R sources, after unpacking it, you can find the keywords in a file within the `doc` directory called `KEYWORDS.db`. 
 
-#### Converting Rd files to Other Formats
+#### Converting Rd files to other formats
 
 HTML and LaTeX versions of the documentation files are automatically produced in the package installation process, you can find them in the `html` and `latex` directories of your package installation directory, respectively. You can also produce a single pdf or dvi file containing all the documentation using the following command from a shell
 
@@ -471,7 +468,7 @@ $ ## produce pdf
 $ R CMD Rd2dvi --pdf /path/to/your/package/sources/
 ```
 
-#### Adding additional Function or Data Files to the Package
+#### Adding additional function or data files to the package
 
 Adding additional function files is quite straightforward, the files contained in the `R` sub-directory of your package directory are plain R files, so you can just write your functions, drop the files with your functions there, and next time you build the package the new functions will be included. The function `prompt` can be used to build the documentation templates for new functions:
 
@@ -497,7 +494,7 @@ documentation again can be produced using the `prompt` function
 prompt(mydata)
 ```
 
-#### Checking the Package
+#### Checking the package
 
 The sanity check for the package can be done by issuing the following command from a shell
 

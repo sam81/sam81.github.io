@@ -54,16 +54,16 @@ dat[dat$y=="A", "x"]
 ## # A tibble: 10 x 1
 ##          x
 ##      <dbl>
-##  1  0.268 
-##  2  0.342 
-##  3  0.878 
-##  4 -0.0965
-##  5 -1.61  
-##  6  0.340 
-##  7 -0.0679
-##  8  0.402 
-##  9  0.418 
-## 10 -0.177
+##  1 -0.0222
+##  2 -1.44  
+##  3 -1.55  
+##  4  1.13  
+##  5  1.16  
+##  6  0.516 
+##  7 -3.31  
+##  8 -0.379 
+##  9 -1.34  
+## 10 -0.680
 ```
 
 but it returns a 1-column tibble instead. Furthermore trying `as.numeric(dat[dat$y=="A", "x"])` to convert it to a vector doesn't work. The solution is to use the `pull` function from `dplyr`:
@@ -75,8 +75,8 @@ pull(dat[dat$y=="A", ], x)
 ```
 
 ```
-##  [1]  0.26817819  0.34238976  0.87751953 -0.09650574 -1.61028432  0.34043984
-##  [7] -0.06789220  0.40189801  0.41828998 -0.17732134
+##  [1] -0.0222453 -1.4357617 -1.5461206  1.1340210  1.1627853  0.5158966
+##  [7] -3.3137151 -0.3791913 -1.3439288 -0.6799547
 ```
 
 More succintly, if, for example, you wanted to run a $t$-test on the groups indicated by the `y` variable, you could do the following through `dplyr`:
@@ -92,13 +92,13 @@ t.test(dat %>% filter(y=="A") %>% pull(x),
 ## 	Welch Two Sample t-test
 ## 
 ## data:  dat %>% filter(y == "A") %>% pull(x) and dat %>% filter(y == "B") %>% pull(x)
-## t = -0.28654, df = 12.676, p-value = 0.7791
+## t = -1.6919, df = 17.04, p-value = 0.1089
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -1.2327599  0.9447016
+##  -2.1163279  0.2324828
 ## sample estimates:
 ##  mean of x  mean of y 
-## 0.06967117 0.21370031
+## -0.5908215  0.3511011
 ```
 
 ## `dplyr`
@@ -138,10 +138,11 @@ str(grIris)
 ##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  - attr(*, "groups")= tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
 ##   ..$ Species: Factor w/ 3 levels "setosa","versicolor",..: 1 2 3
-##   ..$ .rows  :List of 3
+##   ..$ .rows  : list<int> [1:3] 
 ##   .. ..$ : int [1:50] 1 2 3 4 5 6 7 8 9 10 ...
 ##   .. ..$ : int [1:50] 51 52 53 54 55 56 57 58 59 60 ...
 ##   .. ..$ : int [1:50] 101 102 103 104 105 106 107 108 109 110 ...
+##   .. ..@ ptype: int(0) 
 ##   ..- attr(*, ".drop")= logi TRUE
 ```
 
@@ -250,10 +251,10 @@ dat %>% group_by(fct) %>% filter(y>100) %>% summarize(n())
 ## # A tibble: 4 x 2
 ##   fct   `n()`
 ##   <chr> <int>
-## 1 A        13
-## 2 B        12
-## 3 C        18
-## 4 D        11
+## 1 A        11
+## 2 B        15
+## 3 C        14
+## 4 D        13
 ```
 
 ```r
@@ -262,13 +263,11 @@ dat %>% filter(y>100) %>% count(fct)
 ```
 
 ```
-## # A tibble: 4 x 2
-##   fct       n
-##   <chr> <int>
-## 1 A        13
-## 2 B        12
-## 3 C        18
-## 4 D        11
+##   fct  n
+## 1   A 11
+## 2   B 15
+## 3   C 14
+## 4   D 13
 ```
 
 ```r
@@ -280,8 +279,8 @@ dat %>% group_by(fct) %>% filter(y>100) %>% tally()
 ## # A tibble: 4 x 2
 ##   fct       n
 ##   <chr> <int>
-## 1 A        13
-## 2 B        12
-## 3 C        18
-## 4 D        11
+## 1 A        11
+## 2 B        15
+## 3 C        14
+## 4 D        13
 ```

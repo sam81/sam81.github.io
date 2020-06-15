@@ -1,12 +1,12 @@
-# A Simple Introduction to R
+# A simple introduction to R
 
-This chapter will give a simple introduction to R, just to get familiar with it and get a general idea of how it works. This chapter assumes no previous knowledge of programming or anything similar. If you know other computer languages, or have even a basic knowledge of programming, getting started will be easy. If you don't, don't worry, R syntax is very elegant and simple, it might take a little while, but after looking at some examples, and importantly, trying them out yourself, you'll be up and running without problems. This tutorial deals only with learning to use R from the command line, if you'd rather use R with a GUI, that is, with a "point and click" interface, please have a look at Section \@ref(gui) for some information on how to get started.
+This chapter will give a simple introduction to R, just to get familiar with it and get a general idea of how it works. This chapter assumes no previous knowledge of programming. If you know other computer languages, or have even a basic knowledge of programming, getting started will be easy. If you don't, don't worry, R syntax is very elegant and simple, it might take a little while, but after looking at some examples, and importantly, trying them out yourself, you'll be up and running without problems. This tutorial deals only with learning to use R from the command line, if you'd rather use R with a GUI, that is, with a "point and click" interface, please have a look at Section \@ref(gui) for some information on how to get started.
 
 ## Datasets
 
 This guide uses several datasets. If you want to follow the examples given in the guide you can download the datasets from this URL: https://sam81.github.io/r_guide_bookdown/rguide_datasets.zip
 
-## Firing up and Quitting R
+## Firing up and quitting R
 
 Under GNU/Linux systems you can start R  from a shell, just type `R` and press <kbd>Enter</kbd>. Under Windows you can click on the R icon to start the R GUI. 
 
@@ -16,7 +16,7 @@ Commands can be terminated either by a semi-colon `;` or by pressing <kbd>Enter<
 
 To quit R type `quit()` or `q()`\footnote{On a Unix terminal you can also press `Ctrl-d` to exit}, R will ask you if you want to save the current session, if you answer `y`, R will save all the objects active in the current session and the command history.
 
-## Starting to Work with R
+## Starting to work with R
 
 The first thing you can try, is doing some math, at the command prompt type `5+4` and press <kbd>Enter</kbd>, the result will be
 
@@ -126,9 +126,50 @@ will create a vector containing the sequence of numbers from 1 to 100, now try t
 long_vec = 1:100
 ```
 
+R can also deal with string variables:
 
-## Getting Help {#gettinghelp}
 
+```r
+name = "John"
+msg1 = "said to check the supplies"
+```
+
+strings can be concatenated together with the `paste` function:
+
+
+```r
+paste(name, msg1)
+```
+
+```
+## [1] "John said to check the supplies"
+```
+
+by default strings pasted together with the `paste` function are separated by a blank space, but this can be changed by supplying a `sep` argument to the function:
+
+
+```r
+paste(name, msg1, sep=";")
+```
+
+```
+## [1] "John;said to check the supplies"
+```
+
+if we want the strings to be attached together with no separator at all, we can write `paste(name, msg1, sep="")`, but it is more convenient to use the `paste0` function instead:
+
+
+```r
+paste0(name, msg1)
+```
+
+```
+## [1] "Johnsaid to check the supplies"
+```
+
+more string facilities are presented in Section \@ref(stringprocessing).
+
+## Getting help {#gettinghelp}
 
 R comes with an excellent online help facility which documents and gives examples for all available functions. There is also a web interface for the help system which is easier to use, you can start it with
 
@@ -137,7 +178,7 @@ help.start()
 ```
 this fires up a web browser from which you can access a search engine for all the available documentation. The documentation is also available as a `pdf` file, the ``Full Reference Manual'' which documents the base system. Printable `pdf` manuals are also available for all the other additional packages. 
 
-### The Online Help System
+### The online help system
 You can quickly look up the documentation for a function, for example `sd`, with
 
 ```r
@@ -197,7 +238,7 @@ levene.test(car)        Levene's Test
 ...
 ```
 
-## Working with a Graphical User Interface {#gui}
+## Working with a graphical user interface {#gui}
 
 The default version of R for Windows and macOS comes with a very limited graphical user interface (GUI), while the GNU/Linux version comes with no GUI at all. There are however several independent projects aimed at developing a GUI for R. The following sections give some information on them.
 
@@ -207,11 +248,12 @@ R Studio is currently the most popular GUI for R. It can be installed on all maj
 
 ### The R Commander
 
-An extensive GUI for R is provided by the `Rcmdr` package (R commander). This GUI allows you to do many of the operations you can do using R from the command line, through a point and click visual interface. The R commander is just a R package, so in order to use it, you need to have R installed in the first place, then you have to install the `Rcmdr` package and all the other packages it depends on. After everything is installed correctly, fire up R and call the R commander as you do with any other package:
+An extensive GUI for R is provided by the `Rcmdr` package ([R commander](https://www.rcommander.com/)). This GUI allows you to do many of the operations you can do using R from the command line, through a point and click visual interface. The R commander is just a R package, so in order to use it, you need to have R installed in the first place, then you have to install the `Rcmdr` package and all the other packages it depends on. After everything is installed correctly, fire up R and call the R commander as you do with any other package:
 
 ```r
 library(Rcmdr)
 ```
+
 you will be greeted by a GUI with menus that allow you to type in data, perform statistical analyses and create graphs. The R commander works on both GNU/Linux and Windows platforms. For further information, please refer to the R commander manual or look up the following web page: <http://www.rcommander.com/>.
 
 ### JGR

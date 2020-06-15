@@ -69,11 +69,11 @@ aov1
 We have the sums of squares for the treatment effect and for the error term and the F value for the treatment effect with its significance value. Since the p value in this case is very, very small, it is written in scientific notation. However we can use the significance codes given at the bottom of the print out to interpret the p value as very close to zero, at least smaller than 0.001, so it is highly significant. 
 
 
-## Repeated Measures ANOVA
+## Repeated measures ANOVA
 
-### One Within Subjects Factor
+### One within-subject factor
 
-The syntax for performing a repeated measures ANOVA is a little more complex than the syntax for fully randomised designs. In a repeated measures design we take into account the effects of the subjects on our measures, that is the fact that different subjects will have different different baseline means on a given measure (e.g. on a reaction time test). In this way we are able to tell apart the variability given by inter individual differences between our subjects, from the variability due to the manipulation of one or more independent variables, with a view to identify the latter with more precision. A consequence of this procedure is that while with other designs we used a common error term, in a repeated measures design we have to use different error terms to test the effects we are interested in and we have to specify this in the formula we use with R for `aov`. A good explanation of repeated measures designs in R is given by Baron and Li [@baron03], and what follows in this discussion is mainly inspired by their work.
+The syntax for performing a repeated measures ANOVA is a little more complex than the syntax for fully randomised designs. In a repeated measures design we take into account the effects of the subjects on our measures, that is the fact that different subjects will have different different baseline means on a given measure (e.g. on a reaction time test). In this way we are able to tell apart the variability given by inter individual differences between our subjects, from the variability due to the manipulation of one or more independent variables, with a view to identify the latter with more precision. A consequence of this procedure is that while with other designs we used a common error term, in a repeated measures design we have to use different error terms to test the effects we are interested in and we have to specify this in the formula we use with R for `aov`. A good explanation of repeated measures designs in R is given by @BaronAndLi2003, and what follows in this discussion is mainly inspired by their work.
 
 We will start with a simple example of a repeated measures design with one within subject factor at three levels. Let's imagine we want to test the effects of three different colours on a simple detection task. The data are presented in Table \@ref(tab:rts), and represent subjects' reaction times (measured with a button press) for the detection of squares of three different colours (blue, black and red). Each subject was tested under all the three conditions. The data are store in the file `rts.txt`, with the same format as that shown in the table, but without any header and without the column specifying the subject's number.
 
@@ -164,7 +164,7 @@ All this is quite tricky at first. Don't worry, remember as a rule of thumb that
 As for the results of this analysis, the *F* statistics for the colour effect is significant. The RTs for detecting stimuli of these three different colours are different.
 
 
-### Two Within Subjects Factors
+### Two within-subject factors
 
 The basic principles for running a repeated measures ANOVA with more than one within subject factors are the same as in the case of a within subjects factor only, with just some further complications due to the fact that now we also want to test for interactions between our factors. We'll start straight with an example. Let's say your data look something like the ones in Table \@ref(tab:rats),
 
@@ -291,7 +291,7 @@ As you can see R splits the summary into different sections, based on the partit
 
 The results tell us that there is a significant effect of both the `alcohol` and the `drug` factors, as well as their interaction. 
 
-### Two Within Subjects Factors and One Between
+### Two within-subjects factors and one between
 
 Now let's see the case in which we also have a between subjects factor. Suppose we want to run again the experiment on the effects of alcohol and drug on the social interactions in rats, but this time we want to use two different species of rats, the yuppy rats and the kilamany rats, as we have reasons to believe that the kilamany will have different reactions to alcohol and drugs from the yuppy, that is the species that we had tested before. So we manage to gather 8 rats from each species and run our experiment. The results are shown in Table \@ref(tab:ratsbetween).
 
@@ -351,7 +351,7 @@ summary(aov(socialint~alcohol*drug*group + Error(subj/(alcohol*drug)),
 ## Error: subj:alcohol
 ##               Df Sum Sq Mean Sq F value   Pr(>F)    
 ## alcohol        1 22.562  22.562  22.766 0.000298 ***
-## alcohol:group  1  0.063   0.063   0.063 0.805367    
+## alcohol:group  1  0.062   0.062   0.063 0.805367    
 ## Residuals     14 13.875   0.991                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

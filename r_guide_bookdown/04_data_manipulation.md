@@ -1,4 +1,4 @@
-# Data Types and Data Manipulation {#datamanip}
+# Data types and data manipulation {#datamanip}
 
 
 
@@ -71,7 +71,7 @@ length(colour)
 ```
 
 
-## Indexing Vectors
+## Indexing vectors
 
 It is possible to access only subsets of data in a vector and also assign them to another vector. The most basic form of indexing is based on the position of the data in the vector. For example, to access only the datum in the third position of a vector called temperature, you would simply type:
 
@@ -139,16 +139,14 @@ temperature[temperature>30 & temperature<35]
 ## [1] 34 31 32 34
 ```
 
-
-
-Operator    Description
---------    -----------------------
-`&`         Intersection ("and")
-`&&`        "and" (lazy evaluation)
-`|`         Union ("or")
-`||`        "or" (lazy evaluation)
-`!`         Negation
-`xor`     exclusive "or"
+Operator     Description
+--------     -----------------------
+`&`          Intersection ("and")
+`&&`         "and" (lazy evaluation)
+`|`          Union ("or")
+`||`         "or" (lazy evaluation)
+`!`          Negation
+`xor`        Exclusive "or"
 `isTRUE(x)`
 
 Table: (\#tab:logicalops) Logical Operators.
@@ -166,12 +164,11 @@ Operator    Description
 Table: (\#tab:relationalops) Relational Operators.
 
 
-
 It is also possible to apply labels to the positions of a vector, and then access the datum in a given position through its label:
 
 ```r
 temperature = c(34, 45, 23, 29, 26)
-names(temperature) =c("Johnny", "Jack", "Tony", "Pippo", "Linda")
+names(temperature) = c("Johnny", "Jack", "Tony", "Pippo", "Linda")
 temperature["Tony"]
 ```
 
@@ -180,9 +177,7 @@ temperature["Tony"]
 ##   23
 ```
 
-
-
-### The `seq` Function
+### The `seq` function
 
 The `seq` function can be used to create evenly spaced sequences of numbers
 
@@ -253,7 +248,7 @@ would yield the same effect.
 Even if it can look pretty useless at first, the `rep` function comes in very handy for example, when you want to transform the data in a table from "one row per subject", to "one row per observation", which is necessary for example to run a repeated measures ANOVA with the `aov` function. `rep` makes it all easier as you can create vectors in which the occurrence of the levels of a factor are repeated over and over.
 
 
-## Matrix Facilities
+## Matrix facilities
 
 There are different ways for creating a matrix in R, you often start from a vector, and then transform it into a matrix with the `matrix` function:
 
@@ -381,7 +376,7 @@ matr[1, which(colnames(matr) == 'col2')]
 ## [1] 5
 ```
 
-### Matrix Operations
+### Matrix operations
 
 The function `t` gives the transpose of a matrix. The inverse of a
 matrix is obtained through the function `solve`. Some other
@@ -406,7 +401,7 @@ Lists are objects that can contain elements of different modes (e.g numeric, cha
 ```r
 vec1 = 1:12
 vec2 = c('w','h','m')
-mylist = list(vec1,vec2)
+mylist = list(vec1, vec2)
 mylist
 ```
 
@@ -439,7 +434,7 @@ mylist[[1]][3]
 Naming the elements of the list makes things easier
 
 ```r
-mylist=list(a=vec1,b=vec2)
+mylist=list(a=vec1, b=vec2)
 mylist
 ```
 
@@ -503,7 +498,7 @@ myList
 ## $vec2
 ## [1] "a" "b" "c"
 ```
-notice that this is different from eliminating an element of the vectors contained in the list, you can do the latter with
+note that this is different from eliminating an element of the vectors contained in the list, you can do the latter with
 
 ```r
 myList$vec2 = myList$vec2[-1]
@@ -515,7 +510,7 @@ myList
 ## [1] "b" "c"
 ```
 
-## Dataframes
+## Dataframes {#dataframes}
 
 Dataframes are one of the most important objects in R. You can think of it as a rectangular data structure, in which each column stores either the values of a numeric variable, or the levels of a factor, and each row represents an observation. Let's look at an example, we'll build a dataframe from 3 vectors, the first vector stores a variable, number of beers drunk during a week for twelve young people, the second is a factor vector, that specifies for each person whether he/she is a university student or not, so it has two levels, the third is also a factor vector, which tells the sex of each person, so it has two levels as well.
 
@@ -526,11 +521,13 @@ sex = c(rep("m", 6), rep("f", 6))
 occupation = as.factor(occupation)
 sex = as.factor(sex)
 ```
-well, now let's create the dataframe
+
+well, now let's create the dataframe:
 
 ```r
 dats = data.frame(n_beers, occupation, sex)
 ```
+
 it's as simple as this, you have just put the three vectors together, let's have a look at it
 
 ```r
@@ -552,20 +549,23 @@ dats
 ## 11       3          s   f
 ## 12       1          w   f
 ```
+
 as we said, each row holds the data of a single observation, in this case it corresponds to the data of a subject, but as we'll see later, this is not always necessarily true. Each row gives a full specification for each observation, we know that the first subject drunk 6 beers, he's a student, and he's male, and we could tell the same data for the other subjects. Since we have all this information, we could now compare for example the number of beers drunk by male vs females, or by male students vs female students. There are special functions to compute these values quickly like `tapply` and `by` (see \@ref(tapply)), and other functions to get statistical tests, they will be dealt with as we go along.
 
-### Accessing Parts of a  Dataframe
+### Accessing parts of a  dataframe
 
 You can access, or refer to a column of a dataframe with the `$` operator, in the example above suppose we removed all the original variables after creating the dataframe
 
 ```r
 rm(n_beers,occupation,sex)
 ```
+
 we can't now access them directly by name
 
 ```r
 mean(n_beers) #this will throw an object 'n_beers' not found error
 ```
+
 we have to retrieve them from the dataframe
 
 ```r
@@ -575,6 +575,7 @@ mean(dats$n_beers)
 ```
 ## [1] 4.75
 ```
+
 the example might seem artificial (why did I remove them in the first place?), but very often you read in the data directly as a dataframe with the `read.table` function (see sec.~\ref{read.table}, so you'll have to access them from the dataframe. Another option is to use the function `attach`, which attaches the dataframe to the path that R searches when evaluating a variable, in this way you don't have to refer to the dataframe to access the values of a variable
 
 ```r
@@ -588,7 +589,7 @@ mean(n_beers)
 
 this is OK only if you're working with a single dataframe, and you don't want to manipulate the variables in it. In fact if you accidentally attach two dataframes that share some variable names, or you try to change an object of a dataframe after it has been attached, strange things may happen, you've been warned, the details are in the R manual. The function `detach` detaches the dataframe from the search path.
 
-### Change the Names of Variables in a Dataframe
+### Changing the names of variables in a dataframe
 
 Sometimes you might want to change the names of the variables in a dataframe, for example when you create new dataframes with the `unstack` function, or just because you don't like the way you called it initially. You can visualise the names for the variables with the function `names`
 
@@ -599,7 +600,8 @@ names(dats)
 ```
 ## [1] "n_beers"    "occupation" "sex"
 ```
-or if you want to see just the first one
+
+or if you want to see just the first one:
 
 ```r
 names(dats)[1]
@@ -608,18 +610,20 @@ names(dats)[1]
 ```
 ## [1] "n_beers"
 ```
-you can change it with a simple assignment
+
+you can change it with a simple assignment:
 
 ```r
 names(dats)[1] = "beers"
 ```
-or if you want to change more than one
+
+or if you want to change more than one:
 
 ```r
 names(dats) = c("brs", "occ", "sx")
 ```
 
-### Other Ways to Subset a Dataframe
+### Other ways to subset a dataframe
 
 A dataframe actually is just a special kind of list (a list of class dataframe), so we can use the normal list notation to subset dataframes
 
@@ -672,6 +676,7 @@ sex
 ## [1] m m m f f f
 ## Levels: f m
 ```
+
 as you can see a factor has a `levels` attribute that specifies the possible values the factor can assume, and by default it is given by the unique values the factor vector can assume, sorted in alphabetical order.
 
 One important side effect of the `levels` attribute is that the way factor levels are ordered determines the sorting order of statistical summaries and graphics. For example, if we use the `tapply` function to calculate the average alcohol units consumption by sex:
@@ -760,7 +765,7 @@ sex
 ## Levels: f Male
 ```
 
-### Creating Factors with `gl` {#gl}
+### Creating factors with `gl` {#gl}
 
 A handy function for creating factors for data with a regular pattern of factor levels is \verb+gl+
 
@@ -818,7 +823,7 @@ sort(fids)
 ## Levels:
 ```
 
-## Getting Info on R Objects
+## Getting info on R objects
 
 The most useful function to summarise information about many R object is `str`:
 
@@ -859,7 +864,7 @@ mode(b)
 ## [1] "character"
 ```
 
-## Changing the Format of Your Data
+## Changing the format of your data
 
 In general statistical software require your data to be entered in a specific format in order to perform statistical analyses on them, and R is no exception. R provides many powerful functions to change the format of your data if they happen to be in a format that is not suitable for applying a given statistical function on them. The process of changing the format of your data with these functions might seem very complicated at first, however you should keep in mind the following things:
 
@@ -874,7 +879,7 @@ In general statistical software require your data to be entered in a specific fo
 
 This said, I would advice you to learn some of the functions that R provides to rearrange your data for at least two reasons: 1) They're very powerful and can actually save you time once you learn them, and 2) many examples in this tutorial and in other books use them, so you'll often need to know them to understand what's going on :)
 
-### The "One Row per Observation" Format
+### The "one row per observation" format {#onerowperobservation}
 
 While statistic textbooks and scientific articles often show data in a format that is suitable and immediate for the "human eye", like the one shown in Table \@ref(tab:formath), statistical software often don't quite like it and would rather have the same data rearranged as shown in Table \@ref(tab:formatss).
 
@@ -1137,7 +1142,7 @@ names(InsDf)
 ## [1] "sprayType" "season"    "count"
 ```
 
-## The `scale` Function
+## The `scale` function
 
 The `scale` function can be used to easily transform your data into $z$ scores. Here's a trivial example:
 
@@ -1157,7 +1162,7 @@ scale(a)
 ## [1] 1
 ```
 
-## Creating and Editing Data Objects through a Visual Interface
+## Creating and editing data objects through a visual interface
 
 If you want to use a visual interface for creating a dataframe, first create an empty dataframe with:
 

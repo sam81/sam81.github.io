@@ -1,8 +1,8 @@
+# Administration and maintenance {#admin}
 
-# Environment Customisation {#custom}
 
-
-Perhaps the best way to customise your R environment is through the use of a `.Rprofile` file, that you put in your `HOME` directory. This is a simple text file that is sourced every time R is started, so you can put in it your own functions, and any operations that you would like R to perform at start-up. Also in this file, you can write two special functions, the `.First` is executed first at the beginning of a session, and the `.Last` is executed at the end of a session. The `.First` function is normally used to initialise the environment setting the desired options. Here's an example of a `.Rprofile` file
+## Environment customisation {#custom}
+Probably the best way to customise your R environment is through the use of a `.Rprofile` file, that you put in your `HOME` directory. This is a simple text file that is sourced every time R is started, so you can put in it your own functions, and any operations that you would like R to perform at start-up. Also in this file, you can write two special functions, the `.First` is executed first at the beginning of a session, and the `.Last` is executed at the end of a session. The `.First` function is normally used to initialise the environment setting the desired options. Here's an example of a `.Rprofile` file
 
 
 ```r
@@ -49,3 +49,31 @@ The `Rprofile.site` or the file pointed to by the `R_PROFILE` environment variab
 
 The `.Rprofile` file in the user's `HOME` can be used for user specific initialisation, and the functions written in this file  overwrite, or better "mask" functions with the same name defined in either  the file pointed to by the `R_PROFILE` variable or in `Rprofile.site`. Moreover a `.Rprofile` file can be put in any directory, then, if R is started from that directory, this file is sourced, and it masks the definitions given in the user's `HOME` `.Rprofile` file, in this way, it is possible to customise the initialisation for a particular data analysis. Finally, a directory specific initialisation can be given in a `.RData` file, the definitions given here mask also the definitions given in any  `.Rprofile` files.
 
+## Compiling R on Debian/Ubuntu
+
+get all the dependencies needed:
+
+```bash
+apt-get build-dep r-base-core
+```
+
+run configure:
+
+```bash
+./configure --prefix=/path/to/install_loc/ \
+--with-cairo --with-jpeglib \
+--with-readline --with-tcltk \
+--enable-R-profiling --enable-R-shlib \
+--enable-memory-profiling \
+--with-blas --with-lapack
+```
+
+`--prefix` can be used to indicate the directory where R will be installed.
+
+
+```bash
+make -j8
+make install
+```
+
+If you don't have some development graphics libraries installed in your system R may nonetheless compile fine, but some functionality may be missing. For example you may have issues with missing fonts (a workaround for this issue is to install `gsfonts-x11` and restart the `X` server or the computer, but the fonts you get by compiling R with all the needed development libraries look better).

@@ -1,6 +1,6 @@
-# Organising a Working Session
+# Organising a working session
 
-## Setting and Changing the Working Directory
+## Setting and changing the working directory
 
 The command `getwd` displays the pathname of the current working directory, that is where R will look for and store files if not otherwise instructed.
 
@@ -55,7 +55,7 @@ this however doesn't remove objects whose name starts with a dot, to remove also
 rm(list=ls(all=TRUE))
 ```
 
-## Saving and Using the "Workspace Image"
+## Saving and using the "workspace image"
 
 You can use a ``workspace image'' that you have previously saved by starting R from the directory in which it was saved. In this way you can use the objects created in a previous session and the up arrow as well to retrieve commands from that session. To take full advantage from workspace images you'd better use different working directories for different analyses, studies, experiments and so on, in this way you can restore the workspace image of a specific analysis you were running and above all, you avoid accidentally overwriting objects from different analyses by creating another object with the same name during your current analysis.
 
@@ -63,7 +63,7 @@ When saving the workspace image R stores two files in the current working direct
 
 You can save the workspace image either on exit, answering yes to the prompt you're given, or during a session with the `save.image` function, the latter is a good measure against accidental losses of objects due to a power failure.
 
-## Working in Batch Mode
+## Working in batch mode
 
 ### Executing commands written in a file from an R session
  Instead of writing and executing commands line by line, it is often convenient to write the commands in a text file and then run them all at once in batch mode. You just write the commands with a text editor in a file, as if it were on the R console, save it in a directory, and then from within an R session issue the command:
