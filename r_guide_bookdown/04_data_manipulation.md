@@ -18,12 +18,12 @@ mean(temperature)
 ```
 ## [1] 30.81818
 ```
-will compute the mean of the data vector. If you want to save the result of this function, you just have to assign it to another object
+will compute the mean of the data vector. If you want to save the result of this function, you just have to assign it to another object:
 
 ```r
 mean_temp = mean(temperature)
 ```
-notice that in this case the value is assigned to the object `mean_temp` but it is not printed, you can display it with
+note that in this case the value is assigned to the object `mean_temp` but it is not printed, you can display it with
 
 ```r
 print(mean_temp)
@@ -245,7 +245,7 @@ rep(rep(1:4, c(2, 2, 2, 2)), 3)
 ```
 would yield the same effect.
 
-Even if it can look pretty useless at first, the `rep` function comes in very handy for example, when you want to transform the data in a table from "one row per subject", to "one row per observation", which is necessary for example to run a repeated measures ANOVA with the `aov` function. `rep` makes it all easier as you can create vectors in which the occurrence of the levels of a factor are repeated over and over.
+Even if it can look pretty useless at first, the `rep` function comes in very handy for example, when you want to transform the data in a table from "one row per participant", to "one row per observation", which is necessary for example to run a repeated measures ANOVA with the `aov` function. `rep` makes it all easier as you can create vectors in which the occurrence of the levels of a factor are repeated over and over.
 
 
 ## Matrix facilities
@@ -550,7 +550,7 @@ dats
 ## 12       1          w   f
 ```
 
-as we said, each row holds the data of a single observation, in this case it corresponds to the data of a subject, but as we'll see later, this is not always necessarily true. Each row gives a full specification for each observation, we know that the first subject drunk 6 beers, he's a student, and he's male, and we could tell the same data for the other subjects. Since we have all this information, we could now compare for example the number of beers drunk by male vs females, or by male students vs female students. There are special functions to compute these values quickly like `tapply` and `by` (see \@ref(tapply)), and other functions to get statistical tests, they will be dealt with as we go along.
+as we said, each row holds the data of a single observation, in this case it corresponds to the data of a participant, but as we'll see later, this is not always necessarily true. Each row gives a full specification for each observation, we know that the first participant drunk 6 beers, he's a student, and he's male, and we could tell the same data for the other participants. Since we have all this information, we could now compare for example the number of beers drunk by male vs females, or by male students vs female students. There are special functions to compute these values quickly like `tapply` and `by` (see \@ref(tapply)), and other functions to get statistical tests, they will be dealt with as we go along.
 
 ### Accessing parts of a  dataframe
 
@@ -767,7 +767,7 @@ sex
 
 ### Creating factors with `gl` {#gl}
 
-A handy function for creating factors for data with a regular pattern of factor levels is \verb+gl+
+A handy function for creating factors for data with a regular pattern of factor levels is `gl`:
 
 ```r
 sex = gl(2, 3, label=c("male", "female"), length=6)
@@ -778,7 +778,7 @@ sex
 ## [1] male   male   male   female female female
 ## Levels: male female
 ```
-the first argument to the function specifies the number of levels, and the second argument the number of consecutive repetitions of each level, the pattern is repeated up to the number of elements specified by the length argument. Notice the different pattern created when the number of consecutive repetitions is set to 1 and the total length is left unchanged
+the first argument to the function specifies the number of levels, and the second argument the number of consecutive repetitions of each level, the pattern is repeated up to the number of elements specified by the length argument. Note the different pattern created when the number of consecutive repetitions is set to 1 and the total length is left unchanged:
 
 ```r
 sex = gl(2, 1, label=c("male", "female"), length=6)
@@ -798,8 +798,7 @@ It's common to assign identifiers to participants in an experiment as:
 ids = c("P1", "P2", "P3", "P4", "P5", "P6","P7", "P8", "P9", "P10", "P11")
 ```
 
-when you use these identifiers for summarizing or plotting data as a function of participant id R will
-sort the output in strict alphabetical order, which is equivalent to the output of this function:
+when you use these identifiers for summarizing or plotting data as a function of participant id R will sort the output in strict alphabetical order, which is equivalent to the output of this function:
 
 ```r
 sort(ids)
@@ -809,8 +808,7 @@ sort(ids)
 ##  [1] "P1"  "P10" "P11" "P2"  "P3"  "P4"  "P5"  "P6"  "P7"  "P8"  "P9"
 ```
 
-often what you want instead is a natural sort order, in which `P10` comes after `P9` and not after `P1`.
-To force R to use a natural sort order you can use a factor vector and sort the factor levels using the `mixedsort` function in the package `gtools`:
+often what you want instead is a natural sort order, in which `P10` comes after `P9` and not after `P1`. To force R to use a natural sort order you can use a factor vector and sort the factor levels using the `mixedsort` function in the package `gtools`:
 
 ```r
 library(gtools)
@@ -868,20 +866,19 @@ mode(b)
 
 In general statistical software require your data to be entered in a specific format in order to perform statistical analyses on them, and R is no exception. R provides many powerful functions to change the format of your data if they happen to be in a format that is not suitable for applying a given statistical function on them. The process of changing the format of your data with these functions might seem very complicated at first, however you should keep in mind the following things:
 
-- You don't really need to learn all of the functions that R provides to manipulate your data and change their format. Once you learn a procedure that does the job you can stick on it and you'll be fine most of the times.
+- You don't really need to learn all of the functions that R provides to manipulate your data and change their format. Once you learn a procedure that does the job you can stick with it and you'll be fine most of the times.
 
-- Once you understand the "logic" and the structure of the data format that R expects to apply some statistical functions, changing the layout of your data to match this structure will be easy. Moreover the data format R wants is most of the times one and only one: The "one row per observation format", which will be explained below.
+- Once you understand the "logic" and the structure of the data format that R expects to apply some statistical functions, changing the layout of your data to match this structure will be easy. Moreover, the data format that R wants is most of the times one and only one: The "one row per observation format", which will be explained below.
 
 - In this tutorial you will see different examples in which the format of the data, stored in a given file don't match the format R wants. This is just for illustrative purposes. In real life if you're doing a research or an experiment, you  can often gather your data in a format that is already suitable for performing statistical analyses.
 
 - You don't really have to use R to change the layout of your data if you don't like the functions it provides to do this job. You can always use some external programs to achieve the same results, for example spreadsheets programs such as Libreoffice Calc. What's really important is that you understand the structure of the format the R expects.
 
-
 This said, I would advice you to learn some of the functions that R provides to rearrange your data for at least two reasons: 1) They're very powerful and can actually save you time once you learn them, and 2) many examples in this tutorial and in other books use them, so you'll often need to know them to understand what's going on :)
 
-### The "one row per observation" format {#onerowperobservation}
+### The "one row per observation" (long) format {#onerowperobservation}
 
-While statistic textbooks and scientific articles often show data in a format that is suitable and immediate for the "human eye", like the one shown in Table \@ref(tab:formath), statistical software often don't quite like it and would rather have the same data rearranged as shown in Table \@ref(tab:formatss).
+While statistic textbooks and scientific articles often show data in a "wide" format that is suitable and immediate for the "human eye", like the one shown in Table \@ref(tab:formath), statistical software often don't quite like it and would rather have the same data rearranged in a "long" format, as shown in Table \@ref(tab:formatss).
 
 Group A  Group B  Group C
 -------  -------- -------
@@ -891,7 +888,7 @@ Group A  Group B  Group C
 4         5       8
 6         4       7
 
-Table: (\#tab:formath) Data Format Suitable for the "Human Eye".
+Table: (\#tab:formath) Data format suitable for the "human eye".
 
 Value  Group
 -----  -----
@@ -911,11 +908,11 @@ Value  Group
 8      C
 7      C
 
-Table: (\#tab:formatss) Data Format Suitable for the R.
+Table: (\#tab:formatss) Data format suitable for R.
 
 The main difference is that while in the first format you have more than one observation in the same row, and you can identify the group to which each observation belongs to through the column headers ("Group A", "Group B" and "Group C"), in the second format you have only one observation for each row. This observation is then fully identified with a "label" that appears in the second column. A better way to describe the second column is to say that in the above case "Group" is a **factor**, and "A", "B" and "C" define the **levels** of this factor for each group.
 
-You could also be running an experiment in which you manipulate more than one factor. For example you might have two groups, "Patients" and "Controls", which are tested under two conditions "1" and condition "2". In this case you might display your data as shown in Table \@ref(tab:formath2) to make them easily readable to humans. However for analysing your data with R, in this case you would need to add another column specifying the levels of the other factor for each observation as shown in Table \@ref(tab:formatss2)
+You could also be running an experiment in which you manipulate more than one factor. For example you might have two groups, "Patients" and "Controls", which are tested under two conditions: condition "1" and condition "2". In this case you might display your data as shown in Table \@ref(tab:formath2) to make them easily readable to humans. However for analyzing your data with R you would need to reshape the data as shown in Table \@ref(tab:formatss2), with one column specifying the group, and another column specifying the condition for a given observation.
 
 Patients Condition1  Patients Condition 2  Controls Condition 1  Controls Condition 2
 -------------------  --------------------  --------------------  --------------------
@@ -925,7 +922,7 @@ Patients Condition1  Patients Condition 2  Controls Condition 1  Controls Condit
 8	                 8                     6	                 5 
 6	                 5                     5	                 3
 
-Table: (\#tab:formath2) Data Format Suitable for the "Human Eye" with More than One Factor.
+Table: (\#tab:formath2) Data format suitable for the "human eye" with more than one factor.
 
 
 Value  Group  Condition
@@ -951,9 +948,9 @@ Value  Group  Condition
 5      C      2 
 3      C      2
 
-Table: (\#tab:formatss2) Data Format Suitable for R with More than One Factor.
+Table: (\#tab:formatss2) Data format suitable for R with more than one factor.
 
-Finally, you might be running an experiment with a repeated measures design, in which all subjects are exposed to all the levels of all the within subjects factors. For example you might have your subjects recall word lists either under the effects of a drug or not (factor 1) and with words concrete or abstract words (factor 2). In this case the data for presentation might look like the ones in Table \@ref(tab:repeatedh), in which each row represents a single subject. Again for R you need to rearrange the data so that each row represents a single observation, and in the case of a repeated measures design you need to add another column that identifies the levels of the "subjects" factor as shown in Table \@ref(tab:repeatedr)
+Finally, you might be running an experiment with a repeated measures design, in which all participants are exposed to all the levels of the within subjects factors. For example you might have your participants recall word lists either under the effects of a drug or not (factor 1) and with words concrete or abstract words (factor 2). In this case the data for presentation might look like the ones in Table \@ref(tab:repeatedh), in which each row represents a single participant. Again for R you need to rearrange the data so that each row represents a single observation, and in the case of a repeated measures design you need to add another column that identifies the levels of the "participants" factor as shown in Table \@ref(tab:repeatedr)
 
 Drug Concrete  Drug Abstract  No-Drug Concrete  No-Drug Abstract
 -------------  -------------  ----------------  ----------------
@@ -963,9 +960,9 @@ Drug Concrete  Drug Abstract  No-Drug Concrete  No-Drug Abstract
 8              8              6	                5 
 6              5              5	                3 
 
-Table: (\#tab:repeatedh) Data Format Suitable for the "Human Eye", repeated measures design.
+Table: (\#tab:repeatedh) Data format suitable for the "human eye" in a repeated measures design.
 
-Value  Drug Exposure  Word Type  Subject
+Value  Drug Exposure  Word Type  Participant
 -----  -------------  ---------  -------
 7      D              C          1
 5      D              C          2
@@ -999,14 +996,14 @@ can use the `stack` function to get a "one row per observation" format. What the
 
 
 ```r
-dats=read.table("stack.txt",header=TRUE)
+dats = read.table("stack.txt", header=TRUE)
 ```
 this creates the dataframe
 
 ```r
 dats = stack(dats)
 ```
-this reshapes the dataframe into a "one row per observation form"
+this reshapes the dataframe into a "one row per observation" form.
 
 Please note that R assigns names to the vectors in the new dataframe, you can see them in the header of the dataframe, you might need to know them for successive operations.
 
@@ -1028,6 +1025,7 @@ The command:
 ```r
 dats = unstackd(ats,form=lat~congr:isi)
 ```
+
 unstacks the values of the response variable according to the levels of both factors, thus creating $3x3= 9$ columns, the first column contains the values at level 1 of `congr` and level 1 of `isi`, the second one contains the values at level 1 of `congr` and level 2 of `isi`, and so on for all the possible combinations.
 
 ### The `tapply` and `aggregate` functions {#tapply}
@@ -1060,6 +1058,7 @@ meanSpray
 ##         A         B         C         D         E         F 
 ## 14.500000 15.333333  2.083333  4.916667  3.500000 16.666667
 ```
+
 the arguments to `tapply` are `X`, the column of the dataframe to which the function should be applied, `INDEX`, the factor used for subsetting the dataframe, and `FUN`, the function to be applied. The function returns an array, in this case a vector, but can be a matrix, or multi-dimensional array.  The `INDEX` argument indeed can be a *list* of factors, in this case the function chosen is applied to group of values given by a unique combination of the levels of these factors. We'll see an example by modifying the `InsectSprays` dataset including another fictitious factor. The new factor will be the season in which the fields were sprayed. The values will be returned in a matrix.
 
 ```r
@@ -1081,6 +1080,7 @@ meanSpray
 ## E  3.666667  4.666667  1.666667  4.000000
 ## F 11.666667 17.666667 16.333333 21.000000
 ```
+
 The `tapply` is often very useful, for example, after having calculated the means in this way, it is very easy to visualise the data with a barplot
 
 ```r
@@ -1123,6 +1123,7 @@ InsDf
 ## 23         E autumn  4.000000
 ## 24         F autumn 21.000000
 ```
+
 if you don't give a name to the grouping factors as we did with `SprayType=Ins$spray` a default name will be given. One slightly annoying thing is that, as far as I know, it is not possible to assign a name to the resulting variable (it will just be named `x`). However it can be changed afterwards, here's a solution that should work whatever the number of factors in the dataframe:
 
 ```r
@@ -1169,11 +1170,13 @@ If you want to use a visual interface for creating a dataframe, first create an 
 ```r
 mydataframe = data.frame()
 ```
+
 then you can call a spreadsheet like editor to fill in the dataframe with:
 
 ```r
 data.entry(mydataframe)
 ```
+
 or
 
 ```r
@@ -1185,6 +1188,7 @@ If the data object is a vector, `fix` will call a text editor to edit the object
 ```r
 fix(myvector, editor="emacs")
 ```
+
 or just call the editor on the object:
 
 ```r

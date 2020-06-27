@@ -47,7 +47,14 @@ Now let's create a variable, we'll call it `foo`, and assign to it a number
 foo = 5
 ```
 
-the equal sign `=` is the assignment operator in R\footnote{You can also use the arrow `<-`as an assignment operator}, in the above case it means the value of `foo` is 5, `foo` is an object, since it is of a numeric type, we can perform arithmetic operations on it:
+the equal sign `=` is the assignment operator in R\footnote{You can also use the arrow `<-`as an assignment operator}, in the above case it means the value of `foo` is 5, `foo` is an object.
+
+<div class="rmdnote">
+<p>In R both <code>=</code> and <code>&lt;-</code> can be used as assignment operators. For example, the expression <code>x = 5</code> and the expression <code>x &lt;- 5</code> are equivalent, and both are in common use, although some style guides recommend one over the other. In a few corner cases using <code>&lt;-</code> instead of <code>=</code> may lead to different behaviors (e.g. when trying to make assignments inside function calls; something that you generally shouldn’t do).</p>
+<p>I tend to stick to using <code>=</code> because it requires only a single keystroke, looks more readable to me, and is the assignment operator used in almost all other programming languages.</p>
+</div>
+
+Because `foo` is an object of numeric type, we can perform arithmetic operations on it:
 
 
 ```r
@@ -81,7 +88,7 @@ another_foo
 ```
 ## [1] 25
 ```
-since the two objects we have created are both numeric we can also do
+since the two objects we have created are both numeric we can also sum them:
 
 ```r
 foo + another_foo
@@ -91,7 +98,7 @@ foo + another_foo
 ## [1] 30
 ```
 
-Let's look at something more interesting, we can create an object that stores a series of numbers, for example the money we have spent each day of a week, in Euros, we can do this using the `c` function, which concatenates a series of values in a *vector*
+Let's look at something more interesting, we can create an object that stores a series of numbers, for example the money we have spent each day of a week, in Euros; we can do this using the `c` function, which concatenates a series of values into a *vector*:
 
 ```r
 expenses = c(7,8,15,20,9,45,3)
@@ -115,12 +122,12 @@ sd(expenses)
 ## [1] 14.24446
 ```
 
-Surely you've wondered why `[1]` appears every time R gives you a result, now that we've introduced the vector we can get to it. Try to create a long vector, you can easily do this by creating a sequence of numbers, for example
+Surely you've wondered why `[1]` appears every time R gives you a result, now that we've introduced the vector we can get to it. Try to create a long vector, you can easily do this by creating a sequence of numbers, for example:
 
 ```r
 long_vec = seq(1, 100, by=1)
 ```
-will create a vector containing the sequence of numbers from 1 to 100, now try to display it and see what happens. All the elements of the vector won't fit in a single line of the screen, and at the start of each line you'll get between \verb+[ ]+ the index, that is the position, of the first element on that line. There's also a shorthand to create such a vector
+will create a vector containing the sequence of numbers from 1 to 100, now try to display it and see what happens. All the elements of the vector won't fit in a single line of the screen, and at the start of each line you'll get between \verb+[ ]+ the index, that is the position, of the first element on that line. There's also a shorthand to create such a vector:
 
 ```r
 long_vec = 1:100

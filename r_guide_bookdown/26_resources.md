@@ -21,11 +21,11 @@
 - Patrick Burns' R page http://www.burns-stat.com/
 
 
-### In Italian
+## In Italian
 
+- Ricerca sociale con R https://www.agnesevardanega.eu/metref/start
 
 ## Other useful statistics resources
-
 
 ### In Italian
 

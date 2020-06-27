@@ -1,8 +1,8 @@
 --- 
 title: "A R Guide"
-subtitle: "0.3.13"
+subtitle: "0.3.14"
 author: "Samuele Carcagno"
-date: "15 giugno, 2020"
+date: "27 giugno, 2020"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: memoir
@@ -12,7 +12,7 @@ bibliography: [refslong.bib]
 link-citations: yes
 github-repo: sam81/rguide
 geometry: margin=3.4cm
-always_allow_html: yes
+always_allow_html: true
 description: "A guide for the R programming language."
 ---
 
@@ -36,7 +36,7 @@ description: "A guide for the R programming language."
 
 Based on a work at https://github.com/sam81/rguide.
 
-The latest html version of this guide is available at https://sam81.github.io/r_guide_bookdown/preface.html
+The latest html version of this guide is available at https://sam81.github.io/r_guide_bookdown/rguide.html
 
 A pdf version of this guide can be downloaded at https://sam81.github.io/r_guide_bookdown/rguide.pdf
 

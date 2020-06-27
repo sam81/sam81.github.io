@@ -1,4 +1,4 @@
-# Organising a working session
+# Organizing a working session
 
 ## Setting and changing the working directory
 

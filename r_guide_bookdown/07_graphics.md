@@ -2,11 +2,15 @@
 
 
 
-There are four main graphics libraries that can be used in R. The first is the base graphics system that comes builtin with every R installation and will be described in this chapter. The other three main graphics libraries (`ggplot2`, `lattice`, and `plotly`), can be installed as additional packages. Each of these libraries provide a complete, independent system to generate graphics in R. Choosing one library over the other is mostly a matter of personal preference because pretty much any graphic that can be built with one library can also be built with the others. Some graphics are easier to build with one library than another and vice-versa. In recent years `ggplot2` has gained lots of popularity and `lattice` is less popular than it was some years ago. Despite the increasing popularity of `ggplot2` the base R graphics that are described in this chapter are still widely used. `plotly` is a recent entry and is somehow a special case because it is primarily designed to generate interactive graphics that can be displayed on html pages, while the other graphics libraries have very limited interactive functionality and are primarily designed to generate static high-quality graphics. `plotly` is special also because through the `ggplotly` function it can convert a `ggplot2` graph into an interactive `plotly` graphic.
+There are four main plotting libraries that can be used in R. The first is the base graphics system that comes builtin with every R installation and will be described in this chapter. The other three main plotting libraries (`ggplot2`, `lattice`, and `plotly`), can be installed as additional packages. Each of these libraries provides a complete, independent system to generate plots in R. 
 
-Because the base R graphics library is still widely used and (in my opinion) is somewhat simpler to use for beginners, I would recommend learning it first. The `ggplot2` library is described in Chapter \@ref(ggplot2), the `lattice` graphics library is described in Chapter \@ref(lattice), and the `plotly` library is described in Chapter \@ref(plotly).
+Choosing one plotting library over the other is mostly a matter of personal preference because pretty much any graphic that can be built with one library can also be built with the others. Some graphics are easier to build with one library than another and vice-versa. In recent years `ggplot2` has gained lots of popularity and `lattice` is less popular than it was some years ago. Despite the increasing popularity of `ggplot2` the base R graphics that are described in this chapter are still widely used. `plotly` is a recent entry and is somehow a special case because it is primarily designed to generate interactive graphics that can be displayed on html pages, while the other plotting libraries have very limited interactive functionality and are primarily designed to generate static high-quality graphics. `plotly` is also special because through the `ggplotly` function it can convert a `ggplot2` graph into an interactive `plotly` graphic.
+
+Because the base R graphics library is still widely used and (in my opinion) is somewhat simpler to use for beginners, I would recommend learning it first. The `ggplot2` library is described in Chapter \@ref(ggplot2), the `lattice` graphics library is described in Chapter \@ref(lattice), and the `plotly` library is described in Chapter \@ref(plotly). Chapter \@ref(graphicscommon) covers some plotting aspects (choosing colors, fonts, and using mathematical expressions in labels) that are common/similar across the different the different R plotting libraries. Chapter \@ref(graphicspublications) gives tips and indications for preparing graphics for academic journal publications, using any of the R graphics libraries.
 
 ## Overview of R base graphics functions
+
+R base graphics has a number of "high-level" plotting functions. Some of these are listed in Table   \@ref(tab:baseplotfuncs), and will be described in detail in the following sections. Graphics can also be produced using "low-level" plotting functions; these are introduced in Section \@ref(plotfromscratch).
 
   Function
   --------
@@ -17,7 +21,9 @@ Because the base R graphics library is still widely used and (in my opinion) is 
   `matplot`
   `stripchart`
   `interaction.plot`
-
+  
+  Table: (\#tab:baseplotfuncs) Some "high-level" plotting functions in the base R graphics system.
+  
 ## The `plot` function {#plot}
 
 The `plot` function is most commonly used to draw a scatterplot of two variables, however if given a R object with a plot method as an argument  it will produce different types of graphics depending on the object it is plotting.
@@ -43,8 +49,8 @@ the resulting scatterplot appears in Figure \@ref(fig:scatterplot).
 If we were to plot the change of a variable over time it could be a good idea to connect the values at different time points in the plot with lines, this is easily achieved setting the option `type`. Below is an example, the result is shown in Figure \@ref(fig:timewlines).
 
 ```r
-ti=1:50
-b=rnorm(15,4.3,n=50)
+ti = 1:50
+b = rnorm(15, 4.3, n=50)
 plot(ti, b, type="l")
 ```
 
@@ -61,7 +67,7 @@ The `plot` function can be used for drawing mathematical functions, for example:
 
 ```r
 vec = seq(from=0, to=4*pi, length=120)
-plot(vec,sin(vec), type="l")
+plot(vec, sin(vec), type="l")
 ```
 
 <div class="figure">
@@ -80,8 +86,8 @@ The `matplot` function can be used to plot the columns of a matrix against the c
 a= seq(from=0, to= 2*pi, length=20)
 s = sin(a)
 c = cos(a)
-aa = cbind(a,a) #matrix of hor coord
-cs = cbind(c,s) #matrix of vert coord
+aa = cbind(a, a) #matrix of hor coord
+cs = cbind(c, s) #matrix of vert coord
 matplot(x=aa, y=cs, type="l", lwd=1.8, ylab="sine and cosine functions")
 ```
 
@@ -156,7 +162,7 @@ test_sd = tapply(X=test2$values, IND=test2$ind, FUN=sd)
 Now we can draw a simple barplot displaying the means for each group:
 
 ```r
-barplot(test_means, col=c("darkred","salmon2","plum4"))
+barplot(test_means, col=c("darkred", "salmon2", "plum4"))
 ```
 
 <div class="figure">
@@ -170,7 +176,7 @@ You can control the width of the bars specifying the `width` option, and setting
 
 
 ```r
-barplot(test_means,col=c("darkred","salmon2","plum4"),
+barplot(test_means,col=c("darkred", "salmon2", "plum4"),
         xlim = C(0,3), width=0.5)
 ```
 
@@ -199,8 +205,8 @@ Now we can draw our barplot, you can see the result in Figure \@ref(fig:barplotb
 
 
 ```r
-barplot2(test_means,col=c("darkred", "salmon2", "plum4"),
-         plot.ci=TRUE,ci.u=upper,ci.l=lower)
+barplot2(test_means, col=c("darkred", "salmon2", "plum4"),
+         plot.ci=TRUE, ci.u=upper, ci.l=lower)
 ```
 
 <div class="figure">
@@ -588,8 +594,8 @@ plot(1:10, main="Mono font")
 ```
 
 <div class="figure">
-<img src="07_graphics_files/figure-html/figuremono-1.png" alt="Changing font family" width="326.4" />
-<p class="caption">(\#fig:figuremono)Changing font family</p>
+<img src="07_graphics_files/figure-html/figuremono-1.png" alt="Changing font family." width="326.4" />
+<p class="caption">(\#fig:figuremono)Changing font family.</p>
 </div>
 
 Note that `serif`, `sans`, or `mono` are generic font families. The actual font family (e.g. Helvetica, Arial, Times New Roman, etc...) that gets used depends on a mapping, which is different between graphics devices, between these generic names and an actual system font. It is possible to directly specify a system font when calling `par`. Figure \@ref(fig:figurepalatino) shows a plot with the Palatino font set through `par`:
@@ -601,34 +607,42 @@ plot(1:10)
 ```
 
 <div class="figure">
-<img src="07_graphics_files/figure-html/figurepalatino-1.png" alt="Plot with Palatino font" width="326.4" />
-<p class="caption">(\#fig:figurepalatino)Plot with Palatino font</p>
+<img src="07_graphics_files/figure-html/figurepalatino-1.png" alt="Plot with Palatino font." width="326.4" />
+<p class="caption">(\#fig:figurepalatino)Plot with Palatino font.</p>
 </div>
 
 however, this may or may not work depending on 1) whether the font is actually installed on your system 2) the graphics device (not all graphics devices have access to all installed system fonts). More information on how to use system fonts is available in Chapter \@ref(fonts).
 
-\BeginKnitrBlock{rmdwarning}<div class="rmdwarning">Not all graphics devices have access to all installed system fonts. For workarounds see Chapter \@ref(fonts).</div>\EndKnitrBlock{rmdwarning}
-
+<div class="rmdwarning">
+<p>Not all graphics devices have access to all installed system fonts. For workarounds see Chapter @ref(fonts).</p>
+</div>
 	
 ### Colors {#parcolors}
 
-Parameter   Function
----------   --------------------------
-`col`       plotting color
-`col.axis`  color for axis annotation 
-`col.lab`   color for x and y labels 
-`col.main`  color for main title 
-`col.sub`   color for sub-titles 
-`bg`        background color
-`fg`        foreground color
+Table \@ref(tab:parcolors) lists a number of color parameters that can be set through the `par` interface. See Section \@ref(colorscommon) for indications on how to speficy colors in R.
 
-Table: (\#tab:parcolors) Parameters for colors.
-	
+Parameter      Function
+----------    --------------------------
+`col`          plotting color
+`col.axis`    color for axis annotation 
+`col.lab`     color for x and y labels 
+`col.main`    color for main title 
+`col.sub`     color for sub-titles 
+`bg`           background color
+`fg`           foreground color
+
+Table: (\#tab:parcolors) Color parameters that can be set through the `par` interface.	
+
+```{=latex}
+\clearpage
+```
+
 ## Adding elements to a plot
 
 ### Adding a legend {#legend}
 
 Some plotting functions (e.g. `interaction.plot`) by default add a legend to the graph, or allow you to add a legend by setting an option inside the function (e.g. `barplot`). However, the default settings for the legend, such as positioning, text or symbols, might not be suitable for your graph, in which case you need to turn off the default legend, and add a customised legend with the `legend` function. You may also need the `legend` function if the plotting function that you're using does not automatically add a legend, or if you're plotting from scratch. Figure \@ref(fig:irislegend1) shows a plot with a legend for the different plotting symbols:
+
 
 ```r
 data(iris)
@@ -650,7 +664,7 @@ legend("topleft", legend=c("Setosa", "Versicolor", "Virginica"),
 <p class="caption">(\#fig:irislegend1)Plot with legend for plotting symbols.</p>
 </div>
 
-The last two lines of code adds the legend. The first argument given to the `legend` function, `topright`, indicates the position where we want the legend to appear, other possible values are `bottomright`, `bottomleft`, `right`, `bottom`, `center` and so on. It is also possible to specify the position of the legend by giving the coordinates of its top-left corner, for the above example we might have written:
+The last two lines of code add the legend. The first argument given to the `legend` function, `topright`, indicates the position where we want the legend to appear, other possible values are `bottomright`, `bottomleft`, `right`, `bottom`, `center` and so on. It is also possible to specify the position of the legend by giving the coordinates of its top-left corner, for the above example we might have written:
 
 
 ```r
@@ -715,7 +729,7 @@ You can insert text in a graph with the `text` function, you have just to specif
 
 ```r
 plot(x, y)
-text(x=3,y=1.5, "mean for control group")
+text(x=3, y=1.5, "mean for control group")
 ```
 if you want to use mathematical symbols you can use the `expression` function:
 
@@ -750,11 +764,11 @@ If you don't like the way the axes are set for a given plot, you can draw the pl
 ```r
 plot(1:10, axes=FALSE) #do not draw any axes or box around
                        # the plot
-plot(1:10, xaxt="n")       #don't draw the x axis alone
-plot(1:10, yaxt="n")       #don't draw the y axis alone
+plot(1:10, xaxt="n")   #don't draw the x axis 
+plot(1:10, yaxt="n")   #don't draw the y axis 
 ```
 
-Once you've removed of one or more axis you can draw them calling the `axis` function:
+Once you've removed of one or more axes you can draw them calling the `axis` function:
 
 ```r
 axis(1, at=seq(1, 10, 3), labels=as.character(seq(1, 10, 3)))
@@ -790,10 +804,10 @@ for(i in 1:6){
 `mfcol` works exactly the same way as `mfrow`, but the figures are drawn in sequence by column rather than by row, for example the following code yields Figure \@ref(fig:mfcol23)
 
 ```r
-par(mfcol=c(2,3))
+par(mfcol=c(2, 3))
 symb<-as.character(1:6)
 for(i in 1:6){
-  plot(1,1,pch=symb[i],xlab='',ylab='')
+  plot(1, 1, pch=symb[i], xlab='', ylab='')
 } 
 ```
 
@@ -960,7 +974,7 @@ par(mar=c(6, 2, 3, 0) + 0.1) #set new margins size
   
 ## Plotting from scratch {#plotfromscratch}
 
-The high level plotting functions such as `plot`, `histogram`, `barplot` and so on, provide a good and quick way to produce graphs. Plotting from scratch, using the low-level plotting commands is generally not necessary, unless you want to create some new, customised plotting functions. Learning to plot "from scratch", however is a very good way to learn how graphics parameters work, which is often necessary to customise plots created with the high-level plotting functions.
+The high-level plotting functions such as `plot`, `histogram`, `barplot` and so on, provide a good and quick way to produce graphs. Plotting from scratch, using the low-level plotting commands is generally not necessary, unless you want to create some new, customised plotting functions. Learning to plot "from scratch", however is a very good way to learn how graphics parameters work, which is often necessary to customise plots created with the high-level plotting functions.
 
 We'll start with a very simple example of a scatterplot:
 
@@ -979,68 +993,6 @@ axis(side=2)
 ```
 
 `points` will draw points at the coordinates given in the `x` an `y` arguments. To complete this very minimal plot you need at least some axes. The `axis` function adds the axis, the `side` argument specifies where the axis should be drawn, 1 means at the "bottom", 2 at the "left" side, and so on in a clockwise fashion.
-
-
-## Colors for graphics
-
-The command `colors` gives a list of built-in colors available for graphics in R. You can see some of these colors in Figure \@ref(fig:color1). There are 101 built-in shades of gray, from `gray0`, that is almost black, to `gray100` that is almost white, you can see some of them in Figure \@ref(fig:gray). A complete table of built-in R colors is given in Appendix \@ref(fullcoltable).
-
-<div class="figure">
-<img src="graphics/colours_table.png" alt="Some built-in colors in R." width="289" />
-<p class="caption">(\#fig:color1)Some built-in colors in R.</p>
-</div>
-
-<div class="figure">
-<img src="graphics/grays_table.png" alt="Different shades of gray." width="276" />
-<p class="caption">(\#fig:gray)Different shades of gray.</p>
-</div>
-
-You can also specify colors in rgb values. By default R accepts values in the range 0-1, but you can change the range with the `max` option to set the range as 0-255. Please note that changing the range doesn't change the colors you can use, it just changes the values you use to specify them, so for example the following graphs will have the same colors:
-
-
-```r
-vec = c(3,6)
-barplot (vec, col= c(rgb(0.176, 0.262, 0.49),
-         rgb(0.568, 0.254 0.654)))
-barplot (vec, col= c(rgb(45,67,125, max=255),
-         rgb(145,65,167, max=255)))
-```
-
-the first uses the default range, and the second uses the range 0-255, but I simply derived the values for the first graph, dividing those for the second by 255.
-
-The function `col2rgb` can be used to get the rgb values of a built-in color from its name. The rgb values are given in this case in the range 0-255. Here's an example:
-
-
-```r
-col2rgb("lightslateblue")
-```
-
-```
-##       [,1]
-## red    132
-## green  112
-## blue   255
-```
-
-### Color opacity
-
-The `adjustcolor` function can be used to set the opacity of a color using the `alpha.f` argument:
-
-
-```r
-mycol = adjustcolor("skyblue", alpha.f=0.5) 
-x = rnorm(1000)
-y = rnorm(1000)
-plot(x, y, pch=21, bg=mycol, cex=2)
-```
-
-<div class="figure">
-<img src="07_graphics_files/figure-html/coltransp-1.png" alt="Color opacity" width="326.4" />
-<p class="caption">(\#fig:coltransp)Color opacity</p>
-</div>
-
-the `adjustcolor` function accepts a vector of colors as an argument, so you can change the transparency of several colors at the same time.
-
 
 ## Managing graphic devices
 
@@ -1073,133 +1025,5 @@ dev.off()
 ```
 
 Other devices you can use, with their corresponding file format are `pdf`, `postscript`, `png` and `bitmap`.
-
-
-## Mathematical expressions and variables {#plotmath}
-
-It is possible to use mathematical symbols in plot labels and text. The base system for providing math symbols in plot annotations has been described by @MurrellAndIhaka2000, which is a recommended reading. An overview of the system with a comprehensive list of all the symbols can be obtained with `?plotmath`. I don't find the system particularly intuitive, and can't claim to fully understand its inner workings, but I'll nevertheless attempt to explain in rough terms how it works.
-
-The basic idea is that instead of providing a string to `text`, `xlab` or other functions through which you want to plot some text, you provide an `expression`, in the sense of a mathematical expression. Two examples are given below:
-
-```r
-plot.new(); plot.window(xlim=c(4, 6), ylim=c(0, 5))
-text(5, 1, labels=expression(alpha/(x+2)))
-text(5, 2.5, labels=expression(frac(alpha, x+2)))
-box()
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-46-1.png" width="326.4" />
-
-note how `alpha` is turned into the corresponding Greek letter. Often you'll want to combine strings with mathematical expressions in labels. This can be achieved using the `paste` function, as shown below:
-
-```r
-plot.new(); plot.window(xlim=c(4, 6), ylim=c(0, 5))
-text(5, 1, labels=expression(paste("Amplitude (", mu, "V)")))
-box()
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-47-1.png" width="326.4" />
-
-Strings and mathematical expressions can also be combined using the multiplication (`*`) operator (e.g. `expression("Amplitude (" * mu * "V)")`), but this seems somewhat improper and runs into limitations. For example `expression(alpha == 3 * beta == 2)` results in an error, probably because it is not a valid mathematical expression, while `expression(paste(alpha == 3, beta == 2))` works without errors.
-
-Spaces between symbols can be obtained by using one or more tilde (`~`) operators, as shown below:
-
-```r
-plot.new(); plot.window(xlim=c(4, 6), ylim=c(0, 5))
-text(5, 1, labels=expression(paste("No spaces: ", alpha * beta)))
-text(5, 2.5, labels=expression(paste("Spaces: ", alpha ~ beta)))
-box()
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-48-1.png" width="326.4" />
-
-Sometimes you may want to print the value of a variable inside the expression of a plot label. In this case you can use the `substitute` function:
-
-```r
-x = rnorm(100); y=rnorm(100)
-corrOut = cor.test(x,y)
-corrEst = corrOut$estimate
-corrPVal = corrOut$p.value
-plot(x,y)
-title(main=substitute(rho == v1, list(v1=round(corrEst,2))))
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-49-1.png" width="326.4" />
-
-the second argument to the function is a list of all the variable values that need to be substituted. In the example below two values are substituted:
-
-```r
-plot(x,y)
-title(main=substitute(paste(rho == v1, "; ", italic(p) == v2),
-                      list(v1=round(corrEst,2), v2=round(corrPVal, 2))))
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-50-1.png" width="326.4" />
-
-A few more example of mathematical expressions in labels are given below:
-
-```r
-uVText = expression(paste("Amplitude (", mu, "V)"))
-dF0Text = expression(paste( Delta, 'F0 (%)'))
-dpText = expression(paste(italic("d' ")))
-subText1 = expression(paste(sigma, scriptscriptstyle(c), " (Cents)"))
-subText2 = expression(paste(delta, scriptscriptstyle(k)  %+-% 162.5,
-                            ' Cents', sep=''))
-sqText = expression(paste('F0 Acceleration (Hz/', s^2, ')'))
-piText = expression(paste('Start Phase 1.5', pi,))
-betaText = expression(beta[0])
-log10Text = expression(log[10](nu))
-uVsqText = expression(paste('Level ', italic('re'), ' 1 ',
-                            mu, V^{2}, ' (dB)'))
-bdText = expression(paste( bold("Enhancement ("),
-                          italic("d'"), bold("units)")))
-zScoreText = expression(paste(italic(z), " Score"))
-densText = expression(paste("Density (", kg/m^3, ")"))
-beta2Text = expression(mu[beta[0]])
-noiseText = expression(paste("Noise [", log[10], "(Energy)]"))
-PTAText = expression(paste("PTA"["0.5-2"], " (dB)"))
-RSqText = expression("R"^"2")
-atopText = expression(atop("PTA"["1-2"],"(dB SPL)"))
-latencyText = expression(paste("Latency (", italic(z),
-                               " Score)"))
-
-par(mfrow=c(2,2))
-
-plot.new(); plot.window(xlim=c(0, 10), ylim=c(0, 10))
-text(5, 1.00, labels=uVText)
-text(5, 2.25, dF0Text)
-text(5, 3.50, dpText)
-text(5, 4.75, subText1)
-text(5, 6.00, subText2)
-text(5, 7.25, sqText)
-text(5, 8.5, piText)
-text(5, 9.75, betaText)
-box()
-
-plot.new(); plot.window(xlim=c(0, 10), ylim=c(0, 10))
-text(5, 1.00, labels=log10Text)
-text(5, 2.25, uVsqText)
-text(5, 3.50, bdText)
-text(5, 4.75, zScoreText)
-text(5, 6.00, densText)
-text(5, 7.25, beta2Text)
-text(5, 8.5, noiseText)
-text(5, 9.75, PTAText)
-box()
-
-plot.new(); plot.window(xlim=c(0, 10), ylim=c(0, 10))
-text(5, 1.00, labels=latencyText)
-text(5, 2.25, RSqText)
-text(5, 3.50, "")
-text(5, 4.75, "")
-text(5, 6.00, "")
-text(5, 7.25, "")
-text(5, 8.5, "")
-text(5, 9.75, "")
-box()
-title(xlab=atopText)
-```
-
-<img src="07_graphics_files/figure-html/unnamed-chunk-51-1.png" width="652.8" />
 
 

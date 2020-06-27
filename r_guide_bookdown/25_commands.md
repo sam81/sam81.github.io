@@ -1,21 +1,21 @@
 # Miscellaneous commands
 
-#### Data
+## Data
 
-- `head(dats)` print the first part of the object `dats`
-- `tail(dats)` print the last part of the object `dats`
+- `head(dat)` print the first part of the object `dat`
+- `tail(dat)` print the last part of the object `dat`
 
 
-#### Help
+## Help
 
 - `?foo` find help on command `foo`
 
-#### Objects
+## Objects
 
 - `class(foo)` get the class of object `"foo"`
 - `ls()` or`objects()` list objects present in the workspace
 
-#### Organise a session
+## Organize a session
 
 - `dir()` or `list.files()`list the files in the current directory
 - `getwd()` get the current directory
@@ -27,13 +27,13 @@
 - `system("foo")` execute the system command `foo` as if it were from the shell
 
 
-#### R administration
+## R administration
 
 - `library()` list all installed packages
 - `R.version` info on R version and the platform it is running on
 
 
-#### Syntax
+## Syntax
 
 - `#` starts a comment
 - `mydata$foo` refer to the variable `foo` in the dataframe `mydata`

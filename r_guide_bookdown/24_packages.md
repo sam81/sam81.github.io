@@ -19,3 +19,18 @@
 - JGR https://cran.r-project.org/web/packages/JGR/index.html
 - pmg Simple GUI for R using gWidgets https://cran.r-project.org/web/packages/pmg/index.html http://www.math.csi.cuny.edu/pmg
 
+## Bibliography management
+
+- [`RefManageR`](https://cran.r-project.org/web/packages/RefManageR/index.html). Provides functions to query PubMed and convert results to BibTeX entries. Query PubMed:
+  
+  ```r
+  hits = ReadPubMed("Nose bleed", database= "PubMed")
+  ```
+
+  the retrieved articles can then be turned into BibTeX entries:
+  
+  ```r
+  toBiblatex(hits[1])
+  ```
+
+
