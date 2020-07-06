@@ -1,8 +1,8 @@
 --- 
 title: "A R Guide"
-subtitle: "0.3.14"
+subtitle: "0.4.0"
 author: "Samuele Carcagno"
-date: "27 giugno, 2020"
+date: "06 luglio, 2020"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: memoir
@@ -41,6 +41,8 @@ The latest html version of this guide is available at https://sam81.github.io/r_
 A pdf version of this guide can be downloaded at https://sam81.github.io/r_guide_bookdown/rguide.pdf
 
 Associated datasets available at https://sam81.github.io/r_guide_bookdown/rguide_datasets.zip
+
+Associated code available at https://sam81.github.io/r_guide_bookdown/rguide_code.zip
 
 ```{=latex}
 \pagenumbering{gobble}
