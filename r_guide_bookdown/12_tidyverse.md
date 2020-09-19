@@ -49,18 +49,18 @@ dat[dat$y=="A", "x"]
 
 ```
 ## # A tibble: 10 x 1
-##         x
-##     <dbl>
-##  1  2.21 
-##  2 -1.05 
-##  3  2.20 
-##  4 -0.270
-##  5 -1.17 
-##  6 -0.627
-##  7 -1.43 
-##  8  1.41 
-##  9 -0.387
-## 10 -0.549
+##          x
+##      <dbl>
+##  1  0.0983
+##  2 -0.280 
+##  3  1.02  
+##  4  0.0584
+##  5 -0.417 
+##  6 -1.74  
+##  7  0.365 
+##  8 -0.317 
+##  9 -1.37  
+## 10 -0.501
 ```
 
 but it returns a 1-column tibble instead. Furthermore trying `as.numeric(dat[dat$y=="A", "x"])` to convert it to a vector doesn't work. The solution is to use the `pull` function from `dplyr`:
@@ -72,8 +72,8 @@ pull(dat[dat$y=="A", ], x)
 ```
 
 ```
-##  [1]  2.2139403 -1.0515517  2.2002439 -0.2702799 -1.1699144 -0.6272248
-##  [7] -1.4262704  1.4136449 -0.3868688 -0.5489977
+##  [1]  0.09831035 -0.27951673  1.02105526  0.05843470 -0.41656644 -1.73980278
+##  [7]  0.36467128 -0.31725294 -1.36515908 -0.50087454
 ```
 
 More succintly, if, for example, you wanted to run a $t$-test on the groups indicated by the `y` variable, you could do the following through `dplyr`:
@@ -89,13 +89,13 @@ t.test(dat %>% filter(y=="A") %>% pull(x),
 ## 	Welch Two Sample t-test
 ## 
 ## data:  dat %>% filter(y == "A") %>% pull(x) and dat %>% filter(y == "B") %>% pull(x)
-## t = 0.55366, df = 17.408, p-value = 0.5869
+## t = -0.52826, df = 14.151, p-value = 0.6055
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.8807316  1.5089555
+##  -1.3785623  0.8332464
 ## sample estimates:
 ##   mean of x   mean of y 
-##  0.03467214 -0.27943979
+## -0.30767009 -0.03501214
 ```
 
 ## `dplyr`
@@ -196,10 +196,10 @@ dat %>% group_by(fct) %>% filter(y>100) %>% summarize(n())
 ## # A tibble: 4 x 2
 ##   fct   `n()`
 ##   <chr> <int>
-## 1 A        14
-## 2 B        11
+## 1 A        13
+## 2 B        16
 ## 3 C         8
-## 4 D        13
+## 4 D        15
 ```
 
 ```r
@@ -209,10 +209,10 @@ dat %>% filter(y>100) %>% count(fct)
 
 ```
 ##   fct  n
-## 1   A 14
-## 2   B 11
+## 1   A 13
+## 2   B 16
 ## 3   C  8
-## 4   D 13
+## 4   D 15
 ```
 
 ```r
@@ -224,8 +224,43 @@ dat %>% group_by(fct) %>% filter(y>100) %>% tally()
 ## # A tibble: 4 x 2
 ##   fct       n
 ##   <chr> <int>
-## 1 A        14
-## 2 B        11
+## 1 A        13
+## 2 B        16
 ## 3 C         8
-## 4 D        13
+## 4 D        15
+```
+
+## Tests statistics with `dplyr` and `broom`
+
+The [`broom`](https://cran.r-project.org/web/packages/broom/) package converts the output of some R models to tibbles. As we will see below, used in conjunction with `dplyr` this provides a very efficient way of fitting models or performing statistical tests on grouped data. Let's first see an example of what `broom` does. We'll fit a simple linear regression model using the `iris` dataset. We'll first fit the model on the data of the setosa species only:
+
+```r
+data(iris)
+fit_single = lm(Petal.Length~Sepal.Length, data=iris %>% filter(Species=="setosa"))
+```
+
+if we run `str(fit_single)` we can see that the output of `lm` is a list. We can get a nice printout of the results with `summary(fit_single)`, but while easy to read, such output is again stored in a list (you can check with `str(summary(fit_single))`) which is not easy to store or process further (e.g. combining the output with that of other model fits and storing in a CSV file). `broom` aims to solve this issue. The `tidy` function turns the coefficients and test statistics for each term of the model into a tibble:
+
+```r
+library(broom)
+fit_single_tidy = tidy(fit_single)
+```
+
+the `glance` function turns parameters and statistics *global* to the model (as opposed to being specific to a given term) into a tibble:
+
+```r
+fit_single_glance = glance(fit_single)
+```
+
+finally the `augment` function computes statistics such as the fitted values and residuals that can be added back to the input dataframe, thus *augmenting* it.
+
+```r
+iris_aug = iris %>% group_by(Species) %>% summarize(lmfit=augment(lm(Petal.Length~Sepal.Length)))
+```
+
+Combined with `dplyr` the `broom` function makes fitting statistical models on grouped data efficient. Below we'll use again the `iris` dataset, but we'll use the whole dataset, fitting a separate model for each iris species in one go:
+
+```r
+fit_frame_tidy = iris %>% group_by(Species) %>% summarize(lmfit=tidy(lm(Petal.Length~Sepal.Length)))
+fit_frame_glance = iris %>% group_by(Species) %>% summarize(lmfit=glance(lm(Petal.Length~Sepal.Length)))
 ```

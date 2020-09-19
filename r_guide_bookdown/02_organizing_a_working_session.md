@@ -4,15 +4,28 @@
 
 The command `getwd` displays the pathname of the current working directory, that is where R will look for and store files if not otherwise instructed.
 
-To change the current working directory, use the command `setwd("dirname")`, where `dirname` is the pathname of the working directory you're moving into. Note that this has to be an existent working directory, because R cannot create a new directory with this command. Here's an example of how to specify the pathname:
+To change the current working directory, use the command `setwd("dirname")`, where `dirname` is the pathname of the working directory you're moving into. Note that this has to be an existent working directory, because R cannot create a new directory with this command. Here's an example of how to specify the pathname on Windows:
 
 ```r
 setwd("C:/mydata/rats")
 ```
-note that you have to use a slash `"/"` and not backslash  `"\"` like you usually do in Windows to specify the pathname.
-You can also specify a pathname relative to your current working directory, without specifying the full pathname. It is indifferent using single `' '` or double `" "` quotes, this holds true when you need to quote character strings.
+note that you have to use a slash `"/"` and not backslash  `"\"` like you usually do in Windows to specify the pathname. On Unix-based OSs the pathname is specified as it would be in a shell command, e.g.:
 
-If you want to see the files present in your current working directory, use the command `dir`.
+```r
+setwd("/home/user123/Documents/analysis_exp_xyz")
+```
+
+You can also specify a pathname relative to your current working directory, without specifying the full pathname. It is indifferent using single `' '` or double `" "` quotes, this holds true when you need to quote character strings. For example to change the working directory up one level in the directory hierarchy you can write:
+
+```r
+setwd("../")
+```
+
+If you want to see the files present in your current working directory you can use:
+
+```r
+dir()
+```
 
 It is also possible to issue commands to the OS from within R with the `system` function, for example
 
@@ -42,7 +55,7 @@ rm(X, Y, W, foo, rats)
 you can also give the variables to be removed, as a character vector:
 
 ```r
-rm(list=c("X","Y","foo","rats"))
+rm(list=c("X", "Y", "foo", "rats"))
 ```
 if you want to remove all the objects in your workspace, you can combine the `ls` and `rm` commands as follows:
 

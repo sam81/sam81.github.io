@@ -83,7 +83,7 @@ rbinom(n=10, size=1, prob=0.7)
 ```
 
 ```
-##  [1] 1 1 0 1 1 1 1 1 1 1
+##  [1] 0 1 1 1 1 1 0 1 0 1
 ```
 
 ## The binomial distribution {#binomial}
@@ -137,7 +137,7 @@ rbinom(n=5, size=10, prob=0.7)
 ```
 
 ```
-## [1] 6 7 8 7 8
+## [1] 8 9 7 8 8
 ```
 
 note that `n` here represents the number of samples to draw, while `size` refers to the number of Bernoulli trials of the binomial distribution.

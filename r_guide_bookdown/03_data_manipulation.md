@@ -4,7 +4,7 @@
 
 ## Vectors
 
-One of the simplest and among the most important data types in R is the vector, which can be numerical or containing strings of characters. A simple way to build a vector is through the `c` function, which concatenates a series of data, for example:
+One of the simplest and among the most important data types in R is the vector, which can be numerical or containing strings of characters. A simple way to build a vector is through the `c` function, which concatenates a series of data values, for example:
 
 ```r
 temperature = c(34, 45, 23, 29, 26, 31, 44, 32, 19, 22, 34)
@@ -560,7 +560,7 @@ as we said, each row holds the data of a single observation, in this case it cor
 You can access, or refer to a column of a dataframe with the `$` operator, in the example above suppose we removed all the original variables after creating the dataframe
 
 ```r
-rm(n_beers,occupation,sex)
+rm(n_beers, occupation, sex)
 ```
 
 we can't now access them directly by name

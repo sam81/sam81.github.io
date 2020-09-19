@@ -26,9 +26,9 @@ There are precompiled binaries for Windows, you just have to download them, then
 
 Precompiled binaries are also available for Mac Os X, you can download them and then double click on the installer's icon to start the installation.
 
-### Installing add-on packages
+### Installing add-on packages {#installpkg}
 
-There is a vast number of packages that implement statistical functions that are not available with the base program. They're not strictly necessary, but if you keep using R, sooner or later you will want to install some of these packages.
+There is a vast number of add-on [packages](https://cran.r-project.org/web/packages/available_packages_by_name.html) (for a categorized view see [CRAN task views](https://cran.r-project.org/web/views/)) that implement statistical functions that are not available with the base program. They're not strictly necessary, but if you keep using R, sooner or later you will want to install some of these packages.
 
 #### GNU/Linux and other Unix systems
 
@@ -63,7 +63,7 @@ This guide uses several datasets. If you want to follow the examples given in th
 
 ### Firing up and quitting R
 
-Under GNU/Linux systems you can start R  from a shell, just type `R` and press <kbd>Enter</kbd>. Under Windows you can click on the R icon to start the R GUI. 
+Under GNU/Linux systems you can start R from a shell, just type `R` and press <kbd>Enter</kbd>. Under Windows you can click on the R icon to start the R GUI. 
 
 You can save yourself a lot of typing by using the up arrow key &#8593; to retrieve past commands.
 
@@ -102,7 +102,11 @@ Now let's create a variable, we'll call it `foo`, and assign to it a number
 foo = 5
 ```
 
-the equal sign `=` is the assignment operator in R\footnote{You can also use the arrow `<-`as an assignment operator}, in the above case it means the value of `foo` is 5, `foo` is an object.
+the equal sign `=` is the assignment operator in R, in the above case it means "the value of `foo` is 5", `foo` is an object. The "arrow symbol", constructed by a "less than" sign followed by a dash, `<-`, can also be used as an assignment operator, and `foo = 5` is equivalent to
+
+```r
+foo <- 5
+```
 
 <div class="rmdnote">
 <p>In R both <code>=</code> and <code>&lt;-</code> can be used as assignment operators. For example, the expression <code>x = 5</code> and the expression <code>x &lt;- 5</code> are equivalent, and both are in common use, although some style guides recommend one over the other. In a few corner cases using <code>&lt;-</code> instead of <code>=</code> may lead to different behaviors (e.g. when trying to make assignments inside function calls; something that you generally shouldn’t do).</p>
@@ -153,12 +157,16 @@ foo + another_foo
 ## [1] 30
 ```
 
+<div class="rmdnote">
+<p>In R variable names can be made up of letters, numbers, and the underscore (<code>_</code>), or the dot (<code>.</code>) characters. For example <code>foo</code>, <code>foo1</code>, <code>foo_1</code>, and <code>foo.1</code> are all syntactically valid variable names. However, there are some restrictions; for example variable names cannot start with a number, or with an underscore. Also, there are reserved keywords, such as <code>for</code>, <code>if</code>, <code>else</code>, that cannot be used as variable names. For more info see the help page for <code>make.names</code> by typing <code>?make.names</code> in the R interpreter.</p>
+</div>
+
 Let's look at something more interesting, we can create an object that stores a series of numbers, for example the money we have spent each day of a week, in Euros; we can do this using the `c` function, which concatenates a series of values into a *vector*:
 
 ```r
-expenses = c(7,8,15,20,9,45,3)
+expenses = c(7, 8, 15, 20, 9, 45, 3)
 ```
-you might want to find out how much you've spent in average during the week, this is easily accomplished with the function `mean`
+you might want to find out how much you've spent on average during the week, this is easily accomplished with the function `mean`
 
 ```r
 mean(expenses)
@@ -231,6 +239,31 @@ paste0(name, msg1)
 
 more string facilities are presented in Section \@ref(stringprocessing).
 
+### Using R packages
+
+As mention in Section \@ref(installpkg) there are many add-on packages, with additional statistical and graphical functions for R. That section had some instructions on how to install them, but did not explain how to use them. In order to use a function from a package that you have already installed you can load the package with the `library` function. For example, if you want to use the `geometric.mean` function from the `psych` package in order to compute the geometric mean of a set of numbers you can run the following commands:
+
+```r
+library(psych)
+geometric.mean(c(4, 54, 7, 15))
+```
+
+```
+## [1] 12.27187
+```
+
+Loading a package in this way will import all the functions of that package in the current *namespace*, in other words, this lets you call directly those functions from the current session. Occasionally there may be "clashes" in the namespace; suppose there is another package called `foz` (I'm making it up) tha you also need to use in your session. Package `foz` also happens to have a function called `geometric.mean` that behaves slightly differently from the function in the `psych` package. If you load package `foz` after package `psych`, the `geometric.mean` function from `foz` will *mask* the one from `psych` (you will get a warning on the R terminal). So, what can you do if you want to use the `geometric.mean` function from `psych` when it's masked? You can call it with the following syntax:
+
+```r
+psych::geometric.mean(c(4, 54, 7, 15))
+```
+
+```
+## [1] 12.27187
+```
+
+note that this syntax works also if the `psych` package is not loaded, in other words you can call functions from packages with the ``pkgname::fncname`` syntax without loading the package.
+
 ### Getting help {#gettinghelp}
 
 R comes with an excellent online help facility which documents and gives examples for all available functions. There is also a web interface for the help system which is easier to use, you can start it with
@@ -302,7 +335,7 @@ levene.test(car)        Levene's Test
 
 ### Working with a graphical user interface {#gui}
 
-The default version of R for Windows and macOS comes with a very limited graphical user interface (GUI), while the GNU/Linux version comes with no GUI at all. There are however several independent projects aimed at developing a GUI for R. The following sections give some information on them.
+The default version of R for Windows and macOS comes with a very limited graphical user interface (GUI), while the GNU/Linux version comes with no GUI at all. There are, however, several independent projects aimed at developing a GUI for R. The following sections give info on some of them.
 
 #### R Studio
 
